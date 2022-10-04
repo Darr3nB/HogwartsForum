@@ -1,0 +1,13 @@
+project_key, issue_type
+TOUCAN,Task
+TOUCAN,Story
+TOUCAN,Sub-Task
+TOUCAN,Bug
+COALA,Sub-Task
+COALA,Task
+COALA,Story
+COALA,Bug
+JETI,Story
+JETI,Task
+JETI,Bug
+JETI,Sub-Task
