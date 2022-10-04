@@ -15,7 +15,7 @@ public class ProfilePageModel extends BaseModel {
 
     public void openProfilePage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/ViewProfile.jspa");
+        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
     }

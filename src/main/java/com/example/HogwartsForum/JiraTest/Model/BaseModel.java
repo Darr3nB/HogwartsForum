@@ -85,16 +85,16 @@ public class BaseModel {
     }
 
     public void doLogin(){
-        webDriver.navigate().to(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+        webDriver.navigate().to(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
         webDriver.manage().window().maximize();
 
-        setUsername(FileReader.getValueByKey("jira.username"));
-        setPassword(FileReader.getValueByKey("jira.password"));
+        setUsername(FileReader.getValueByKeyFromConfigProperties("jira.username"));
+        setPassword(FileReader.getValueByKeyFromConfigProperties("jira.password"));
         clickOnLoginButton();
     }
 
     public void openUrlWithSpecificPathAndMaximizeWindowSize(String path){
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + path);
+        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + path);
         webDriver.manage().window().maximize();
     }
 

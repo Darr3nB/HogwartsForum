@@ -24,8 +24,8 @@ public class WebDriverService {
         webDriver = null;
     }
     private WebDriver createWebDriver() {
-        String browserType = FileReader.getValueByKey("browser.type");
-        String driverLocation = FileReader.getValueByKey("driver.location");
+        String browserType = FileReader.getValueByKeyFromConfigProperties("browser.type");
+        String driverLocation = FileReader.getValueByKeyFromConfigProperties("driver.location");
         String extension = System.getProperty("os.name").contains("Windows") ? ".exe" : "";
 
         switch(browserType) {

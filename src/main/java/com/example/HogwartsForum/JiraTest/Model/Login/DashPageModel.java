@@ -26,7 +26,7 @@ public class DashPageModel extends BaseModel {
 
     public void openDashboardLoginPage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/Dashboard.jspa");
+        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/Dashboard.jspa");
     }
 
     public void loginOnDashPage(String username, String password){
