@@ -1,10 +1,8 @@
 package com.example.HogwartsForum.Controller;
 
+import com.example.HogwartsForum.Model.RegistrationParams;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/registration")
@@ -16,8 +14,13 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String doRegister(@RequestParam String username, @RequestParam String password,
-                             @RequestParam String house, @RequestParam String pet){
+    public String doRegister(@RequestBody RegistrationParams registrationParams){
+        System.out.println("This is registration post method.");
+        System.out.println("Username :" + registrationParams.getUsername());
+        System.out.println("Password :" + registrationParams.getPassword());
+        System.out.println("House :" + registrationParams.getHouse());
+        System.out.println("Pet : " + registrationParams.getPet());
+
         return "redirect:";
     }
 }
