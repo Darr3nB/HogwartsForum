@@ -6,14 +6,13 @@
     <script type="text/javascript" th:src="@{/js/index.js}" defer></script>
 </head>
 <body>
-<form action="/login" method="post">
-    <div th:replace="fragments :: nav-bar"/>
-</form>
+
+<div th:replace="fragments :: nav-bar"/>
 <h1>Welcome to Hogwarts forum!</h1>
 <p>Find friends, chat, connect with other students, ask questions or help in studies.</p>
 
 <p th:text="${questions}?: 'No questions asked yet.'"></p>
 
-<div th:replace="fragments :: footer" />
+<div th:replace="fragments :: footer"/>
 </body>
 </html>

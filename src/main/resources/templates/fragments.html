@@ -19,11 +19,13 @@
     </div>
     <div th:if="${username == null}">
         <div>
-            <label for="username-field">Username: </label>
-            <input type="text" id="username-field"/>
-            <label for="password-field">Magic word: </label>
-            <input type="text" id="password-field"/>
-            <button type="button" id="login-button" class="nav-bar-button">Login</button>
+            <form action="/login" method="post">
+                <label for="username-field">Username: </label>
+                <input type="text" id="username-field"/>
+                <label for="password-field">Magic word: </label>
+                <input type="text" id="password-field"/>
+                <button type="button" id="login-button" class="nav-bar-button">Login</button>
+            </form>
         </div>
         <div class="nav-bar-button">
             <a href="/registration">

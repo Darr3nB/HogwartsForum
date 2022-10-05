@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Hogwarts forum</title>
+    <script type="text/javascript" th:src="@{/js/registration.js}" defer></script>
 </head>
 <body>
 <h1>Registration</h1>
@@ -17,12 +18,18 @@
     <input type="text" id="password-again-field"/>
 
     <label for="house-field">Your house: </label>
-    <input type="text" id="house-field"/>
+    <select id="house-field">
+        <option value="noneSelected"></option>
+        <option value="gryffindor">Gryffindor</option>
+        <option value="slytherin">Slytherin</option>
+        <option value="hufflepuff">Hufflepuff</option>
+        <option value="ravenclaw">Ravenclaw</option>
+    </select>
 
     <label for="pet-field">Your pet: </label>
     <input type="text" id="pet-field"/>
 
-    <button type="button">Login</button>
+    <button type="button" id="registration-button">Registration</button>
 </form>
 </body>
 </html>
