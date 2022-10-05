@@ -16,6 +16,14 @@ public class User {
         this.pet = pet;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId(){
         return this.id;
     }

@@ -6,11 +6,11 @@ public enum HogwartsHouses {
     Hufflepuff,
     Ravenclaw;
 
-    public HogwartsHouses getHouseByStringEquivalent(String houseAsString){
+    public static HogwartsHouses getHouseByStringEquivalent(String houseAsString){
         return switch (houseAsString) {
-            case "gryffindor" -> Gryffindor;
-            case "slytherin" -> Slytherin;
-            case "hufflepuff" -> Hufflepuff;
+            case "Gryffindor" -> Gryffindor;
+            case "Slytherin" -> Slytherin;
+            case "Hufflepuff" -> Hufflepuff;
             default -> Ravenclaw;
         };
     }
