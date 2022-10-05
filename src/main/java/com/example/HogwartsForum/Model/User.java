@@ -1,7 +1,5 @@
 package com.example.HogwartsForum.Model;
 
-import com.example.HogwartsForum.Util.HogwartsHouses;
-
 public class User {
 
     private Integer id;

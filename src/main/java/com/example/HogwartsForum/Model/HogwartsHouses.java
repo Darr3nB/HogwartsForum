@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.Util;
+package com.example.HogwartsForum.Model;
 
 public enum HogwartsHouses {
     Gryffindor,
