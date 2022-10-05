@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
-    @GetMapping
-    public String login(){
-        return "login";
-    }
-
     @PostMapping
     public String doLogin(@RequestBody LoginParams loginParams){
         System.out.println("This is login post method.");
