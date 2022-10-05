@@ -4,6 +4,7 @@ function indexPage(){
     }
 
     function clickOnLoginButton(){
+        // TODO Check if fields are empty
         let username = document.querySelector("#username-field").value;
         let password = document.querySelector("#password-field").value;
 

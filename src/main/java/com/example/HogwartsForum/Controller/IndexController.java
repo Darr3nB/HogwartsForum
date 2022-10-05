@@ -11,6 +11,7 @@ public class IndexController {
 
     @GetMapping
     public String index(Model model){
+        model.addAttribute("username", null);
         return "index";
     }
 }

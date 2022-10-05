@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:fragment="html_header">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div th:fragment="nav-bar">
-    <label for="username-field">Username: </label>
-    <input type="text" id="username-field"/>
-    <label for="password-field">Magic word: </label>
-    <input type="text" id="password-field"/>
-    <button type="button" id="login-button">Login</button>
+    <div class="nav-bar-button">
+        <a href="/">
+            <button>Home</button>
+        </a>
+    </div>
+    <div th:if="${username}">
+        <p th:text="Welcome + ${' ' + username + '!'}"></p>
+        <a href="/logout">
+            <button>Logout</button>
+        </a>
+    </div>
+    <div th:if="${username == null}">
+        <div>
+            <label for="username-field">Username: </label>
+            <input type="text" id="username-field"/>
+            <label for="password-field">Magic word: </label>
+            <input type="text" id="password-field"/>
+            <button type="button" id="login-button" class="nav-bar-button">Login</button>
+        </div>
+        <div class="nav-bar-button">
+            <a href="/registration">
+                <button>Registration</button>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div th:fragment="footer">
