@@ -1,4 +1,4 @@
-package JiraTest.BrowseProject;
+package JiraTest;
 
 import com.example.HogwartsForum.JiraTest.Model.BrowseProject.BrowseProjectModel;
 import com.example.HogwartsForum.JiraTest.WebDriverService;

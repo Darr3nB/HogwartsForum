@@ -1,4 +1,4 @@
-package JiraTest.Logout;
+package JiraTest;
 
 import com.example.HogwartsForum.JiraTest.Model.Logout.LogoutModel;
 import com.example.HogwartsForum.JiraTest.WebDriverService;

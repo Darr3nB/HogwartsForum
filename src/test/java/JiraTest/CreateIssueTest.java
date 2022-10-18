@@ -1,4 +1,4 @@
-package JiraTest.EditIssue;
+package JiraTest;
 
 import com.example.HogwartsForum.JiraTest.Model.EditIssue.EditIssueModel;
 import com.example.HogwartsForum.JiraTest.WebDriverService;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-public class EditIssueTest {
+public class CreateIssueTest {
     private EditIssueModel editIssueModel;
 
 

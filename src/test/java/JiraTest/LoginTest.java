@@ -1,4 +1,4 @@
-package JiraTest.Login;
+package JiraTest;
 
 import com.example.HogwartsForum.JiraTest.Model.Login.DashPageModel;
 import com.example.HogwartsForum.JiraTest.Model.Login.LoginPageModel;
