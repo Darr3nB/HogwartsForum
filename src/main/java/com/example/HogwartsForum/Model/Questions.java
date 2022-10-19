@@ -1,16 +1,14 @@
 package com.example.HogwartsForum.Model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,6 +22,8 @@ public class Questions {
     private String title;
     private String questionText;
     private String submissionTime;
+    @OneToMany
+    private Set<Comments> commentsList;
 
     public Questions(String title, String questionText){
         this.title = title;

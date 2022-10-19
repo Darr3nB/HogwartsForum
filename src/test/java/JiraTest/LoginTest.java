@@ -1,9 +1,8 @@
 package JiraTest;
 
-import com.example.HogwartsForum.JiraTest.Model.Login.DashPageModel;
-import com.example.HogwartsForum.JiraTest.Model.Login.LoginPageModel;
-import com.example.HogwartsForum.JiraTest.Model.Login.ProfilePageModel;
-import com.example.HogwartsForum.JiraTest.WebDriverService;
+import JiraTest.Model.Login.DashPageModel;
+import JiraTest.Model.Login.LoginPageModel;
+import JiraTest.Model.Login.ProfilePageModel;
 import com.example.HogwartsForum.Util.FileReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

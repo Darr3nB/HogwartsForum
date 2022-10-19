@@ -1,7 +1,6 @@
 package JiraTest;
 
-import com.example.HogwartsForum.JiraTest.Model.Logout.LogoutModel;
-import com.example.HogwartsForum.JiraTest.WebDriverService;
+import JiraTest.Model.Logout.LogoutModel;
 import org.junit.jupiter.api.*;
 
 public class LogoutTest {

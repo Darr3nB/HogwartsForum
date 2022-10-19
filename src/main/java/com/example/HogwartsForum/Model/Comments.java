@@ -1,13 +1,10 @@
 package com.example.HogwartsForum.Model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,8 +17,6 @@ public class Comments {
     @Id
     @GeneratedValue
     private Integer id;
-    @ManyToOne
-    private Integer questionId;
     private String commentText;
     private String submissionTime;
 

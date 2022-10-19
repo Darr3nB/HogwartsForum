@@ -1,7 +1,7 @@
-package com.example.HogwartsForum.JiraTest.Model.Login;
+package JiraTest.Model.Login;
 
 
-import com.example.HogwartsForum.JiraTest.Model.BaseModel;
+import JiraTest.Model.BaseModel;
 import com.example.HogwartsForum.Util.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

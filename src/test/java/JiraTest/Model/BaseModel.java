@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.JiraTest.Model;
+package JiraTest.Model;
 
-import com.example.HogwartsForum.JiraTest.WebDriverService;
+import JiraTest.WebDriverService;
 import com.example.HogwartsForum.Util.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

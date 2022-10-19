@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.JiraTest.Model.BrowseProject;
+package JiraTest.Model.BrowseProject;
 
-import com.example.HogwartsForum.JiraTest.Model.BaseModel;
+import JiraTest.Model.BaseModel;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

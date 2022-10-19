@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.JiraTest;
+package JiraTest;
 
 import com.example.HogwartsForum.Util.FileReader;
 import org.openqa.selenium.WebDriver;

@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.JiraTest.Model.EditIssue;
+package JiraTest.Model.EditIssue;
 
-import com.example.HogwartsForum.JiraTest.Model.BaseModel;
+import JiraTest.Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;

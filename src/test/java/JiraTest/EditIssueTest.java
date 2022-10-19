@@ -1,7 +1,6 @@
 package JiraTest;
 
-import com.example.HogwartsForum.JiraTest.Model.EditIssue.EditIssueModel;
-import com.example.HogwartsForum.JiraTest.WebDriverService;
+import JiraTest.Model.EditIssue.EditIssueModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

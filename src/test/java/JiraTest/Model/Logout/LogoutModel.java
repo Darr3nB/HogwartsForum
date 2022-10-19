@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.JiraTest.Model.Logout;
+package JiraTest.Model.Logout;
 
-import com.example.HogwartsForum.JiraTest.Model.BaseModel;
+import JiraTest.Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
