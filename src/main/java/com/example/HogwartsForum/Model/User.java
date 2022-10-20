@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RegisteredUsers {
+public class User {
 
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class RegisteredUsers {
     @OneToMany
     private Set<Questions> questionsList;
 
-    public RegisteredUsers(String name, String password, HogwartsHouses house, String pet) {
+    public User(String name, String password, HogwartsHouses house, String pet) {
         this.name = name;
         this.password = password;
         this.house = house;

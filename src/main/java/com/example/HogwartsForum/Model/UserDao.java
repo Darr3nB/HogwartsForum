@@ -3,11 +3,11 @@ package com.example.HogwartsForum.Model;
 import java.util.List;
 
 public interface UserDao {
-    void add(RegisteredUsers registeredUsers);
+    void add(User user);
 
-    void update(RegisteredUsers registeredUsers);
+    void update(User user);
 
-    RegisteredUsers get(int id);
+    User get(int id);
 
-    List<RegisteredUsers> getAll();
+    List<User> getAll();
 }
