@@ -1,6 +1,7 @@
 function registrationPage() {
     function initButtonHandler() {
         document.querySelector('#registration-button').addEventListener('click', clickOnRegistrationButton);
+        document.querySelector('#username-field').addEventListener('input', validateUsername)
     }
 
     function clickOnRegistrationButton() {
@@ -45,6 +46,31 @@ function registrationPage() {
 
     function passwordsFieldsAreTheSame(passwordFieldOne, passwordFieldTwo) {
         return passwordFieldOne === passwordFieldTwo;
+    }
+
+    async function validateUsername(event){
+        const inputFieldValue = event.currentTarget.value;
+        const pTag = document.querySelector("#valid-field");
+        let usernameIsInDatabase = await apiForUsernameValidation(inputFieldValue);
+
+        if (inputFieldValue === ""){
+            pTag.classList.add("p-transparent");
+        } else if (!usernameIsInDatabase){
+            pTag.setAttribute("class", "");
+            pTag.classList.add("p-green");
+            pTag.innerText = "Username available"
+        }else {
+            pTag.setAttribute("class", "");
+            pTag.classList.add("p-red");
+            pTag.innerText = "Username unavailable"
+        }
+    }
+
+    async function apiForUsernameValidation(name){
+        if (name === ""){ return ; }
+        const result = await fetch(`/api/checkUsernameInDatabase/${name}`).then(response => response.json())
+
+        return result;
     }
 
     initButtonHandler();

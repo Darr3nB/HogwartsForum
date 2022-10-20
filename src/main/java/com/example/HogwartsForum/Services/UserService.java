@@ -24,6 +24,10 @@ public class UserService {
         return hogwartsUserDatabaseDao.getById(id);
     }
 
+    public Boolean countUsersByName(String name){
+        return hogwartsUserDatabaseDao.countByName(name) == 1;
+    }
+
     public void updateUserById(Integer id, HogwartsUser hogwartsUser){
         HogwartsUser hogwartsUserToUpdate = hogwartsUserDatabaseDao.getById(id);
         hogwartsUserToUpdate.setName(hogwartsUser.getName());
