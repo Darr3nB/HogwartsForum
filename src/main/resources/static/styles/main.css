@@ -1,11 +1,11 @@
-.p-red{
+.unavailable{
     color: red;
 }
 
-.p-green{
+.available{
     color: green;
 }
 
-.p-transparent{
+.transparent{
     color: transparent;
 }

@@ -54,14 +54,14 @@ function registrationPage() {
         let usernameIsInDatabase = await apiForUsernameValidation(inputFieldValue);
 
         if (inputFieldValue === "") {
-            pTag.classList.add("p-transparent");
+            pTag.classList.add("transparent");
         } else if (!usernameIsInDatabase) {
             pTag.setAttribute("class", "");
-            pTag.classList.add("p-green");
+            pTag.classList.add("available");
             pTag.innerText = "Username available"
         } else {
             pTag.setAttribute("class", "");
-            pTag.classList.add("p-red");
+            pTag.classList.add("unavailable");
             pTag.innerText = "Username unavailable"
         }
     }
