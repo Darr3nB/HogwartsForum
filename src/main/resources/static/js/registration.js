@@ -10,13 +10,13 @@ function registrationPage(){
         const passwordFieldTwo = document.querySelector('#password-again-field').value;
         const house = document.querySelector('#house-field').value;
         const petType = document.querySelector('#pet-field').value;
-        console.log("asd " + house);
 
         if (!checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType)){
             alert("All fields must be filled!");
+            return;
         }
 
-        //registrationPost(username, passwordFieldOne, house, petType);
+        registrationPost(username, passwordFieldOne, house, petType);
     }
 
     function registrationPost(username, password, house, petType){
@@ -36,7 +36,7 @@ function registrationPage(){
     }
 
     function checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType){
-        return !(username === "" || passwordFieldOne === "" || passwordFieldTwo === "" || house === "noneSelected" || petType === "");
+        return !(username === "" || passwordFieldOne === "" || passwordFieldTwo === "" || house === "noneSelected" || petType === "noneSelected");
     }
 
     initButtonHandler();

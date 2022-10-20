@@ -16,8 +16,10 @@ public class HogwartsUser {
     private Integer id;
     private String name;
     private String password;
+    @Enumerated(EnumType.STRING)
     private HogwartsHouses house;
-    private String pet;
+    @Enumerated(EnumType.STRING)
+    private PetTypes pet;
     @OneToMany
     private Set<Questions> questionsList;
 
@@ -25,6 +27,6 @@ public class HogwartsUser {
         this.name = name;
         this.password = password;
         this.house = HogwartsHouses.getHouseByStringEquivalent(house);
-        this.pet = pet;
+        this.pet = PetTypes.getPetByStringEquivalent(pet);
     }
 }
