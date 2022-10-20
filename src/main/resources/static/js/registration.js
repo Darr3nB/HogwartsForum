@@ -11,7 +11,7 @@ function registrationPage(){
         const house = document.querySelector('#house-field').value;
         const petType = document.querySelector('#pet-field').value;
 
-        registrationPost(username, passwordFieldOne, passwordFieldTwo, house, petType);
+        registrationPost(username, passwordFieldOne, house, petType);
     }
 
     function registrationPost(username, password, house, petType){
@@ -20,7 +20,7 @@ function registrationPage(){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'username': username, 'password': password, 'house': house, 'pet': petType})
+            body: JSON.stringify({'username': username, 'password': password, 'house': house, 'petType': petType})
         })
             .then(response => {
                 if (response.redirected){

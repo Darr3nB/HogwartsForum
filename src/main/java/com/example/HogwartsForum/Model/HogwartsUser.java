@@ -9,23 +9,22 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class HogwartsUser {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
     private String password;
-    @Enumerated(EnumType.STRING)
     private HogwartsHouses house;
     private String pet;
     @OneToMany
     private Set<Questions> questionsList;
 
-    public User(String name, String password, HogwartsHouses house, String pet) {
+    public HogwartsUser(String name, String password, String house, String pet) {
         this.name = name;
         this.password = password;
-        this.house = house;
+        this.house = HogwartsHouses.getHouseByStringEquivalent(house);
         this.pet = pet;
     }
 }

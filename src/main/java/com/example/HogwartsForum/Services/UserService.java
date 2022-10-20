@@ -1,34 +1,38 @@
 package com.example.HogwartsForum.Services;
 
-import com.example.HogwartsForum.Model.User;
-import com.example.HogwartsForum.Repositories.UserRepository;
+import com.example.HogwartsForum.Model.HogwartsUser;
+import com.example.HogwartsForum.Repositories.HogwartsUserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class UserService {
-    UserRepository userDatabaseDao;
+    HogwartsUserRepository hogwartsUserDatabaseDao;
 
-    public List<User> getAllUsers(){
-        return userDatabaseDao.findAll();
+    public List<HogwartsUser> getAllUsers(){
+        return hogwartsUserDatabaseDao.findAll();
     }
 
-    public void addUser(User user){
-        userDatabaseDao.save(user);
+    public void addUser(HogwartsUser hogwartsUser){
+        hogwartsUserDatabaseDao.save(hogwartsUser);
     }
 
-    public User getUserById(Integer id){
-        return userDatabaseDao.getById(id);
+    public HogwartsUser getUserById(Integer id){
+        return hogwartsUserDatabaseDao.getById(id);
     }
 
-    public void updateUserById(Integer id, User user){
-        User userToUpdate = userDatabaseDao.getById(id);
-        userToUpdate.setName(user.getName());
-        userToUpdate.setPassword(user.getPassword());
-        userToUpdate.setPet(user.getPet());
-        userDatabaseDao.save(userToUpdate);
+    public void updateUserById(Integer id, HogwartsUser hogwartsUser){
+        HogwartsUser hogwartsUserToUpdate = hogwartsUserDatabaseDao.getById(id);
+        hogwartsUserToUpdate.setName(hogwartsUser.getName());
+        hogwartsUserToUpdate.setPassword(hogwartsUser.getPassword());
+        hogwartsUserToUpdate.setPet(hogwartsUser.getPet());
+        hogwartsUserDatabaseDao.save(hogwartsUserToUpdate);
     }
 
     public void deleteUserById(Integer id){
-        userDatabaseDao.deleteById(id);
+        hogwartsUserDatabaseDao.deleteById(id);
     }
 }
