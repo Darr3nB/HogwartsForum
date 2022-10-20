@@ -5,7 +5,7 @@ import com.example.HogwartsForum.Repositories.UserRepository;
 
 import java.util.List;
 
-public class UsersService{
+public class UserService {
     UserRepository userDatabaseDao;
 
     public List<User> getAllUsers(){
