@@ -11,15 +11,7 @@ function registrationPage() {
         const house = document.querySelector('#house-field').value;
         const petType = document.querySelector('#pet-field').value;
 
-        fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType);
-
-        if (!checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType)) {
-            alert("All fields must be filled!");
-            return;
-        }
-
-        if (!passwordsFieldsAreTheSame(passwordFieldOne, passwordFieldTwo)) {
-            alert("Passwords must match!");
+        if (!fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType)) {
             return;
         }
 
@@ -46,6 +38,22 @@ function registrationPage() {
     }
 
     function fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType) {
+        if (!checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType)) {
+            alert("All fields must be filled!");
+            return false;
+        }
+
+        if (!passwordsFieldsAreTheSame(passwordFieldOne, passwordFieldTwo)) {
+            alert("Passwords must match!");
+            return false;
+        }
+
+        if (username === passwordFieldOne){
+            alert("Username cannot be the same as password!");
+            return false;
+        }
+
+        return true;
     }
 
     function checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType) {
