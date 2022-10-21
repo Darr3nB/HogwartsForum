@@ -28,7 +28,7 @@ public class RegistrationController {
 
     @PostMapping
     public HttpEntity<Void> doRegister(@RequestBody RegistrationModel newRegistration) {
-        if (!newRegistration.variableValidationForRegistration()) {
+        if (!newRegistration.validateRegistrationData()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
