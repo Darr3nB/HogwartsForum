@@ -13,7 +13,7 @@ public class RegistrationModel {
     private String petType;
 
     public Boolean variableValidationForRegistration() {
-        return username.length() >= 5 && password.length() >= 5 && passwordAgain.length() >= 5 && password.equals(passwordAgain)
+        return username.length() >= 3 && password.length() >= 3 && passwordAgain.length() >= 3 && password.equals(passwordAgain)
                 && !house.equals("noneSelected") && !petType.equals("noneSelected");
     }
 }

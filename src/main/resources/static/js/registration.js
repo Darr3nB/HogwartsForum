@@ -4,7 +4,8 @@ function registrationPage() {
         document.querySelector('#username-field').addEventListener('input', validateUsername);
     }
 
-    function clickOnRegistrationButton() {
+    function clickOnRegistrationButton(event) {
+        event.preventDefault();
         const username = document.querySelector('#username-field').value;
         const passwordFieldOne = document.querySelector('#password-field').value;
         const passwordFieldTwo = document.querySelector('#password-again-field').value;

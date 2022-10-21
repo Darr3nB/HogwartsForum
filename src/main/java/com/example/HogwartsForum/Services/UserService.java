@@ -12,23 +12,27 @@ import java.util.List;
 public class UserService {
     HogwartsUserRepository hogwartsUserDatabaseDao;
 
-    public List<HogwartsUser> getAllUsers(){
+    public List<HogwartsUser> getAllUsers() {
         return hogwartsUserDatabaseDao.findAll();
     }
 
-    public void addUser(HogwartsUser hogwartsUser){
+    public void addUser(HogwartsUser hogwartsUser) {
         hogwartsUserDatabaseDao.save(hogwartsUser);
     }
 
-    public HogwartsUser getUserById(Integer id){
+    public HogwartsUser getUserById(Integer id) {
         return hogwartsUserDatabaseDao.getById(id);
     }
 
-    public Boolean countUsersByName(String name){
+    public HogwartsUser getUserByUsername(String username) {
+        return hogwartsUserDatabaseDao.getHogwartsUserByName(username);
+    }
+
+    public Boolean countUsersByName(String name) {
         return hogwartsUserDatabaseDao.countByName(name) == 1;
     }
 
-    public void updateUserById(Integer id, HogwartsUser hogwartsUser){
+    public void updateUserById(Integer id, HogwartsUser hogwartsUser) {
         HogwartsUser hogwartsUserToUpdate = hogwartsUserDatabaseDao.getById(id);
         hogwartsUserToUpdate.setName(hogwartsUser.getName());
         hogwartsUserToUpdate.setPassword(hogwartsUser.getPassword());
@@ -36,7 +40,14 @@ public class UserService {
         hogwartsUserDatabaseDao.save(hogwartsUserToUpdate);
     }
 
-    public void deleteUserById(Integer id){
+    public void deleteUserById(Integer id) {
         hogwartsUserDatabaseDao.deleteById(id);
+    }
+
+    public Boolean validateLogin(String username){
+        HogwartsUser userFromDB = getUserByUsername(username);
+        
+
+        return true;
     }
 }

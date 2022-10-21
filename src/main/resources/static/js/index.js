@@ -3,13 +3,17 @@ function indexPage(){
         document.querySelector("#login-button").addEventListener('click', clickOnLoginButton);
     }
 
-    function clickOnLoginButton(){
-        // TODO Check if fields are empty
+    function clickOnLoginButton(event){
+        event.preventDefault();
         const username = document.querySelector("#username-field").value;
         const password = document.querySelector("#password-field").value;
 
-        console.log(username, password);
-        //loginPost(username, password)
+        if (fieldAreEmpty(username, password)){
+            alert("Both fields must be filled!");
+            return;
+        }
+
+        loginPost(username, password);
     }
 
     function loginPost(username, password){
@@ -26,6 +30,10 @@ function indexPage(){
                 }
             })
             .catch(reason => console.log(`Error happened: ${reason}`));
+    }
+
+    function fieldAreEmpty(username, password){
+        return username === "" || password === "";
     }
 
     initEventListener();
