@@ -35,7 +35,6 @@ public class IndexController {
         }
 
         model.addAttribute("username", username);
-//        model.addAttribute("username", null);
         return "index";
     }
 
@@ -45,7 +44,6 @@ public class IndexController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        System.out.println("Valid login");
         Cookie theCookie = new Cookie("hfUsername", loginParams.getUsername());
         theCookie.setMaxAge(60 * 60 * 24);
 
