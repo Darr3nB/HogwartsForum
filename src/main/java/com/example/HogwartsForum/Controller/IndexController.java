@@ -52,7 +52,7 @@ public class IndexController {
     }
 
     @GetMapping(value = "/logout")
-    public String doLogout(HttpServletResponse response){
+    public String doLogout(HttpServletResponse response) {
         Cookie theCookie = new Cookie("hfUsername", null);
         theCookie.setMaxAge(0);
         response.addCookie(theCookie);
