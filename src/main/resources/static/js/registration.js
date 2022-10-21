@@ -1,7 +1,7 @@
 function registrationPage() {
     function initButtonHandler() {
         document.querySelector('#registration-button').addEventListener('click', clickOnRegistrationButton);
-        document.querySelector('#username-field').addEventListener('input', validateUsername)
+        document.querySelector('#username-field').addEventListener('input', validateUsername);
     }
 
     function clickOnRegistrationButton() {
@@ -74,11 +74,11 @@ function registrationPage() {
         } else if (!usernameIsInDatabase) {
             pTag.setAttribute("class", "");
             pTag.classList.add("available");
-            pTag.innerText = "Username available"
+            pTag.innerText = "Username available";
         } else {
             pTag.setAttribute("class", "");
             pTag.classList.add("unavailable");
-            pTag.innerText = "Username unavailable"
+            pTag.innerText = "Username unavailable";
         }
     }
 
@@ -86,7 +86,7 @@ function registrationPage() {
         if (name === "") {
             return;
         }
-        const result = await fetch(`/api/checkUsernameInDatabase/${name}`).then(response => response.json())
+        const result = await fetch(`/api/checkUsernameInDatabase/${name}`).then(response => response.json());
 
         return result;
     }
