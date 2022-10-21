@@ -1,19 +1,19 @@
 package com.example.HogwartsForum.model;
 
 public enum PetTypes {
-    Owl,
-    Cat,
-    Toad,
-    Rat,
-    Ferret;
+    OWL,
+    CAT,
+    TOAD,
+    RAT,
+    FERRET;
 
     public static PetTypes getPetByStringEquivalent(String petTypeAsString) {
         return switch (petTypeAsString) {
-            case "Ferret" -> Ferret;
-            case "Cat" -> Cat;
-            case "Toad" -> Toad;
-            case "Rat" -> Rat;
-            default -> Owl;
+            case "Ferret" -> FERRET;
+            case "Cat" -> CAT;
+            case "Toad" -> TOAD;
+            case "Rat" -> RAT;
+            default -> OWL;
         };
     }
 }

@@ -1,7 +1,7 @@
 package com.example.HogwartsForum.services;
 
-import com.example.HogwartsForum.model.HogwartsUser;
 import com.example.HogwartsForum.daos.HogwartsUserDao;
+import com.example.HogwartsForum.model.HogwartsUser;
 import com.example.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,9 +51,9 @@ public class UserService {
             HogwartsUser userFromDB = getUserByUsername(username);
             return username.equals(userFromDB.getName()) &&
                     passwordAgent.passwordMatches(userFromDB.getPassword(), plainPassword);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("An error has occurred: " + e);
             return false;
         }

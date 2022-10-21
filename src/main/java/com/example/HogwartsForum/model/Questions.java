@@ -1,6 +1,7 @@
 package com.example.HogwartsForum.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class Questions {
 
@@ -25,7 +25,7 @@ public class Questions {
     @OneToMany
     private Set<Comments> commentsList;
 
-    public Questions(String title, String questionText){
+    public Questions(String title, String questionText) {
         this.title = title;
         this.questionText = questionText;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

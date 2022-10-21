@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class FileReader {
-    public static String getValueByKeyFromConfigProperties(String fieldName){
+    public static String getValueByKeyFromConfigProperties(String fieldName) {
         try (InputStream input = new FileInputStream("config.properties")) {
             Properties prop = new Properties();
             prop.load(input);

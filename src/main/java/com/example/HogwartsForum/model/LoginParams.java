@@ -1,9 +1,9 @@
 package com.example.HogwartsForum.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class LoginParams {
     String username;

@@ -1,17 +1,17 @@
 package com.example.HogwartsForum.model;
 
 public enum HogwartsHouses {
-    Gryffindor,
-    Slytherin,
-    Hufflepuff,
-    Ravenclaw;
+    GRYFFINDOR,
+    SLYTHERIN,
+    HUFFLEPUFF,
+    RAVENCLAW;
 
-    public static HogwartsHouses getHouseByStringEquivalent(String houseAsString){
+    public static HogwartsHouses getHouseByStringEquivalent(String houseAsString) {
         return switch (houseAsString) {
-            case "Gryffindor" -> Gryffindor;
-            case "Slytherin" -> Slytherin;
-            case "Hufflepuff" -> Hufflepuff;
-            default -> Ravenclaw;
+            case "Gryffindor" -> GRYFFINDOR;
+            case "Slytherin" -> SLYTHERIN;
+            case "Hufflepuff" -> HUFFLEPUFF;
+            default -> RAVENCLAW;
         };
     }
 }

@@ -1,6 +1,7 @@
 package com.example.HogwartsForum.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class Comments {
 
@@ -20,7 +20,7 @@ public class Comments {
     private String commentText;
     private String submissionTime;
 
-    public Comments(String text){
+    public Comments(String text) {
         this.commentText = text;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime dateTimeNow = LocalDateTime.now();
