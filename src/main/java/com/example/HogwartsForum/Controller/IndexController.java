@@ -34,8 +34,8 @@ public class IndexController {
             }
         }
 
-//        model.addAttribute("username", username);
-        model.addAttribute("username", null);
+        model.addAttribute("username", username);
+//        model.addAttribute("username", null);
         return "index";
     }
 
@@ -51,5 +51,14 @@ public class IndexController {
 
         response.addCookie(theCookie);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "/logout")
+    public String doLogout(HttpServletResponse response){
+        Cookie theCookie = new Cookie("hfUsername", null);
+        theCookie.setMaxAge(0);
+        response.addCookie(theCookie);
+
+        return "redirect:";
     }
 }
