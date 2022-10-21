@@ -11,6 +11,8 @@ function registrationPage() {
         const house = document.querySelector('#house-field').value;
         const petType = document.querySelector('#pet-field').value;
 
+        fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType);
+
         if (!checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType)) {
             alert("All fields must be filled!");
             return;
@@ -21,16 +23,19 @@ function registrationPage() {
             return;
         }
 
-        registrationPost(username, passwordFieldOne, house, petType);
+        registrationPost(username, passwordFieldOne, passwordFieldTwo, house, petType);
     }
 
-    function registrationPost(username, password, house, petType) {
+    function registrationPost(username, password, passwordAgain, house, petType) {
         const registration = fetch(`/registration`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'username': username, 'password': password, 'house': house, 'petType': petType})
+            body: JSON.stringify({
+                'username': username, 'password': password, 'passwordAgain': passwordAgain,
+                'house': house, 'petType': petType
+            })
         })
             .then(response => {
                 if (response.redirected) {
@@ -38,6 +43,9 @@ function registrationPage() {
                 }
             })
             .catch(reason => console.log(`Error happened: ${reason}`));
+    }
+
+    function fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType) {
     }
 
     function checkIfFieldsAreEmpty(username, passwordFieldOne, passwordFieldTwo, house, petType) {

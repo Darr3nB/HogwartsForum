@@ -25,6 +25,10 @@ public class RegistrationController {
 
     @PostMapping
     public String doRegister(@RequestBody RegistrationModel newRegistration) {
+        if (!newRegistration.variableValidationForRegistration()) {
+            return "registration";
+        }
+
         HogwartsUser newUser = new HogwartsUser(newRegistration.getUsername(), passwordAgent.hashPassword(newRegistration.getPassword()),
                 newRegistration.getHouse(), newRegistration.getPetType());
         userService.addUser(newUser);

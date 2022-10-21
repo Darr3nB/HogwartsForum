@@ -9,7 +9,7 @@ function indexPage(){
         const password = document.querySelector("#password-field").value;
 
         console.log(username, password);
-        loginPost(username, password)
+        //loginPost(username, password)
     }
 
     function loginPost(username, password){
