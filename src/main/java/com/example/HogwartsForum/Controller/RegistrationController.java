@@ -5,6 +5,9 @@ import com.example.HogwartsForum.Model.RegistrationModel;
 import com.example.HogwartsForum.Security.PasswordAgent;
 import com.example.HogwartsForum.Services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,15 +27,15 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String doRegister(@RequestBody RegistrationModel newRegistration) {
+    public HttpEntity<Void> doRegister(@RequestBody RegistrationModel newRegistration) {
         if (!newRegistration.variableValidationForRegistration()) {
-            return "registration";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         HogwartsUser newUser = new HogwartsUser(newRegistration.getUsername(), passwordAgent.hashPassword(newRegistration.getPassword()),
                 newRegistration.getHouse(), newRegistration.getPetType());
         userService.addUser(newUser);
 
-        return "redirect:";
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

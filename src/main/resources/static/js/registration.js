@@ -31,8 +31,10 @@ function registrationPage() {
             })
         })
             .then(response => {
-                if (response.redirected) {
-                    window.location.href = response.url;
+                if (response.status === 403) {
+                    alert("Invalid registration attempt!");
+                }else if (response.ok){
+                    window.location.href = "/";
                 }
             })
             .catch(reason => console.log(`Error happened: ${reason}`));
