@@ -17,11 +17,11 @@ public class Comment {
     @Id
     @GeneratedValue
     private Integer id;
-    private String commentText;
+    private String comment;
     private String submissionTime;
 
     public Comment(String text) {
-        this.commentText = text;
+        this.comment = text;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime dateTimeNow = LocalDateTime.now();
         this.submissionTime = dtf.format(dateTimeNow);
