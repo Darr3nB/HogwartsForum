@@ -2,6 +2,7 @@ package com.example.HogwartsForum.Services;
 
 import com.example.HogwartsForum.Model.HogwartsUser;
 import com.example.HogwartsForum.Repositories.HogwartsUserRepository;
+import com.example.HogwartsForum.Security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
     HogwartsUserRepository hogwartsUserDatabaseDao;
+    PasswordAgent passwordAgent;
 
     public List<HogwartsUser> getAllUsers() {
         return hogwartsUserDatabaseDao.findAll();
@@ -44,10 +46,13 @@ public class UserService {
         hogwartsUserDatabaseDao.deleteById(id);
     }
 
-    public Boolean validateLogin(String username){
-        HogwartsUser userFromDB = getUserByUsername(username);
-        
-
-        return true;
+    public Boolean validateLogin(String username, String plainPassword) {
+        try {
+            HogwartsUser userFromDB = getUserByUsername(username);
+            return username.equals(userFromDB.getName()) &&
+                    passwordAgent.passwordMatches(userFromDB.getPassword(), plainPassword);
+        }catch (Exception e){
+            return false;
+        }
     }
 }

@@ -25,8 +25,10 @@ function indexPage(){
             body: JSON.stringify({'username': username, 'password': password})
         })
             .then(response => {
-                if (response.redirected){
-                    window.location.href = response.url;
+                if (response.ok){
+                    window.location.href = "/";
+                }else if (response.status === 403){
+                    alert("Invalid login attempt!");
                 }
             })
             .catch(reason => console.log(`Error happened: ${reason}`));
