@@ -51,7 +51,10 @@ public class UserService {
             HogwartsUser userFromDB = getUserByUsername(username);
             return username.equals(userFromDB.getName()) &&
                     passwordAgent.passwordMatches(userFromDB.getPassword(), plainPassword);
+        }catch (NullPointerException e){
+            return false;
         }catch (Exception e){
+            System.out.println("An error has occurred: " + e);
             return false;
         }
     }

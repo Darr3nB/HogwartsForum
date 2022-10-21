@@ -1,4 +1,6 @@
-package com.example.HogwartsForum.model;
+package com.example.HogwartsForum.daos;
+
+import com.example.HogwartsForum.model.HogwartsUser;
 
 import java.util.List;
 
