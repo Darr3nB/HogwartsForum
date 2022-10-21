@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public Boolean countUsersByName(String name) {
-        return hogwartsUserDatabaseDao.countByName(name) == 1;
+        return hogwartsUserDatabaseDao.existsByName(name);
     }
 
     public void updateUserById(Integer id, HogwartsUser hogwartsUser) {
