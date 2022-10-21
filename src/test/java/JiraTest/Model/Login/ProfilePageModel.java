@@ -1,7 +1,7 @@
 package JiraTest.Model.Login;
 
 import JiraTest.Model.BaseModel;
-import com.example.HogwartsForum.Util.FileReader;
+import com.example.HogwartsForum.util.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

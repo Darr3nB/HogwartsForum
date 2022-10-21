@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.Util;
+package com.example.HogwartsForum.util;
 
-import com.example.HogwartsForum.Model.UserDao;
+import com.example.HogwartsForum.model.UserDao;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;

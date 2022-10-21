@@ -1,6 +1,6 @@
 package JiraTest;
 
-import com.example.HogwartsForum.Util.FileReader;
+import com.example.HogwartsForum.util.FileReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

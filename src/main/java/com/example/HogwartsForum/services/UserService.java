@@ -1,8 +1,8 @@
-package com.example.HogwartsForum.Services;
+package com.example.HogwartsForum.services;
 
-import com.example.HogwartsForum.Model.HogwartsUser;
-import com.example.HogwartsForum.Repositories.HogwartsUserRepository;
-import com.example.HogwartsForum.Security.PasswordAgent;
+import com.example.HogwartsForum.model.HogwartsUser;
+import com.example.HogwartsForum.daos.HogwartsUserDao;
+import com.example.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService {
-    HogwartsUserRepository hogwartsUserDatabaseDao;
+    HogwartsUserDao hogwartsUserDatabaseDao;
     PasswordAgent passwordAgent;
 
     public List<HogwartsUser> getAllUsers() {

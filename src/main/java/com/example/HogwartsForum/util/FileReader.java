@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.Util;
+package com.example.HogwartsForum.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

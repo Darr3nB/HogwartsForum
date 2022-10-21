@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.Util;
+package com.example.HogwartsForum.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

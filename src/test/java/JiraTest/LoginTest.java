@@ -3,7 +3,7 @@ package JiraTest;
 import JiraTest.Model.Login.DashPageModel;
 import JiraTest.Model.Login.LoginPageModel;
 import JiraTest.Model.Login.ProfilePageModel;
-import com.example.HogwartsForum.Util.FileReader;
+import com.example.HogwartsForum.util.FileReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

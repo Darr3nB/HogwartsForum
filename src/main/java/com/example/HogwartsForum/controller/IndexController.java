@@ -1,7 +1,7 @@
-package com.example.HogwartsForum.Controller;
+package com.example.HogwartsForum.controller;
 
-import com.example.HogwartsForum.Model.LoginParams;
-import com.example.HogwartsForum.Services.UserService;
+import com.example.HogwartsForum.model.LoginParams;
+import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

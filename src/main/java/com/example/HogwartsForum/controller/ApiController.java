@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.Controller;
+package com.example.HogwartsForum.controller;
 
-import com.example.HogwartsForum.Services.UserService;
+import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
