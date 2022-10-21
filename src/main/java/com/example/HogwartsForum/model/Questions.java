@@ -23,7 +23,7 @@ public class Questions {
     private String questionText;
     private String submissionTime;
     @OneToMany
-    private Set<Comments> commentsList;
+    private Set<Comment> commentList;
 
     public Questions(String title, String questionText) {
         this.title = title;

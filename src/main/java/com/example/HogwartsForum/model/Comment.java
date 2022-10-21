@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Data
 @NoArgsConstructor
-public class Comments {
+public class Comment {
 
     @Id
     @GeneratedValue
@@ -20,7 +20,7 @@ public class Comments {
     private String commentText;
     private String submissionTime;
 
-    public Comments(String text) {
+    public Comment(String text) {
         this.commentText = text;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime dateTimeNow = LocalDateTime.now();
