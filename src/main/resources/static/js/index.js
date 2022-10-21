@@ -1,14 +1,14 @@
-function indexPage(){
-    function initEventListener(){
+function indexPage() {
+    function initEventListener() {
         document.querySelector("#login-button").addEventListener('click', clickOnLoginButton);
     }
 
-    function clickOnLoginButton(event){
+    function clickOnLoginButton(event) {
         event.preventDefault();
         const username = document.querySelector("#username-field").value;
         const password = document.querySelector("#password-field").value;
 
-        if (fieldAreEmpty(username, password)){
+        if (fieldAreEmpty(username, password)) {
             alert("Both fields must be filled!");
             return;
         }
@@ -16,7 +16,7 @@ function indexPage(){
         loginPost(username, password);
     }
 
-    function loginPost(username, password){
+    function loginPost(username, password) {
         const login = fetch(`/login`, {
             method: "POST",
             headers: {
@@ -25,16 +25,16 @@ function indexPage(){
             body: JSON.stringify({'username': username, 'password': password})
         })
             .then(response => {
-                if (response.ok){
+                if (response.ok) {
                     window.location.href = "/";
-                }else if (response.status === 403){
+                } else if (response.status === 403) {
                     alert("Invalid login attempt!");
                 }
             })
             .catch(reason => console.log(`Error happened: ${reason}`));
     }
 
-    function fieldAreEmpty(username, password){
+    function fieldAreEmpty(username, password) {
         return username === "" || password === "";
     }
 

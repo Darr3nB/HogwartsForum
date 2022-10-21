@@ -33,7 +33,7 @@ function registrationPage() {
             .then(response => {
                 if (response.status === 403) {
                     alert("Invalid registration attempt!");
-                }else if (response.ok){
+                } else if (response.ok) {
                     window.location.href = "/";
                 }
             })
@@ -51,7 +51,7 @@ function registrationPage() {
             return false;
         }
 
-        if (username === passwordFieldOne){
+        if (username === passwordFieldOne) {
             alert("Username cannot be the same as password!");
             return false;
         }
