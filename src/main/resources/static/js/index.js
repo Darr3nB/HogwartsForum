@@ -1,6 +1,9 @@
 function indexPage() {
     function initEventListener() {
-        document.querySelector("#login-button").addEventListener('click', clickOnLoginButton);
+        let loginButton = document.querySelector("#login-button");
+        if (loginButton) {
+            document.querySelector("#login-button").addEventListener('click', clickOnLoginButton);
+        }
     }
 
     function clickOnLoginButton(event) {
