@@ -19,7 +19,7 @@ function indexPage() {
         let stringBuilder = `<ol>`;
 
         for (let i = 0; i < questionList.length; i++) {
-            stringBuilder = stringBuilder + `<li>${questionList[i].title} ${questionList[i].questionText}`;
+            stringBuilder = stringBuilder + `<li>${questionList[i].title} ${questionList[i].questionText}</li>`;
         }
 
         stringBuilder = stringBuilder + `</ol>`;
