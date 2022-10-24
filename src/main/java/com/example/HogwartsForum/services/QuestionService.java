@@ -5,6 +5,8 @@ import com.example.HogwartsForum.model.Question;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class QuestionService {
@@ -12,5 +14,9 @@ public class QuestionService {
 
     public void addQuestion(Question question) {
         questionsDao.save(question);
+    }
+
+    public List<Question> getAllQuestions(){
+        return questionsDao.findAll();
     }
 }
