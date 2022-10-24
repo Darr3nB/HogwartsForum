@@ -14,22 +14,23 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class Questions {
+public class Question {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String title;
     private String questionText;
-    private String submissionTime;
+    private LocalDateTime submissionTime;
     @OneToMany
     private Set<Comment> commentList;
 
-    public Questions(String title, String questionText) {
+    public Question(String title, String questionText) {
         this.title = title;
         this.questionText = questionText;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime dateTimeNow = LocalDateTime.now();
-        this.submissionTime = dtf.format(dateTimeNow);
+        this.submissionTime = dateTimeNow;
+                //dtf.format(dateTimeNow);
     }
 }

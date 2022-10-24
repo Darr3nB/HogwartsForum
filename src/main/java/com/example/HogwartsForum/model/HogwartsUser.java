@@ -21,7 +21,7 @@ public class HogwartsUser {
     @Enumerated(EnumType.STRING)
     private PetTypes pet;
     @OneToMany
-    private Set<Questions> questionsList;
+    private Set<Question> questionsList;
 
     public HogwartsUser(String name, String password, String house, String pet) {
         this.name = name;

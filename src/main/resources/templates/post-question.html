@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Ask a question</title>
     <script type="text/javascript" th:src="@{/js/index.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/question.js}" defer></script>
     <link rel="shortcut icon" href="#">
 </head>
 <body>
@@ -14,15 +15,13 @@
         <div>
             <h1>Ask your question</h1>
 
-            <form action="/post-question" method="post">
                 <label for="question-title">Question title: </label>
                 <input type="text" id="question-title" minlength="5">
 
                 <label for="question-description">Description: </label>
                 <textarea id="question-description" rows="4" cols="50"></textarea>
 
-                <button>Post question</button>
-            </form>
+                <button id="post-question-button">Post question</button>
         </div>
     </span>
 </td>
