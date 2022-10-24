@@ -10,6 +10,7 @@
 
 <div th:replace="fragments :: nav-bar"/>
 <h1>Welcome to Hogwarts forum!</h1>
+<a href="/post-question"><button>Ask a question</button></a>
 <p>Find friends, chat, connect with other students, ask questions or help in studies.</p>
 
 <p th:text="${questions}?: 'No questions asked yet.'"></p>
