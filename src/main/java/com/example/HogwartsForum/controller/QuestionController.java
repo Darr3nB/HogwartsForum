@@ -1,6 +1,7 @@
 package com.example.HogwartsForum.controller;
 
 import com.example.HogwartsForum.model.Question;
+import com.example.HogwartsForum.services.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @AllArgsConstructor
 @RequestMapping("/post-question")
 public class QuestionController {
+    QuestionService questionService;
 
     @GetMapping
     public String postQuestionPage(Model model, HttpServletRequest request) {
@@ -36,10 +38,12 @@ public class QuestionController {
     }
 
     @PostMapping
-    public HttpEntity<Void> postQuestion(@RequestBody Question question){
-        if (question.getTitle().length() < 5 || question.getQuestionText().length() < 5){
+    public HttpEntity<Void> postQuestion(@RequestBody Question question) {
+        if (question.getTitle().length() < 5 || question.getQuestionText().length() < 5) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        Question newQuestion = new Question(question.getTitle(), question.getQuestionText());
+        questionService.addQuestion(newQuestion);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

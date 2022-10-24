@@ -25,12 +25,10 @@ public class Question {
     @OneToMany
     private Set<Comment> commentList;
 
+
     public Question(String title, String questionText) {
         this.title = title;
         this.questionText = questionText;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-        this.submissionTime = dateTimeNow;
-                //dtf.format(dateTimeNow);
+        this.submissionTime = LocalDateTime.now();
     }
 }

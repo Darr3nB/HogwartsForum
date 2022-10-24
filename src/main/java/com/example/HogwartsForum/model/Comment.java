@@ -18,12 +18,10 @@ public class Comment {
     @GeneratedValue
     private Integer id;
     private String comment;
-    private String submissionTime;
+    private LocalDateTime submissionTime;
 
     public Comment(String text) {
         this.comment = text;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-        this.submissionTime = dtf.format(dateTimeNow);
+        this.submissionTime = LocalDateTime.now();
     }
 }
