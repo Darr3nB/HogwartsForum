@@ -46,6 +46,7 @@ public class IndexController {
 
         Cookie theCookie = new Cookie("hfUsername", loginParams.getUsername());
         theCookie.setMaxAge(60 * 60 * 24);
+        theCookie.setPath("/");
 
         response.addCookie(theCookie);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -55,6 +56,7 @@ public class IndexController {
     public String doLogout(HttpServletResponse response) {
         Cookie theCookie = new Cookie("hfUsername", null);
         theCookie.setMaxAge(0);
+        theCookie.setPath("/");
         response.addCookie(theCookie);
 
         return "redirect:";

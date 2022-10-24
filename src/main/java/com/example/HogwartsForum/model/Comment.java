@@ -26,5 +26,4 @@ public class Comment {
         LocalDateTime dateTimeNow = LocalDateTime.now();
         this.submissionTime = dtf.format(dateTimeNow);
     }
-
 }
