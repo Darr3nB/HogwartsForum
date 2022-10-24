@@ -21,9 +21,9 @@ function questionHtml() {
         })
             .then(response => {
                 if (response.status === 403) {
-                    console.log("ERROR");
+                    alert("Title or description is too short!");
                 } else if (response.ok) {
-                    console.log("OK!");
+                    window.location.href = "/";
                 }
             })
             .catch(reason => console.log(`An error happened: ${reason}`));

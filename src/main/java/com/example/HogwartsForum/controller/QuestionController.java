@@ -37,8 +37,9 @@ public class QuestionController {
 
     @PostMapping
     public HttpEntity<Void> postQuestion(@RequestBody Question question){
-        System.out.println(question.getTitle());
-        System.out.println(question.getQuestionText());
+        if (question.getTitle().length() < 5 || question.getQuestionText().length() < 5){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
