@@ -7,7 +7,7 @@ function indexPage() {
     }
 
     async function loadQuestions() {
-        // TODO add header to list, add id to list elements and display only the 5 latest question
+        // TODO add id to list elements and display only the 5 latest question
         // TODO add loading gif util promise fulfilled
         let mainPageQuestions = document.querySelector("#main-page-questions");
         let questionList = await apiGetQuestions();
