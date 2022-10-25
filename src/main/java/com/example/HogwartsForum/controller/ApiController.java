@@ -25,6 +25,6 @@ public class ApiController {
 
     @GetMapping(value = "all-questions")
     public List<Question> getAllQuestions(){
-        return questionService.getAllQuestions();
+        return questionService.getTop5QuestionBySubmissionTime();
     }
 }

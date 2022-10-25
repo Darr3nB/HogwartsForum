@@ -7,7 +7,7 @@ function indexPage() {
     }
 
     async function loadQuestions() {
-        // TODO add id to list elements and display only the 5 latest question
+        // TODO add id to table elements
         // TODO add loading gif util promise fulfilled
         let mainPageQuestions = document.querySelector("#main-page-questions");
         let questionList = await apiGetQuestions();
@@ -20,15 +20,15 @@ function indexPage() {
                                 <table>
                                      <tr>
                                         <th>Asked question(s)</th>
-                                    </tr>
-                                    <tr>`;
+                                    </tr>`;
 
         for (let i = 0; i < questionList.length; i++) {
-            stringBuilder = stringBuilder + `<td>${questionList[i].title} ${questionList[i].questionText}</td>`;
+            stringBuilder = stringBuilder + `<tr>
+                                                <td>${questionList[i].title} ${questionList[i].questionText}</td>
+                                            </tr>`;
         }
 
-        stringBuilder = stringBuilder + `    </tr>
-                                            </table>
+        stringBuilder = stringBuilder + `   </table>
                                         </div>`;
         mainPageQuestions.innerHTML = stringBuilder;
     }

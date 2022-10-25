@@ -19,4 +19,8 @@ public class QuestionService {
     public List<Question> getAllQuestions() {
         return questionsDao.findAll();
     }
+
+    public List<Question> getTop5QuestionBySubmissionTime(){
+        return questionsDao.findTop5ByOrderBySubmissionTimeDesc();
+    }
 }
