@@ -30,7 +30,7 @@ public class UserService {
         return hogwartsUserDatabaseDao.getHogwartsUserByName(username);
     }
 
-    public Boolean countUsersByName(String name) {
+    public Boolean existByName(String name) {
         return hogwartsUserDatabaseDao.existsByName(name);
     }
 

@@ -20,7 +20,7 @@ public class ApiController {
 
     @GetMapping(value = "checkUsernameInDatabase/{name}")
     public Boolean checkUsernameInDatabase(@PathVariable String name) {
-        return userService.countUsersByName(name);
+        return userService.existByName(name);
     }
 
     @GetMapping(value = "all-questions")
