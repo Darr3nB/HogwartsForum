@@ -8,12 +8,12 @@ function indexPage() {
 
     async function loadQuestions() {
         // TODO add id to table elements
-        // TODO add loading gif util promise fulfilled
         let mainPageQuestions = document.querySelector("#main-page-questions");
+        mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
         let questionList = await apiGetQuestions();
 
         if (questionList.length <= 0) {
-            mainPageQuestions.innerText = "There are no questions yet!";
+            mainPageQuestions.innerHTML = `<div>There are no asked questions yet!</div>`;
         }
 
         let stringBuilder = `<div>
