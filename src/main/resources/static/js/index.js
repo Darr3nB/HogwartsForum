@@ -16,18 +16,20 @@ function indexPage() {
             mainPageQuestions.innerText = "There are no questions yet!";
         }
 
-        let stringBuilder = `<table>
-                                 <tr>
-                                    <th>Asked questions</th>
-                                </tr>
-                                <tr>`;
+        let stringBuilder = `<div>
+                                <table>
+                                     <tr>
+                                        <th>Asked questions</th>
+                                    </tr>
+                                    <tr>`;
 
         for (let i = 0; i < questionList.length; i++) {
             stringBuilder = stringBuilder + `<td>${questionList[i].title} ${questionList[i].questionText}</td>`;
         }
 
-        stringBuilder = stringBuilder + `</tr>
-                                        </table>`;
+        stringBuilder = stringBuilder + `    </tr>
+                                            </table>
+                                        </div>`;
         mainPageQuestions.innerHTML = stringBuilder;
     }
 
