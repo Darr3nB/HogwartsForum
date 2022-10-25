@@ -1,5 +1,6 @@
 package com.example.HogwartsForum.controller;
 
+import com.example.HogwartsForum.model.HogwartsUser;
 import com.example.HogwartsForum.model.LoginParams;
 import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
@@ -60,5 +61,32 @@ public class IndexController {
         response.addCookie(theCookie);
 
         return "redirect:";
+    }
+
+    @GetMapping(value = "/profile")
+    public String openProfilePage(Model model, HttpServletRequest request) {
+        String username = null;
+        Cookie[] cookies = request.getCookies();
+
+        for (Cookie temp : cookies) {
+            if ("hfUsername".equals(temp.getName())) {
+                username = temp.getValue();
+            }
+        }
+
+        if (username == null) {
+            return errorPage();
+        }
+
+        HogwartsUser foundUser = userService.getUserByUsername(username);
+        model.addAttribute("user", foundUser);
+        model.addAttribute("username", username);
+
+        return "profile";
+    }
+
+    @GetMapping(value = "/error")
+    public String errorPage() {
+        return "error";
     }
 }

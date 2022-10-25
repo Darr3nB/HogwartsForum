@@ -19,7 +19,7 @@ function indexPage() {
         let stringBuilder = `<div>
                                 <table>
                                      <tr>
-                                        <th>Asked questions</th>
+                                        <th>Asked question(s)</th>
                                     </tr>
                                     <tr>`;
 

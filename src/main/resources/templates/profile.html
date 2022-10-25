@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <script type="text/javascript" th:src="@{/js/index.js}" defer></script>
+</head>
+<body>
+<div th:replace="fragments :: nav-bar"/>
+
+<p th:text="${user.getName()}"></p>
+<p th:text="${user.getHouse()}"></p>
+<p th:text="${user.getPet()}"></p>
+
+<div th:replace="fragments :: footer"/>
+</body>
+</html>
