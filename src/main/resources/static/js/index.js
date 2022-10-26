@@ -12,7 +12,7 @@ function indexPage() {
         // TODO add id to table elements
         let mainPageQuestions = document.querySelector("#main-page-questions");
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
-        let questionList = await utility.apiGetReturningJson("/api/all-questions");
+        let questionList = await utility.apiGet("/api/all-questions").then(response => response.json());
 
         if (questionList.length <= 0) {
             mainPageQuestions.innerHTML = `<div>There are no asked questions yet!</div>`;
@@ -35,7 +35,7 @@ function indexPage() {
         mainPageQuestions.innerHTML = stringBuilder;
     }
 
-    function clickOnLoginButton(event) {
+    async function clickOnLoginButton(event) {
         event.preventDefault();
         const username = document.querySelector("#username-field").value;
         const password = document.querySelector("#password-field").value;
@@ -45,25 +45,13 @@ function indexPage() {
             return;
         }
 
-        loginPost(username, password);
-    }
-
-    function loginPost(username, password) {
-        const login = fetch(`/login`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'username': username, 'password': password})
+        await utility.apiPost("/login", {'username': username, 'password': password}).then(response => {
+            if (response.status === 403){
+                alert("Invalid login attempt!");
+            }else if (response.ok){
+                window.location.href = "/";
+            }
         })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = "/";
-                } else if (response.status === 403) {
-                    alert("Invalid login attempt!");
-                }
-            })
-            .catch(reason => console.log(`Error happened: ${reason}`));
     }
 
     function fieldAreEmpty(username, password) {
