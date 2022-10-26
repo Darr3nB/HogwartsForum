@@ -1,6 +1,7 @@
 import {utility} from "./utility.js";
 
 function allQuestionsPage() {
+    // TODO add input fields to search for specific question
     const listedQuestionsDiv = document.querySelector("#listed-questions");
 
     async function loadAllQuestions() {
