@@ -12,5 +12,20 @@ export let utility = {
             body: JSON.stringify(dataAsDict)
         })
             .catch(reason => console.log(`Error happened: ${reason}`));
+    },
+
+    addEventListenerToQuestions: function () {
+        const allQuestion = document.querySelectorAll("td");
+        allQuestion.forEach(element => {
+            element.addEventListener('click', utility.clickOnSpecificQuestion);
+        });
+    },
+
+    clickOnSpecificQuestion: function (event) {
+        const selectedQuestionId = +event.currentTarget.id.replace("question-id-", "");
+
+        utility.apiGet(`/post-question/specific-question/${selectedQuestionId}`).then(response => {
+            window.location.href = response.url;
+        });
     }
 }

@@ -53,22 +53,7 @@ function indexPage() {
                                         </div>`;
         mainPageQuestions.innerHTML = stringBuilder;
 
-        addEventListenerToQuestions();
-    }
-
-    function addEventListenerToQuestions() {
-        const allQuestion = document.querySelectorAll("td");
-        allQuestion.forEach(element => {
-            element.addEventListener('click', clickOnSpecificQuestion);
-        });
-    }
-
-    function clickOnSpecificQuestion(event) {
-        const selectedQuestionId = +event.currentTarget.id.replace("question-id-", "");
-
-        utility.apiGet(`/post-question/specific-question/${selectedQuestionId}`).then(response => {
-            window.location.href = response.url;
-        });
+        utility.addEventListenerToQuestions();
     }
 
     async function clickOnLoginButton(event) {

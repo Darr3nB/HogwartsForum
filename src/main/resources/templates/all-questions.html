@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <title>All questions</title>
     <script type="module" th:src="@{/js/allQuestions.js}" defer></script>
+    <script type="module" th:src="@{/js/index.js}" defer></script>
     <link rel="shortcut icon" href="#">
 </head>
 <body>
+<div th:replace="fragments :: nav-bar"/>
 
+<div id="listed-questions"></div>
+
+<div th:replace="fragments :: footer"/>
 </body>
 </html>
