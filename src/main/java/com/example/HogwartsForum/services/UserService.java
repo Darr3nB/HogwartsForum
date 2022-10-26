@@ -52,6 +52,10 @@ public class UserService {
     }
 
     public Boolean validateLogin(String username, String plainPassword) {
+        if (username.equals("DELETED_USER")){
+            return false;
+        }
+
         try {
             HogwartsUser userFromDB = getUserByUsername(username);
             return username.equals(userFromDB.getName()) &&

@@ -12,6 +12,6 @@ public class RegistrationModel {
 
     public Boolean validateRegistrationData() {
         return username.length() >= 3 && password.length() >= 3 && passwordAgain.length() >= 3 && password.equals(passwordAgain)
-                && !house.equals("noneSelected") && !petType.equals("noneSelected");
+                && !house.equals("noneSelected") && !petType.equals("noneSelected") || !username.equals("DELETED_USER");
     }
 }

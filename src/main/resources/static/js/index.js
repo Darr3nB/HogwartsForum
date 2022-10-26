@@ -15,7 +15,6 @@ function indexPage() {
     }
 
     async function clickOnDeleteProfileButton(event) {
-        // TODO for login and reg validation add the new deleted_profile as criteria
         event.preventDefault();
         const profileId = document.querySelector("#profile-id-on-profile-page").innerText;
 
@@ -61,7 +60,7 @@ function indexPage() {
         const username = document.querySelector("#username-field").value;
         const password = document.querySelector("#password-field").value;
 
-        if (fieldAreEmpty(username, password)) {
+        if (fieldAreEmptyOrValid(username, password)) {
             alert("Both fields must be filled!");
             return;
         }
@@ -75,8 +74,8 @@ function indexPage() {
         })
     }
 
-    function fieldAreEmpty(username, password) {
-        return username === "" || password === "";
+    function fieldAreEmptyOrValid(username, password) {
+        return username === "" || password === "" || username !== "DELETED_USER";
     }
 
     initEventListener();
