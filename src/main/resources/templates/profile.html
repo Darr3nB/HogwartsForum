@@ -8,9 +8,10 @@
 <body>
 <div th:replace="fragments :: nav-bar"/>
 
-<p th:text="${user.getName()}"></p>
-<p th:text="${user.getHouse()}"></p>
-<p th:text="${user.getPet()}"></p>
+<img src="/images/blank_profile_picture.jpg" alt="Blank profile picture." height="150" width="200">
+<div th:text="${user.getName()}"></div>
+<div th:text="${user.getHouse()}"></div>
+<div th:text="${user.getPet()}"></div>
 
 <div th:replace="fragments :: footer"/>
 </body>
