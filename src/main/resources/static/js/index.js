@@ -28,7 +28,6 @@ function indexPage() {
     }
 
     async function loadQuestions() {
-        // TODO replace question id with user id who posted id
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
         let questionList = await utility.apiGet("/api/five-latest-question").then(response => response.json());
 
