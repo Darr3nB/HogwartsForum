@@ -1,6 +1,8 @@
 import {utility} from "./utility.js";
 
 function indexPage() {
+    let mainPageQuestions = document.querySelector("#main-page-questions");
+
     function initEventListener() {
         let loginButton = document.querySelector("#login-button");
         if (loginButton) {
@@ -10,7 +12,6 @@ function indexPage() {
 
     async function loadQuestions() {
         // TODO add id to table elements
-        let mainPageQuestions = document.querySelector("#main-page-questions");
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
         let questionList = await utility.apiGet("/api/all-questions").then(response => response.json());
 
@@ -46,9 +47,9 @@ function indexPage() {
         }
 
         await utility.apiPost("/login", {'username': username, 'password': password}).then(response => {
-            if (response.status === 403){
+            if (response.status === 403) {
                 alert("Invalid login attempt!");
-            }else if (response.ok){
+            } else if (response.ok) {
                 window.location.href = "/";
             }
         })
@@ -59,7 +60,9 @@ function indexPage() {
     }
 
     initEventListener();
-    loadQuestions();
+    if (mainPageQuestions) {
+        loadQuestions();
+    }
 }
 
 indexPage();
