@@ -1,10 +1,12 @@
+import {utility} from "./utility.js";
+
 function registrationPage() {
     function initButtonHandler() {
         document.querySelector('#registration-button').addEventListener('click', clickOnRegistrationButton);
         document.querySelector('#username-field').addEventListener('input', validateUsername);
     }
 
-    function clickOnRegistrationButton(event) {
+    async function clickOnRegistrationButton(event) {
         event.preventDefault();
         const username = document.querySelector('#username-field').value;
         const passwordFieldOne = document.querySelector('#password-field').value;
@@ -16,28 +18,16 @@ function registrationPage() {
             return;
         }
 
-        registrationPost(username, passwordFieldOne, passwordFieldTwo, house, petType);
-    }
-
-    function registrationPost(username, password, passwordAgain, house, petType) {
-        const registration = fetch(`/registration`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'username': username, 'password': password, 'passwordAgain': passwordAgain,
-                'house': house, 'petType': petType
-            })
-        })
-            .then(response => {
-                if (response.status === 403) {
-                    alert("Invalid registration attempt!");
-                } else if (response.ok) {
-                    window.location.href = "/";
-                }
-            })
-            .catch(reason => console.log(`Error happened: ${reason}`));
+        await utility.apiPost("/registration", {
+            'username': username, 'password': passwordFieldOne, 'passwordAgain': passwordFieldTwo,
+            'house': house, 'petType': petType
+        }).then(response => {
+            if (response.status === 403) {
+                alert("Invalid registration attempt!");
+            } else if (response.ok) {
+                window.location.href = "/";
+            }
+        });
     }
 
     function fieldValidationForRegisterPage(username, passwordFieldOne, passwordFieldTwo, house, petType) {
