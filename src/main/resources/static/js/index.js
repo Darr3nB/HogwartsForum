@@ -22,7 +22,7 @@ function indexPage() {
         let stringBuilder = `<div>
                                 <table>
                                      <tr>
-                                        <th>Asked question(s)</th>
+                                        <th>Latest question(s)</th>
                                     </tr>`;
 
         for (let i = 0; i < questionList.length; i++) {
