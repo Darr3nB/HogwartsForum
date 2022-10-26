@@ -14,12 +14,12 @@ function indexPage() {
         }
     }
 
-    function clickOnDeleteProfileButton(event) {
+    async function clickOnDeleteProfileButton(event) {
         // TODO for login and reg validation add the new deleted_profile as criteria
         event.preventDefault();
         const profileId = document.querySelector("#profile-id-on-profile-page").innerText;
 
-        utility.apiGet(`/delete-profile/${+profileId}`).then(response => {
+        await utility.apiGet(`/delete-profile/${+profileId}`).then(response => {
             if (response.status === 403) {
                 console.log("An error has happened while trying to delete profile! Please try again later!");
             } else if (response.ok) {
