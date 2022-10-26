@@ -88,10 +88,18 @@ public class IndexController {
     }
 
     @GetMapping(value = "/delete-profile/{id}")
-    public String deleteProfile(@PathVariable Integer id){
-        System.out.println("ID: " + id);
-//        userService.deleteUserById(id);
+    public HttpEntity<Void> deleteProfile(@PathVariable Integer id) {
+        try {
+            HogwartsUser foundUserById = userService.getUserById(id);
+            userService.deleteUserById(foundUserById.getId());
 
-        return "redirect:";
+        } catch (javax.persistence.EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            System.out.println("An error has occurred: " + e);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

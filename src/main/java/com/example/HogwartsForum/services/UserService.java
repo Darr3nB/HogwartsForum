@@ -43,7 +43,12 @@ public class UserService {
     }
 
     public void deleteUserById(Integer id) {
-        hogwartsUserDatabaseDao.deleteById(id);
+        HogwartsUser foundUser = getUserById(id);
+        foundUser.setName("DELETED_USER");
+        foundUser.setPassword("----");
+        foundUser.setPet(null);
+        foundUser.setHouse(null);
+        hogwartsUserDatabaseDao.save(foundUser);
     }
 
     public Boolean validateLogin(String username, String plainPassword) {

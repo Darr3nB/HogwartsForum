@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     <script type="module" th:src="@{/js/index.js}" defer></script>
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
 <div th:replace="fragments :: nav-bar"/>
 
 <img src="/images/blank_profile_picture.jpg" alt="Blank profile picture." height="150" width="200">
-<div th:text="${user.getId()}"></div>
+<div id="profile-id-on-profile-page" th:text="${user.getId()}"></div>
 <div th:text="${user.getName()}"></div>
 <div th:text="${user.getHouse()}"></div>
 <div th:text="${user.getPet()}"></div>
 
-<button>Delete my profile</button>
+<button id="delete-profile-button">Delete my profile</button>
 <div th:replace="fragments :: footer"/>
 </body>
 </html>

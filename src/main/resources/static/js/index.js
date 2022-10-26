@@ -1,13 +1,31 @@
 import {utility} from "./utility.js";
 
 function indexPage() {
-    let mainPageQuestions = document.querySelector("#main-page-questions");
+    let loginButton = document.querySelector("#login-button");
+    const mainPageQuestions = document.querySelector("#main-page-questions");
+    const deleteProfileButton = document.querySelector("#delete-profile-button");
 
     function initEventListener() {
-        let loginButton = document.querySelector("#login-button");
         if (loginButton) {
             loginButton.addEventListener('click', clickOnLoginButton);
         }
+        if (deleteProfileButton) {
+            deleteProfileButton.addEventListener('click', clickOnDeleteProfileButton);
+        }
+    }
+
+    function clickOnDeleteProfileButton(event) {
+        // TODO for login and reg validation add the new deleted_profile as criteria
+        event.preventDefault();
+        const profileId = document.querySelector("#profile-id-on-profile-page").innerText;
+
+        utility.apiGet(`/delete-profile/${+profileId}`).then(response => {
+            if (response.status === 403) {
+                console.log("An error has happened while trying to delete profile! Please try again later!");
+            } else if (response.ok) {
+                window.location.href = "/logout";
+            }
+        });
     }
 
     async function loadQuestions() {
