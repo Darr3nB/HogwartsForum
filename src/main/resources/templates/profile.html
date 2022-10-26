@@ -9,10 +9,12 @@
 <div th:replace="fragments :: nav-bar"/>
 
 <img src="/images/blank_profile_picture.jpg" alt="Blank profile picture." height="150" width="200">
+<div th:text="${user.getId()}"></div>
 <div th:text="${user.getName()}"></div>
 <div th:text="${user.getHouse()}"></div>
 <div th:text="${user.getPet()}"></div>
 
+<button>Delete my profile</button>
 <div th:replace="fragments :: footer"/>
 </body>
 </html>
