@@ -1,7 +1,7 @@
 import {utility} from "./utility.js";
 
 function indexPage() {
-    let loginButton = document.querySelector("#login-button");
+    const loginButton = document.querySelector("#login-button");
     const mainPageQuestions = document.querySelector("#main-page-questions");
     const deleteProfileButton = document.querySelector("#delete-profile-button");
 
@@ -31,7 +31,7 @@ function indexPage() {
     async function loadQuestions() {
         // TODO replace question id with user id who posted id
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
-        let questionList = await utility.apiGet("/api/all-questions").then(response => response.json());
+        let questionList = await utility.apiGet("/api/five-latest-question").then(response => response.json());
 
         if (questionList.length <= 0) {
             mainPageQuestions.innerHTML = `<div>There are no asked questions yet!</div>`;

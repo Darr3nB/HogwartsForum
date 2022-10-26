@@ -36,7 +36,7 @@ public class IndexController {
         return "index";
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "login")
     public HttpEntity<Void> doLogin(@RequestBody LoginParams loginParams, HttpServletResponse response) {
         if (!userService.validateLogin(loginParams.getUsername(), loginParams.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -50,7 +50,7 @@ public class IndexController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping(value = "/logout")
+    @GetMapping(value = "logout")
     public String doLogout(HttpServletResponse response) {
         Cookie theCookie = new Cookie("hfUsername", null);
         theCookie.setMaxAge(0);
@@ -60,7 +60,7 @@ public class IndexController {
         return "redirect:";
     }
 
-    @GetMapping(value = "/profile")
+    @GetMapping(value = "profile")
     public String openProfilePage(Model model, HttpServletRequest request) {
         String username = null;
         Cookie[] cookies = request.getCookies();
@@ -82,12 +82,12 @@ public class IndexController {
         return "profile";
     }
 
-    @GetMapping(value = "/error")
+    @GetMapping(value = "error")
     public String errorPage() {
         return "error";
     }
 
-    @GetMapping(value = "/delete-profile/{id}")
+    @GetMapping(value = "delete-profile/{id}")
     public HttpEntity<Void> deleteProfile(@PathVariable Integer id) {
         try {
             HogwartsUser foundUserById = userService.getUserById(id);
@@ -101,5 +101,10 @@ public class IndexController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "see-all-questions")
+    public String allQuestionsPage() {
+        return "all-questions";
     }
 }

@@ -18,13 +18,18 @@ public class ApiController {
     UserService userService;
     QuestionService questionService;
 
-    @GetMapping(value = "checkUsernameInDatabase/{name}")
+    @GetMapping(value = "check-username-in-database/{name}")
     public Boolean checkUsernameInDatabase(@PathVariable String name) {
         return userService.existByName(name);
     }
 
-    @GetMapping(value = "all-questions")
-    public List<Question> getAllQuestions(){
+    @GetMapping(value = "five-latest-question")
+    public List<Question> getFiveLatestQuestions(){
         return questionService.getTop5QuestionBySubmissionTime();
+    }
+
+    @GetMapping(value = "get-all-questions")
+    public List<Question> getAllQuestions(){
+        return questionService.getAllQuestions();
     }
 }

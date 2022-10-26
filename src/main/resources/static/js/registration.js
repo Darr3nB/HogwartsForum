@@ -79,7 +79,7 @@ function registrationPage() {
         if (name === "") {
             return;
         }
-        return await fetch(`/api/checkUsernameInDatabase/${name}`).then(response => response.json());
+        return await fetch(`/api/check-username-in-database/${name}`).then(response => response.json());
     }
 
     initButtonHandler();
