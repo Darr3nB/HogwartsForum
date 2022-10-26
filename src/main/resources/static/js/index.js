@@ -11,7 +11,7 @@ function indexPage() {
     }
 
     async function loadQuestions() {
-        // TODO add id to table elements
+        // TODO replace question id with user id who posted id
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
         let questionList = await utility.apiGet("/api/all-questions").then(response => response.json());
 
@@ -27,7 +27,7 @@ function indexPage() {
 
         for (let i = 0; i < questionList.length; i++) {
             stringBuilder = stringBuilder + `<tr>
-                                                <td>${questionList[i].title} ${questionList[i].questionText}</td>
+                                                <td id="questionId-${questionList[i].id}">${questionList[i].title} ${questionList[i].questionText}</td>
                                             </tr>`;
         }
 
