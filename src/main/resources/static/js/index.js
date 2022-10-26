@@ -12,8 +12,7 @@ function indexPage() {
         // TODO add id to table elements
         let mainPageQuestions = document.querySelector("#main-page-questions");
         mainPageQuestions.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
-        // let questionList = await apiGetQuestions();
-        let questionList = await utility.apiGetReturningJson("all-questions");
+        let questionList = await utility.apiGetReturningJson("/api/all-questions");
 
         if (questionList.length <= 0) {
             mainPageQuestions.innerHTML = `<div>There are no asked questions yet!</div>`;
@@ -35,10 +34,6 @@ function indexPage() {
                                         </div>`;
         mainPageQuestions.innerHTML = stringBuilder;
     }
-
-    // async function apiGetQuestions() {
-    //     return await fetch("/api/all-questions").then(response => response.json());
-    // }
 
     function clickOnLoginButton(event) {
         event.preventDefault();
