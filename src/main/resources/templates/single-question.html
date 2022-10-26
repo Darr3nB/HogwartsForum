@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single question</title>
+    <script type="module" th:src="@{/js/index.js}" defer></script>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<div th:replace="fragments :: nav-bar"/>
+
+<div th:text="${question.getTitle()}"></div>
+<div th:text="${question.getQuestionText()}"></div>
+
+<div th:replace="fragments :: footer"/>
+</body>
+</html>

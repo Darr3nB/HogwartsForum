@@ -45,13 +45,30 @@ function indexPage() {
 
         for (let i = 0; i < questionList.length; i++) {
             stringBuilder = stringBuilder + `<tr>
-                                                <td id="questionId-${questionList[i].id}">${questionList[i].title} ${questionList[i].questionText}</td>
+                                                <td id="question-id-${questionList[i].id}">${questionList[i].title} ${questionList[i].questionText}</td>
                                             </tr>`;
         }
 
         stringBuilder = stringBuilder + `   </table>
                                         </div>`;
         mainPageQuestions.innerHTML = stringBuilder;
+
+        addEventListenerToQuestions();
+    }
+
+    function addEventListenerToQuestions() {
+        const allQuestion = document.querySelectorAll("td");
+        allQuestion.forEach(element => {
+            element.addEventListener('click', clickOnSpecificQuestion);
+        });
+    }
+
+    function clickOnSpecificQuestion(event) {
+        const selectedQuestionId = +event.currentTarget.id.replace("question-id-", "");
+
+        utility.apiGet(`/post-question/specific-question/${selectedQuestionId}`).then(response => {
+            window.location.href = response.url;
+        });
     }
 
     async function clickOnLoginButton(event) {

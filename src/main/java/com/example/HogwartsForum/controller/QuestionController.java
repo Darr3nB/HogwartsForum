@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -46,5 +43,20 @@ public class QuestionController {
         questionService.addQuestion(newQuestion);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "/specific-question/{id}")
+    public String openSelectedQuestionPage(@PathVariable Integer id, Model model) {
+        try {
+            Question foundQuestion = questionService.getQuestionById(id);
+            model.addAttribute("question", foundQuestion);
+        } catch (javax.persistence.EntityNotFoundException e) {
+            return "error";
+        } catch (Exception e) {
+            System.out.println("An error has occurred: " + e);
+            return "error";
+        }
+
+        return "single-question";
     }
 }

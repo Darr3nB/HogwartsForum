@@ -20,7 +20,11 @@ public class QuestionService {
         return questionsDao.findAll();
     }
 
-    public List<Question> getTop5QuestionBySubmissionTime(){
+    public List<Question> getTop5QuestionBySubmissionTime() {
         return questionsDao.findTop5ByOrderBySubmissionTimeDesc();
+    }
+
+    public Question getQuestionById(Integer id) {
+        return questionsDao.getById(id);
     }
 }
