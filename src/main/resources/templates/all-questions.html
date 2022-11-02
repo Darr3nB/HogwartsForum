@@ -9,6 +9,15 @@
 </head>
 <body>
 <div th:replace="fragments :: nav-bar"/>
+<h1>All questions</h1>
+<span>Filter</span>
+<label for="filter-title">Title: </label>
+<input type="text" id="filter-title" />
+
+<label for="filter-description">Description: </label>
+<input type="text" id="filter-description" />
+
+<button id="filter-search-button">Search</button>
 
 <div id="listed-questions"></div>
 

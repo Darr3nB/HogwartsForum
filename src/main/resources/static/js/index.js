@@ -15,6 +15,7 @@ function indexPage() {
     }
 
     async function clickOnDeleteProfileButton(event) {
+        // TODO ask for password to delete profile
         event.preventDefault();
         const profileId = document.querySelector("#profile-id-on-profile-page").innerText;
 
