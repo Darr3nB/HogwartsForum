@@ -9,14 +9,23 @@ function allQuestionsPage() {
     }
 
     async function filterQuestions(event) {
+        // TODO finish this function
         event.preventDefault();
-        const titleFieldValue = document.querySelector("#filter-title").value;
-        const descriptionFieldValue = document.querySelector("#filter-description").value;
+        let titleFieldValue = document.querySelector("#filter-title").value;
+        let descriptionFieldValue = document.querySelector("#filter-description").value;
 
-        let filteredQuestionList = await utility.apiGet(`/api/get-all-questions-filtered/${titleFieldValue}/${descriptionFieldValue}`)
+        if (!allFilterFieldsValidation(titleFieldValue, descriptionFieldValue)) {
+            return;
+        }
+
+        let filteredQuestionList = await utility.apiGet(`/api/get-all-questions-filtered/?title=${titleFieldValue}&description=${descriptionFieldValue}`)
             .then(response => response.json());
 
-        loadQuestions(filteredQuestionList);
+        // loadQuestions(filteredQuestionList);
+    }
+
+    function allFilterFieldsValidation(titleFieldValue, descriptionFieldValue) {
+        return !(titleFieldValue === "" && descriptionFieldValue === "");
     }
 
     async function loadQuestions(qList = []) {
