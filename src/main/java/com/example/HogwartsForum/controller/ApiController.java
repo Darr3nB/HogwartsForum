@@ -4,6 +4,9 @@ import com.example.HogwartsForum.model.Question;
 import com.example.HogwartsForum.services.QuestionService;
 import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +34,10 @@ public class ApiController {
     @GetMapping(value = "get-all-questions")
     public List<Question> getAllQuestions(){
         return questionService.getAllQuestions();
+    }
+
+    @GetMapping(value = "get-all-questions-filtered/{title}/{description}")
+    public void getAllQuestionsFiltered(@PathVariable String title, @PathVariable String description){
+        System.out.println(title + " " + description);
     }
 }
