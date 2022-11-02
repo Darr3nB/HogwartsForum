@@ -8,7 +8,7 @@ function allQuestionsPage() {
         listedQuestionsDiv.innerHTML = `<img src="/images/owl.png" alt="Picture of a cute owl." width="300" height="400">`;
         let allQuestions = await utility.apiGet("/api/get-all-questions").then(response => response.json());
 
-        if (allQuestions.length <= 0){
+        if (allQuestions.length <= 0) {
             listedQuestionsDiv.innerHTML = `<div>There are no asked questions yet!</div>`;
         }
 
@@ -17,11 +17,13 @@ function allQuestionsPage() {
                                     <tr>
                                         <tr>Questions: </tr>
                                     </tr>`;
-        for (let i = 0; i < allQuestions.length; i++){
+
+        for (let question of allQuestions) {
             stringBuilder = stringBuilder + `<tr>
-                                                <td id="question-id-${allQuestions[i].id}">${allQuestions[i].title} ${allQuestions[i].questionText}</td>
+                                                <td id="question-id-${question.id}">${question.title} ${question.questionText}</td>
                                             </tr>`;
         }
+
         stringBuilder = stringBuilder + `   </table>
                                         </div>`;
 

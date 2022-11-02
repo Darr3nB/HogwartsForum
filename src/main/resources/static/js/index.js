@@ -41,9 +41,9 @@ function indexPage() {
                                         <th>Latest question(s)</th>
                                     </tr>`;
 
-        for (let i = 0; i < questionList.length; i++) {
+        for (let question of questionList) {
             stringBuilder = stringBuilder + `<tr>
-                                                <td id="question-id-${questionList[i].id}">${questionList[i].title} ${questionList[i].questionText}</td>
+                                                <td id="question-id-${question.id}">${question.title} ${question.questionText}</td>
                                             </tr>`;
         }
 
