@@ -18,11 +18,7 @@ public class QuestionService {
         questionsDao.save(question);
     }
 
-    public List<Question> getAllQuestions() {
-        return questionsDao.findAll();
-    }
-
-    public Page<Question> getAllPageNumber(){
+    public Page<Question> getAllQuestions() {
         return questionsDao.findAll(PageRequest.of(0, 10));
     }
 
@@ -32,9 +28,5 @@ public class QuestionService {
 
     public Question getQuestionById(Integer id) {
         return questionsDao.getById(id);
-    }
-
-    public List<Question> getAllQuestionsPaged(int pageNumber){
-        return questionsDao.findAll(PageRequest.of(pageNumber, 10)).getContent();
     }
 }

@@ -26,26 +26,32 @@ public class ApiController {
     }
 
     @GetMapping(value = "five-latest-question")
-    public List<Question> getFiveLatestQuestions(){
+    public List<Question> getFiveLatestQuestions() {
         return questionService.getTop5QuestionBySubmissionTime();
     }
 
     @GetMapping(value = "get-all-questions")
-    public List<Question> getAllQuestions(){
-        return questionService.getAllQuestions();
+    public List<Question> getAllQuestions() {
+        return questionService.getAllQuestions().getContent();
+    }
+
+    @GetMapping(value = "getTotalPageCount")
+    public Integer getTotalPageCount() {
+        return questionService.getAllQuestions().getTotalPages();
     }
 
     @GetMapping(value = "get-all-questions-filtered/")
-    public void getAllQuestionsFiltered(@RequestParam(name = "title") String title, @RequestParam(name = "description") String description){
+    public void getAllQuestionsFiltered(@RequestParam(name = "title") String title,
+                                        @RequestParam(name = "description") String description) {
         // TODO need query builder or something
         System.out.println("Title: " + title);
         System.out.println("Description: " + description);
     }
 
-    @GetMapping(value = "getTotalPageCount")
-    public Integer getTotalPageCount(){
-        Page<Question> page = questionService.getAllPageNumber();
-
-        return page.getTotalPages();
+    @GetMapping("get-all-questions-filtered-page-number/")
+    public Integer getAllQuestionsFilteredPageNumber(@RequestParam(name = "title") String title,
+                                                     @RequestParam(name = "description") String description) {
+        // TODO when query builder done, get page number as well
+        return 0;
     }
 }
