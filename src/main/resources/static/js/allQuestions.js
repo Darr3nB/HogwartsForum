@@ -9,7 +9,6 @@ function allQuestionsPage() {
     }
 
     async function filterQuestions(event) {
-        // TODO finish this function
         event.preventDefault();
         let titleFieldValue = document.querySelector("#filter-title").value;
         let descriptionFieldValue = document.querySelector("#filter-description").value;
@@ -21,6 +20,8 @@ function allQuestionsPage() {
         let filteredQuestionList = await utility.apiGet(`/api/get-all-questions-filtered/?title=${titleFieldValue}&description=${descriptionFieldValue}`)
             .then(response => response.json());
 
+        console.log(filteredQuestionList);
+        // TODO uncomment loadQuestions()
         // loadQuestions(filteredQuestionList);
     }
 

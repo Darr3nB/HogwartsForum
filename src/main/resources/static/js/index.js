@@ -60,7 +60,7 @@ function indexPage() {
         const username = document.querySelector("#username-field").value;
         const password = document.querySelector("#password-field").value;
 
-        if (fieldAreEmptyOrValid(username, password)) {
+        if (!fieldAreEmptyOrValid(username, password)) {
             alert("Both fields must be filled!");
             return;
         }

@@ -4,6 +4,7 @@ import com.example.HogwartsForum.model.Question;
 import com.example.HogwartsForum.services.QuestionService;
 import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,15 @@ public class ApiController {
 
     @GetMapping(value = "get-all-questions-filtered/")
     public void getAllQuestionsFiltered(@RequestParam(name = "title") String title, @RequestParam(name = "description") String description){
-        // TODO finish this method
+        // TODO need query builder or something
         System.out.println("Title: " + title);
         System.out.println("Description: " + description);
+    }
+
+    @GetMapping(value = "getTotalPageCount")
+    public Integer getTotalPageCount(){
+        Page<Question> page = questionService.getAllPageNumber();
+
+        return page.getTotalPages();
     }
 }
