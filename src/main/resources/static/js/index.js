@@ -15,11 +15,18 @@ function indexPage() {
     }
 
     async function clickOnDeleteProfileButton(event) {
-        // TODO ask for password to delete profile
         event.preventDefault();
         const profileId = document.querySelector("#profile-id-on-profile-page").innerText;
+        const profileUsername = document.querySelector("#username-on-profile-page").innerText;
+        const passwordOnProfilePage = document.querySelector("#password-for-delete-profile").value;
 
-        await utility.apiGet(`/delete-profile/${+profileId}`).then(response => {
+        if (passwordOnProfilePage === "") {
+            alert("Password must be given!");
+            return;
+        }
+
+        utility.apiPostWithDictionaryDataType(`delete-profile`, {'id': profileId, 'username': profileUsername,
+            'password': passwordOnProfilePage}).then(response => {
             if (response.status === 403) {
                 console.log("An error has happened while trying to delete profile! Please try again later!");
             } else if (response.ok) {
@@ -65,7 +72,10 @@ function indexPage() {
             return;
         }
 
-        await utility.apiPost("/login", {'username': username, 'password': password}).then(response => {
+        await utility.apiPostWithDictionaryDataType("/login", {
+            'username': username,
+            'password': password
+        }).then(response => {
             if (response.status === 403) {
                 alert("Invalid login attempt!");
             } else if (response.ok) {

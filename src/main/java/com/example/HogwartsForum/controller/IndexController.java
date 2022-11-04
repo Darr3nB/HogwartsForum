@@ -38,7 +38,7 @@ public class IndexController {
 
     @PostMapping(value = "login")
     public HttpEntity<Void> doLogin(@RequestBody LoginParams loginParams, HttpServletResponse response) {
-        if (!userService.validateLogin(loginParams.getUsername(), loginParams.getPassword())) {
+        if (!userService.validateProfile(loginParams.getUsername(), loginParams.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
@@ -87,18 +87,13 @@ public class IndexController {
         return "error";
     }
 
-    @GetMapping(value = "delete-profile/{id}")
-    public HttpEntity<Void> deleteProfile(@PathVariable Integer id) {
-        try {
-            HogwartsUser foundUserById = userService.getUserById(id);
-            userService.deleteUserById(foundUserById.getId());
-
-        } catch (javax.persistence.EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        } catch (Exception e) {
-            System.out.println("An error has occurred: " + e);
+    @PostMapping(value = "delete-profile")
+    public HttpEntity<Void> deleteProfile(@RequestBody LoginParams profileParams){
+        if (!userService.validateProfile(profileParams.getUsername(), profileParams.getPassword())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        userService.deleteUserById(profileParams.getId());
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

@@ -18,7 +18,7 @@ function registrationPage() {
             return;
         }
 
-        await utility.apiPost("/registration", {
+        await utility.apiPostWithDictionaryDataType("/registration", {
             'username': username, 'password': passwordFieldOne, 'passwordAgain': passwordFieldTwo,
             'house': house, 'petType': petType
         }).then(response => {

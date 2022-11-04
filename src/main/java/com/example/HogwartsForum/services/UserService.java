@@ -51,7 +51,7 @@ public class UserService {
         hogwartsUserDatabaseDao.save(foundUser);
     }
 
-    public Boolean validateLogin(String username, String plainPassword) {
+    public Boolean validateProfile(String username, String plainPassword) {
         if (username.equals("DELETED_USER")){
             return false;
         }

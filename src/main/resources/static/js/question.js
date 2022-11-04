@@ -10,7 +10,7 @@ function questionHtml() {
         const questionTitle = document.querySelector("#question-title").value;
         const questionDescription = document.querySelector("#question-description").value;
 
-        utility.apiPost("/post-question", {'title': questionTitle, 'questionText': questionDescription})
+        utility.apiPostWithDictionaryDataType("/post-question", {'title': questionTitle, 'questionText': questionDescription})
             .then(response => {
                 if (response.status === 403) {
                     alert("Title or description is too short!");

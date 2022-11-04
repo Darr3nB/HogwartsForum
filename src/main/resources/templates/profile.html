@@ -11,10 +11,13 @@
 
 <img src="/images/blank_profile_picture.jpg" alt="Blank profile picture." height="150" width="200">
 <div id="profile-id-on-profile-page" th:text="${user.getId()}"></div>
-<div th:text="${user.getName()}"></div>
+<div id="username-on-profile-page" th:text="${user.getName()}"></div>
 <div th:text="${user.getHouse()}"></div>
 <div th:text="${user.getPet()}"></div>
 
+
+<label for="password-for-delete-profile">Enter password to delete profile:</label>
+<input type="text" id="password-for-delete-profile">
 <button id="delete-profile-button">Delete my profile</button>
 <div th:replace="fragments :: footer"/>
 </body>

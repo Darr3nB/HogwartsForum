@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LoginParams {
+    Integer id;
     String username;
     String password;
-
 }
