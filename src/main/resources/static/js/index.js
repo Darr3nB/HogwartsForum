@@ -25,8 +25,10 @@ function indexPage() {
             return;
         }
 
-        utility.apiPostWithDictionaryDataType(`delete-profile`, {'id': profileId, 'username': profileUsername,
-            'password': passwordOnProfilePage}).then(response => {
+        utility.apiPostWithDictionaryDataType(`delete-profile`, {
+            'id': profileId, 'username': profileUsername,
+            'password': passwordOnProfilePage
+        }).then(response => {
             if (response.status === 403) {
                 console.log("An error has happened while trying to delete profile! Please try again later!");
             } else if (response.ok) {
