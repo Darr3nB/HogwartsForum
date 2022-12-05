@@ -1,7 +1,7 @@
 package com.example.HogwartsForum.controller;
 
+import com.example.HogwartsForum.dtos.Login;
 import com.example.HogwartsForum.model.HogwartsUser;
-import com.example.HogwartsForum.model.LoginParams;
 import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -37,7 +37,7 @@ public class IndexController {
     }
 
     @PostMapping(value = "login")
-    public HttpEntity<Void> doLogin(@RequestBody LoginParams loginParams, HttpServletResponse response) {
+    public HttpEntity<Void> doLogin(@RequestBody Login loginParams, HttpServletResponse response) {
         if (!userService.validateProfile(loginParams.getUsername(), loginParams.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
@@ -88,7 +88,7 @@ public class IndexController {
     }
 
     @PostMapping(value = "delete-profile")
-    public HttpEntity<Void> deleteProfile(@RequestBody LoginParams profileParams){
+    public HttpEntity<Void> deleteProfile(@RequestBody Login profileParams){
         if (!userService.validateProfile(profileParams.getUsername(), profileParams.getPassword())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
