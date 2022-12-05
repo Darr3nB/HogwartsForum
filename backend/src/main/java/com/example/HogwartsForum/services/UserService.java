@@ -1,6 +1,6 @@
 package com.example.HogwartsForum.services;
 
-import com.example.HogwartsForum.daos.HogwartsUserDao;
+import com.example.HogwartsForum.dao.HogwartsUserDao;
 import com.example.HogwartsForum.model.HogwartsUser;
 import com.example.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;

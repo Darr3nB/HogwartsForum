@@ -1,6 +1,6 @@
 package com.example.HogwartsForum.controller;
 
-import com.example.HogwartsForum.dtos.Login;
+import com.example.HogwartsForum.dto.Login;
 import com.example.HogwartsForum.model.HogwartsUser;
 import com.example.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;

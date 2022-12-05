@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.dtos;
+package com.example.HogwartsForum.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

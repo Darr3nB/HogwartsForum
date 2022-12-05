@@ -1,6 +1,6 @@
 package com.example.HogwartsForum.services;
 
-import com.example.HogwartsForum.daos.QuestionsDao;
+import com.example.HogwartsForum.dao.QuestionsDao;
 import com.example.HogwartsForum.model.Question;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
