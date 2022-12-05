@@ -1,17 +1,12 @@
-package com.example.HogwartsForum.controller;
+package com.HogwartsForum.controller;
 
-import com.example.HogwartsForum.model.Question;
-import com.example.HogwartsForum.services.QuestionService;
-import com.example.HogwartsForum.services.UserService;
+import com.HogwartsForum.model.Question;
+import com.HogwartsForum.services.QuestionService;
+import com.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @RestController

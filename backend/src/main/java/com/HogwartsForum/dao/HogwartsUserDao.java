@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.dao;
+package com.HogwartsForum.dao;
 
-import com.example.HogwartsForum.model.HogwartsUser;
+import com.HogwartsForum.model.HogwartsUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HogwartsUserDao extends JpaRepository<HogwartsUser, Integer> {

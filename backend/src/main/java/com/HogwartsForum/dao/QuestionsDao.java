@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.dao;
+package com.HogwartsForum.dao;
 
-import com.example.HogwartsForum.model.Question;
+import com.HogwartsForum.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

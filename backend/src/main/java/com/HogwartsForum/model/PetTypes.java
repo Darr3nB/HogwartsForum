@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.model;
+package com.HogwartsForum.model;
 
 public enum PetTypes {
     OWL,

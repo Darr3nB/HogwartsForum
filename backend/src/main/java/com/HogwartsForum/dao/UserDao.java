@@ -1,6 +1,6 @@
-package com.example.HogwartsForum.dao;
+package com.HogwartsForum.dao;
 
-import com.example.HogwartsForum.model.HogwartsUser;
+import com.HogwartsForum.model.HogwartsUser;
 
 import java.util.List;
 

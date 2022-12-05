@@ -1,4 +1,4 @@
-package com.example.HogwartsForum.security;
+package com.HogwartsForum.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

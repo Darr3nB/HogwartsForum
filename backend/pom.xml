@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>com</groupId>
     <artifactId>HogwartsForum</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>HogwartsForum</name>

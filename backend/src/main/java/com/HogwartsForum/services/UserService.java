@@ -1,8 +1,8 @@
-package com.example.HogwartsForum.services;
+package com.HogwartsForum.services;
 
-import com.example.HogwartsForum.dao.HogwartsUserDao;
-import com.example.HogwartsForum.model.HogwartsUser;
-import com.example.HogwartsForum.security.PasswordAgent;
+import com.HogwartsForum.dao.HogwartsUserDao;
+import com.HogwartsForum.model.HogwartsUser;
+import com.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

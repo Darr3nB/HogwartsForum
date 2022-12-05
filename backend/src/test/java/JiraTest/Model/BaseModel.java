@@ -1,7 +1,7 @@
 package JiraTest.Model;
 
 import JiraTest.WebDriverService;
-import com.example.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
