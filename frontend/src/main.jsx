@@ -4,20 +4,18 @@ import './index.css'
 import ErrorPage from "./error-page.jsx";
 import {createBrowserRouter, RouterProvider, Route,} from "react-router-dom";
 import Index from "./routes/index.jsx";
+import AllQuestions from "./routes/allQuestions.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Index/>,
         errorElement: <ErrorPage/>,
-        // children: [
-        //     {
-        //         path: "contacts/:contactId",
-        //         element: <Contact/>,
-        //         loader: contactLoader,
-        //     },
-        // ],
     },
+    {
+        path: "/all-questions",
+        element: <AllQuestions/>,
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
