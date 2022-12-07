@@ -1,9 +1,8 @@
-import './App.css';
 import {useState} from "react";
-import MenuLayout from "./components/MenuLayout";
-import Footer from "./components/Footer";
+import MenuLayout from "../components/MenuLayout.jsx";
+import Footer from "../components/Footer.jsx";
 
-function App() {
+export default function Index() {
     const [questions, setQuestionState] = useState([]);
 
     // Fetch questions
@@ -39,5 +38,3 @@ function App() {
         </div>
     );
 }
-
-export default App;

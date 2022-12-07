@@ -1,6 +1,7 @@
 import {useState} from "react";
 
 const MenuLayout = () => {
+    // TODO request from backend if logged in
     const [isLoggedIn, setLoginState] = useState(false);
 
     const loggedOff = <div>
