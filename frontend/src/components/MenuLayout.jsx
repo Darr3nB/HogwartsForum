@@ -33,6 +33,7 @@ async function doLogout(e, setLoginState) {
 export default function MenuLayout() {
     // TODO request from backend if logged in
     // TODO request logged in user's data for usage
+    // TODO switch password input field type to password
     const [isLoggedIn, setLoginState] = useState(false);
 
     const loggedOff = <div>

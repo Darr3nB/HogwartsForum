@@ -7,6 +7,7 @@ import Index from "./routes/index.jsx";
 import AllQuestions from "./routes/allQuestions.jsx";
 import Registration from "./routes/registration.jsx";
 import PostQuestion from "./routes/postQuestion.jsx";
+import Profile from "./routes/profile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/post-question",
         element: <PostQuestion/>,
     },
+    {
+        path: "/profile",
+        element: <Profile/>
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

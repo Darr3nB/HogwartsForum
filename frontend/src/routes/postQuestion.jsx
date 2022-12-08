@@ -5,7 +5,7 @@ import {Link, redirect} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
-async function apiPostQuestion(e) {
+async function postAQuestion(e) {
     e.preventDefault();
     const postQuestionData = new FormData(e.currentTarget);
 
@@ -29,7 +29,7 @@ export default function PostQuestion() {
 
             <h1>Ask your question</h1>
 
-            <form onSubmit={apiPostQuestion}>
+            <form onSubmit={postAQuestion}>
                 <label htmlFor="question-title">Question title: </label>
                 <input type="text" id="question-title" name="question-title" minLength="5"/>
 
