@@ -10,10 +10,12 @@ async function apiPostQuestion(e) {
     const postQuestionData = new FormData(e.currentTarget);
 
     await utility.apiPostWithDictionaryDataType('/post-question',
-        {'title': postQuestionData.get("question-title"),
-            'questionText': postQuestionData.get("question-description")})
+        {
+            'title': postQuestionData.get("question-title"),
+            'questionText': postQuestionData.get("question-description")
+        })
         .then(response => {
-            if (response.ok){
+            if (response.ok) {
                 redirect('/');
             }
         });

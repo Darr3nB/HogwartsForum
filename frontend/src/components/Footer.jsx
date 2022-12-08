@@ -1,4 +1,4 @@
-const Footer = () => {
+export default function Footer() {
     return (
         <div>
             <p>fake@email.com - Copyright ----</p>
@@ -6,5 +6,3 @@ const Footer = () => {
 
     );
 }
-
-export default Footer;

@@ -1,8 +1,38 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import {utility} from "../utility.js";
 
-const MenuLayout = () => {
+
+async function doLogin(e, setLoginState) {
+    e.preventDefault();
+    const componentData = new FormData(e.currentTarget);
+
+
+    await utility.apiPostWithDictionaryDataType(`/login`, {
+        'username': componentData.get('username-field'),
+        'password': componentData.get("password-field")
+    })
+        .then(response => {
+            if (response.ok) {
+                setLoginState(true);
+            }
+        });
+}
+
+async function doLogout(e, setLoginState) {
+    e.preventDefault();
+
+    await utility.apiGet(`/logout`)
+        .then(response => {
+            if (response.ok) {
+                setLoginState(false);
+            }
+        })
+}
+
+export default function MenuLayout() {
     // TODO request from backend if logged in
+    // TODO request logged in user's data for usage
     const [isLoggedIn, setLoginState] = useState(false);
 
     const loggedOff = <div>
@@ -10,14 +40,13 @@ const MenuLayout = () => {
             <button type="button">Home</button>
         </Link>
         <div>
-            <form action="/login" method="post">
+            <form onSubmit={event => doLogin(event, setLoginState)}>
                 <label htmlFor="username-field">Username: </label>
-                <input type="text" id="username-field" minLength="3"/>
+                <input type="text" id="username-field" name="username-field" minLength="3"/>
                 <label htmlFor="password-field">Magic word: </label>
-                <input type="text" id="password-field" minLength="3"/>
-                <Link to={"/login"}>
-                    <button type="button" id="login-button" className="nav-bar-button">Login</button>
-                </Link>
+                <input type="text" id="password-field" name="password-field" minLength="3"/>
+
+                <button type="submit" id="login-button" className="nav-bar-button">Login</button>
             </form>
         </div>
         <div>
@@ -32,9 +61,7 @@ const MenuLayout = () => {
             <button type="button">Home</button>
         </Link>
         <p>Welcome USERNAME_HERE!</p>
-        <Link to={"/logout"}>
-            <button type="button">Logout</button>
-        </Link>
+        <button onClick={event => doLogout(event, setLoginState)}>Logout</button>
         <Link to={"/profile"}>
             <button type="button">Profile</button>
         </Link>
@@ -42,5 +69,3 @@ const MenuLayout = () => {
 
     return isLoggedIn ? loggedIn : loggedOff;
 };
-
-export default MenuLayout;

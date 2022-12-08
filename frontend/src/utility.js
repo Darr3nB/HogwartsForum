@@ -1,5 +1,5 @@
 export let utility = {
-    apiPostWithDictionaryDataType: async function (path, dataAsDict){
+    apiPostWithDictionaryDataType: async function (path, dataAsDict) {
         return await fetch(path, {
             method: 'POST',
             headers: {
@@ -8,5 +8,9 @@ export let utility = {
             body: JSON.stringify(dataAsDict)
         })
             .catch(reason => console.log(`An error happened: ${reason}`));
+    },
+
+    apiGet: async function (path) {
+        return await fetch(path);
     }
 }
