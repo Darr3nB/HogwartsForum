@@ -5,13 +5,12 @@ import {utility} from "../utility.js";
 
 
 export default function AllQuestions() {
-    const [allQuestions, setAllQuestionstate] = useState([]);
+    const [allQuestions, setAllQuestionState] = useState([]);
 
-    // TODO Fetch questions
     const askedQuestions = async () => {
         const data = await utility.apiGet(`/api/get-all-questions`).then(response => response.json());
         // TODO In case of bad response, use state
-        setAllQuestionstate(data);
+        setAllQuestionState(data);
     };
 
     useEffect(() => {

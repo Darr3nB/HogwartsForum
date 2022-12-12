@@ -1,18 +1,23 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
 import {Link} from "react-router-dom";
+import {utility} from "../utility.js";
 
 export default function Index() {
-    const [topFiveQuestions, setTopFiveQuestionstate] = useState([]);
+    const [topFiveQuestions, setTopFiveQuestionState] = useState([]);
 
-    // TODO Fetch questions
     const askedQuestions = async () => {
-        const data = await fetch(`http://localhost:8080/api/five-latest-question`).then(response => response.json());
+        const data = await utility.apiGet(`/api/five-latest-question`).then(response => response.json());
         // TODO In case of bad response, use state
-        setTopFiveQuestionstate(data);
+        setTopFiveQuestionState(data);
     };
     // TODO useEffect maybe? If new question posted, automatically refresh the data
+
+    useEffect(() => {
+        askedQuestions().then();
+    }, []);
+
 
     return (
         <div className="App">
