@@ -1,13 +1,14 @@
 import {useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {Link, redirect} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
 async function postAQuestion(e) {
     e.preventDefault();
     const postQuestionData = new FormData(e.currentTarget);
+    const navigate = useNavigate();
 
     await utility.apiPostWithDictionaryDataType('/post-question',
         {
@@ -16,7 +17,7 @@ async function postAQuestion(e) {
         })
         .then(response => {
             if (response.ok) {
-                redirect('/');
+                navigate('/');
             }
         });
 }

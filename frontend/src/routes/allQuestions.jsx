@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
+import {utility} from "../utility.js";
 
 
 export default function AllQuestions() {
@@ -8,10 +9,14 @@ export default function AllQuestions() {
 
     // TODO Fetch questions
     const askedQuestions = async () => {
-        const data = await fetch(`http://localhost:8080/api/get-all-questions`).then(response => response.json());
+        const data = await utility.apiGet(`/api/get-all-questions`).then(response => response.json());
         // TODO In case of bad response, use state
         setAllQuestionstate(data);
     };
+
+    useEffect(() => {
+        askedQuestions().then();
+    }, []);
 
     return (
         <div>
@@ -23,14 +28,19 @@ export default function AllQuestions() {
                 {allQuestions.length <= 0
                     ? (<p>There are no asked questions yet.</p>)
                     : (<table>
+                        <thead>
                         <tr>
                             <th>Latest question(s)</th>
                         </tr>
+                        </thead>
+                        <tbody>
+
                         {allQuestions.map(question => {
-                            return (<tr>
+                            return (<tr key={"question-id-" + question.id}>
                                 <td id={"question-id-" + question.id}>{question.title + " " + question.questionText}</td>
                             </tr>)
                         })}
+                        </tbody>
                     </table>)}
             </div>
 
