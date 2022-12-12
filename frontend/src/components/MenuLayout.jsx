@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {utility} from "../utility.js";
 
@@ -8,9 +8,9 @@ async function doLogin(e, setLoginState) {
     const componentData = new FormData(e.currentTarget);
 
 
-    await utility.apiPostWithDictionaryDataType(`/login`, {
+    await utility.apiPostWithDictionaryDataType(`/user/login`, {
         'username': componentData.get('username-field'),
-        'password': componentData.get("password-field")
+        'password': componentData.get('password-field')
     })
         .then(response => {
             if (response.ok) {
@@ -22,7 +22,7 @@ async function doLogin(e, setLoginState) {
 async function doLogout(e, setLoginState) {
     e.preventDefault();
 
-    await utility.apiGet(`/logout`)
+    await utility.apiGet(`/user/logout`)
         .then(response => {
             if (response.ok) {
                 setLoginState(false);
@@ -35,6 +35,15 @@ export default function MenuLayout() {
     // TODO request logged in user's data for usage
     // TODO switch password input field type to password
     const [isLoggedIn, setLoginState] = useState(false);
+
+    const isLoggedInRequest = async () => {
+        const data = await utility.apiGet();
+    };
+
+    useEffect(() => {
+
+    }, [input]);
+
 
     const loggedOff = <div>
         <Link to={"/"}>
