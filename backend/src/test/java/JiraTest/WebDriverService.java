@@ -1,6 +1,6 @@
 package JiraTest;
 
-import com.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.Utility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,8 +24,8 @@ public class WebDriverService {
         webDriver = null;
     }
     private WebDriver createWebDriver() {
-        String browserType = FileReader.getValueByKeyFromConfigProperties("browser.type");
-        String driverLocation = FileReader.getValueByKeyFromConfigProperties("driver.location");
+        String browserType = Utility.getValueByKeyFromConfigProperties("browser.type");
+        String driverLocation = Utility.getValueByKeyFromConfigProperties("driver.location");
         String extension = System.getProperty("os.name").contains("Windows") ? ".exe" : "";
 
         switch(browserType) {

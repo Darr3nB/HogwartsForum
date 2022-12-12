@@ -3,7 +3,7 @@ package JiraTest;
 import JiraTest.Model.Login.DashPageModel;
 import JiraTest.Model.Login.LoginPageModel;
 import JiraTest.Model.Login.ProfilePageModel;
-import com.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.Utility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,12 +31,12 @@ public class LoginTest {
     public void successfulLoginOnLoginPage() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.login(FileReader.getValueByKeyFromConfigProperties("jira.username"), FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        loginPageModel.login(Utility.getValueByKeyFromConfigProperties("jira.username"), Utility.getValueByKeyFromConfigProperties("jira.password"));
         loginPageModel.waitUntilLoggedIn();
 
         loginPageModel.openProfilePageAndWaitForLoadIn();
 
-        Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKeyFromConfigProperties("jira.displayname")));
+        Assertions.assertTrue(profilePageModel.getFullName().contains(Utility.getValueByKeyFromConfigProperties("jira.displayname")));
     }
 
     @Test
@@ -45,34 +45,34 @@ public class LoginTest {
         dashPageModel.waitUntilWebElementIsClickable("id", "login");
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
 
-        dashPageModel.loginOnDashPage(FileReader.getValueByKeyFromConfigProperties("jira.username"), FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        dashPageModel.loginOnDashPage(Utility.getValueByKeyFromConfigProperties("jira.username"), Utility.getValueByKeyFromConfigProperties("jira.password"));
         dashPageModel.waitUntilLoggedIn();
         profilePageModel.openProfilePage();
 
-        Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKeyFromConfigProperties("jira.displayname")));
+        Assertions.assertTrue(profilePageModel.getFullName().contains(Utility.getValueByKeyFromConfigProperties("jira.displayname")));
     }
 
     @Test
     public void loginWithInvalidUserName() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.invalidLoginTry("whatever", FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        loginPageModel.invalidLoginTry("whatever", Utility.getValueByKeyFromConfigProperties("jira.password"));
         loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 
-        loginPageModel.login(FileReader.getValueByKeyFromConfigProperties("jira.username"), FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        loginPageModel.login(Utility.getValueByKeyFromConfigProperties("jira.username"), Utility.getValueByKeyFromConfigProperties("jira.password"));
     }
 
     @Test
     public void loginWithInvalidPassword() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.invalidLoginTry(FileReader.getValueByKeyFromConfigProperties("jira.username"), "whatever");
+        loginPageModel.invalidLoginTry(Utility.getValueByKeyFromConfigProperties("jira.username"), "whatever");
         loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 
-        loginPageModel.login(FileReader.getValueByKeyFromConfigProperties("jira.username"), FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        loginPageModel.login(Utility.getValueByKeyFromConfigProperties("jira.username"), Utility.getValueByKeyFromConfigProperties("jira.password"));
     }
 }

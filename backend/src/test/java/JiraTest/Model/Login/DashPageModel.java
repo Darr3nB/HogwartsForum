@@ -1,7 +1,7 @@
 package JiraTest.Model.Login;
 
 import JiraTest.Model.BaseModel;
-import com.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.Utility;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,7 +26,7 @@ public class DashPageModel extends BaseModel {
 
     public void openDashboardLoginPage()
     {
-        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/Dashboard.jspa");
+        webDriver.get(Utility.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/Dashboard.jspa");
     }
 
     public void loginOnDashPage(String username, String password){

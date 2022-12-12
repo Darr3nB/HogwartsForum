@@ -20,35 +20,35 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/")
 public class IndexController {
     UserService userService;
-
-    @GetMapping
-    public String index(Model model, HttpServletRequest request) {
-        String username = null;
-        Cookie[] cookies = request.getCookies();
-
-        for (Cookie temp : cookies) {
-            if ("hfUsername".equals(temp.getName())) {
-                username = temp.getValue();
-            }
-        }
-
-        model.addAttribute("username", username);
-        return "index";
-    }
-
-    @PostMapping(value = "login")
-    public HttpEntity<Void> doLogin(@RequestBody Login loginParams, HttpServletResponse response) {
-        if (!userService.validateProfile(loginParams.getUsername(), loginParams.getPassword())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        Cookie theCookie = new Cookie("hfUsername", loginParams.getUsername());
-        theCookie.setMaxAge(60 * 60 * 24);
-        theCookie.setPath("/");
-
-        response.addCookie(theCookie);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
+//
+//    @GetMapping
+//    public String index(Model model, HttpServletRequest request) {
+//        String username = null;
+//        Cookie[] cookies = request.getCookies();
+//
+//        for (Cookie temp : cookies) {
+//            if ("hfUsername".equals(temp.getName())) {
+//                username = temp.getValue();
+//            }
+//        }
+//
+//        model.addAttribute("username", username);
+//        return "index";
+//    }
+//
+//    @PostMapping(value = "login")
+//    public HttpEntity<Void> doLogin(@RequestBody Login loginParams, HttpServletResponse response) {
+//        if (!userService.validateProfile(loginParams.getUsername(), loginParams.getPassword())) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//        }
+//
+//        Cookie theCookie = new Cookie("hfUsername", loginParams.getUsername());
+//        theCookie.setMaxAge(60 * 60 * 24);
+//        theCookie.setPath("/");
+//
+//        response.addCookie(theCookie);
+//        return ResponseEntity.status(HttpStatus.OK).build();
+//    }
 
     @GetMapping(value = "logout")
     public String doLogout(HttpServletResponse response) {

@@ -1,7 +1,7 @@
 package JiraTest.Model;
 
 import JiraTest.WebDriverService;
-import com.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -85,16 +85,16 @@ public class BaseModel {
     }
 
     public void doLogin(){
-        webDriver.navigate().to(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+        webDriver.navigate().to(Utility.getValueByKeyFromConfigProperties("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
         webDriver.manage().window().maximize();
 
-        setUsername(FileReader.getValueByKeyFromConfigProperties("jira.username"));
-        setPassword(FileReader.getValueByKeyFromConfigProperties("jira.password"));
+        setUsername(Utility.getValueByKeyFromConfigProperties("jira.username"));
+        setPassword(Utility.getValueByKeyFromConfigProperties("jira.password"));
         clickOnLoginButton();
     }
 
     public void openUrlWithSpecificPathAndMaximizeWindowSize(String path){
-        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + path);
+        webDriver.get(Utility.getValueByKeyFromConfigProperties("jira.baseurl") + path);
         webDriver.manage().window().maximize();
     }
 

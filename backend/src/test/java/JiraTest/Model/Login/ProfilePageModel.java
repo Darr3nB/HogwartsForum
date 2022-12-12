@@ -1,7 +1,7 @@
 package JiraTest.Model.Login;
 
 import JiraTest.Model.BaseModel;
-import com.HogwartsForum.util.FileReader;
+import com.HogwartsForum.util.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +15,7 @@ public class ProfilePageModel extends BaseModel {
 
     public void openProfilePage()
     {
-        webDriver.get(FileReader.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/ViewProfile.jspa");
+        webDriver.get(Utility.getValueByKeyFromConfigProperties("jira.baseurl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
     }
