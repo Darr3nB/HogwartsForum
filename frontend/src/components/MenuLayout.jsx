@@ -35,14 +35,32 @@ export default function MenuLayout() {
     // TODO request logged in user's data for usage
     // TODO switch password input field type to password
     const [isLoggedIn, setLoginState] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState({});
 
     const isLoggedInRequest = async () => {
-        const data = await utility.apiGet();
+        const data = await utility.apiGet(`/user/logged-in`)
+            .then(r => {
+                if (r.status === 204){
+                    return false;
+                }else if (r.status === 200){
+                    return r.json();
+                }
+            });
+        return data;
     };
 
     useEffect(() => {
-
-    }, [input]);
+        isLoggedInRequest().then(
+            d => {
+                if (d === false){
+                    setLoginState(false);
+                }else {
+                    setLoggedInUser(d);
+                    setLoginState(true);
+                }
+            }
+        );
+    }, [isLoggedIn]);
 
 
     const loggedOff = <div>
@@ -70,12 +88,12 @@ export default function MenuLayout() {
         <Link to={"/"}>
             <button type="button">Home</button>
         </Link>
-        <p>Welcome USERNAME_HERE!</p>
+        <p>{loggedInUser.name}</p>
         <button onClick={event => doLogout(event, setLoginState)}>Logout</button>
         <Link to={"/profile"}>
             <button type="button">Profile</button>
         </Link>
     </div>;
 
-    return isLoggedIn ? loggedIn : loggedOff;
+    return isLoggedIn === false ? loggedOff : loggedIn;
 };

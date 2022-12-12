@@ -25,22 +25,30 @@ export default function Index() {
 
             <h1>Welcome to Hogwarts forum!</h1>
 
-            <Link to={"/post-question"}><button type="button">Ask a question</button></Link>
-            <Link to={`all-questions`}><button>All Questions</button></Link>
+            <Link to={"/post-question"}>
+                <button type="button">Ask a question</button>
+            </Link>
+            <Link to={`all-questions`}>
+                <button>All Questions</button>
+            </Link>
             <p>Find friends, chat, connect with other students, ask questions or help in studies.</p>
 
             <div id="main-page-questions">
                 {topFiveQuestions.length <= 0
                     ? (<p>There are no asked questions yet.</p>)
                     : (<table>
+                        <thead>
                         <tr>
                             <th>Latest question(s)</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {topFiveQuestions.map(question => {
-                            return (<tr>
+                            return (<tr key={"question-id-" + question.id}>
                                 <td id={"question-id-" + question.id}>{question.title + " " + question.questionText}</td>
                             </tr>)
                         })}
+                        </tbody>
                     </table>)}
             </div>
 
