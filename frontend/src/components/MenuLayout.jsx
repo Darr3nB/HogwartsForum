@@ -38,7 +38,7 @@ export default function MenuLayout() {
     const [loggedInUser, setLoggedInUser] = useState({});
 
     const isLoggedInRequest = async () => {
-        const data = await utility.apiGet(`/user/logged-in`)
+        return await utility.apiGet(`/user/logged-in`)
             .then(r => {
                 if (r.status === 204){
                     return false;
@@ -46,7 +46,6 @@ export default function MenuLayout() {
                     return r.json();
                 }
             });
-        return data;
     };
 
     useEffect(() => {
