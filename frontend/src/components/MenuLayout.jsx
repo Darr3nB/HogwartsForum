@@ -40,9 +40,9 @@ export default function MenuLayout() {
     const isLoggedInRequest = async () => {
         return await utility.apiGet(`/user/logged-in`)
             .then(r => {
-                if (r.status === 204){
+                if (r.status === 204) {
                     return false;
-                }else if (r.status === 200){
+                } else if (r.status === 200) {
                     return r.json();
                 }
             });
@@ -51,9 +51,9 @@ export default function MenuLayout() {
     useEffect(() => {
         isLoggedInRequest().then(
             d => {
-                if (d === false){
+                if (d === false) {
                     setLoginState(false);
-                }else {
+                } else {
                     setLoggedInUser(d);
                     setLoginState(true);
                 }

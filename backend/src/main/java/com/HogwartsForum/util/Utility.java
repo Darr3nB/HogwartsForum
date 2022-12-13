@@ -1,5 +1,7 @@
 package com.HogwartsForum.util;
 
+import com.HogwartsForum.model.HogwartsUser;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

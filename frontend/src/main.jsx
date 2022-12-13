@@ -30,6 +30,11 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: <Profile/>
+    },
+    {
+        path: "/specific-question",
+        // TODO put specific question page here
+        element: <ErrorPage/>
     }
 ]);
 

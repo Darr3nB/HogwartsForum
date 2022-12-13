@@ -1,7 +1,9 @@
 package com.HogwartsForum.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,12 +11,14 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class HogwartsUser {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
+    @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private HogwartsHouses house;
