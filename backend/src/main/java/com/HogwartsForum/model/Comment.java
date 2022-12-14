@@ -20,9 +20,4 @@ public class Comment {
     private Integer id;
     private String comment;
     private LocalDateTime submissionTime;
-
-    public Comment(String text) {
-        this.comment = text;
-        this.submissionTime = LocalDateTime.now();
-    }
 }

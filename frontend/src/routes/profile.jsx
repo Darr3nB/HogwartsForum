@@ -5,10 +5,9 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
-async function deleteProfile(e, currentUser) {
+async function deleteProfile(e, currentUser, navigate) {
     e.preventDefault();
     const profileData = new FormData(e.currentTarget);
-    const navigate = useNavigate();
 
     await utility.apiPostWithDictionaryDataType(`delete-profile`, {
         'id': currentUser.id,
@@ -26,6 +25,7 @@ export default function Profile() {
     // TODO if not logged in redirect to error
     // TODO switch password input type to 'password'
     // TODO get current user's data instead of dummy data
+    const navigate = useNavigate();
     const [user] = useState({
         'id': 1,
         'username': "Harry Potter",
@@ -43,7 +43,7 @@ export default function Profile() {
             <div id="house-on-profile-page">{user.houseType}</div>
             <div id="pet-on-profile-page">{user.petType}</div>
 
-            <form onSubmit={event => deleteProfile(event, user)}>
+            <form onSubmit={event => deleteProfile(event, user, navigate)}>
                 <label htmlFor="password-for-delete-profile">Enter password to delete profile:</label>
                 <input type="text" id="password-for-delete-profile" name="password-for-delete-profile"
                        required="required"/>

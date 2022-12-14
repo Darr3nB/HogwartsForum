@@ -5,10 +5,9 @@ import {useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
-async function postAQuestion(e) {
+async function postAQuestion(e, navigate) {
     e.preventDefault();
     const postQuestionData = new FormData(e.currentTarget);
-    const navigate = useNavigate();
 
     await utility.apiPostWithDictionaryDataType('/post-question',
         {
@@ -23,6 +22,7 @@ async function postAQuestion(e) {
 }
 
 export default function PostQuestion() {
+    const navigate = useNavigate();
     // TODO check if logged in, case: no, redirect error
     return (
         <div>
@@ -30,7 +30,7 @@ export default function PostQuestion() {
 
             <h1>Ask your question</h1>
 
-            <form onSubmit={postAQuestion}>
+            <form onSubmit={event => postAQuestion(event, navigate)}>
                 <label htmlFor="question-title">Question title: </label>
                 <input type="text" id="question-title" name="question-title" minLength="5"/>
 

@@ -2,15 +2,21 @@ import {useEffect, useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
 import {utility} from "../utility.js";
+import {useNavigate} from "react-router-dom";
 
 
 export default function AllQuestions() {
     const [allQuestions, setAllQuestionState] = useState([]);
+    const navigate = useNavigate();
 
     const askedQuestions = async () => {
         const data = await utility.apiGet(`/api/get-all-questions`).then(response => response.json());
         // TODO In case of bad response, use state
         setAllQuestionState(data);
+    };
+
+    const openSelectedQuestion = (e, id) =>{
+        navigate(`/specific-question/${id}`);
     };
 
     useEffect(() => {
@@ -36,7 +42,9 @@ export default function AllQuestions() {
 
                         {allQuestions.map(question => {
                             return (<tr key={"question-id-" + question.id}>
-                                <td id={"question-id-" + question.id}>{question.title + " " + question.questionText}</td>
+                                <td id={"question-id-" + question.id} onClick={event => openSelectedQuestion(event, question.id)}>
+                                    {question.title + " " + question.questionText}
+                                </td>
                             </tr>)
                         })}
                         </tbody>

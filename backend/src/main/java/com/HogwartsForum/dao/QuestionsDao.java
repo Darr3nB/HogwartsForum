@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface QuestionsDao extends JpaRepository<Question, Integer> {
     List<Question> findTop5ByOrderBySubmissionTimeDesc();
+    Question findQuestionById(Integer id);
 }

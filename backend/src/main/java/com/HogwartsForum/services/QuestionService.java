@@ -27,6 +27,6 @@ public class QuestionService {
     }
 
     public Question getQuestionById(Integer id) {
-        return questionsDao.getById(id);
+        return questionsDao.findQuestionById(id);
     }
 }

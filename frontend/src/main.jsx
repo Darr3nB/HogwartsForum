@@ -8,6 +8,7 @@ import AllQuestions from "./routes/allQuestions.jsx";
 import Registration from "./routes/registration.jsx";
 import PostQuestion from "./routes/postQuestion.jsx";
 import Profile from "./routes/profile.jsx";
+import SpecificQuestion from "./routes/specific-question.jsx";
 
 const router = createBrowserRouter([
     {
@@ -32,9 +33,8 @@ const router = createBrowserRouter([
         element: <Profile/>
     },
     {
-        path: "/specific-question",
-        // TODO put specific question page here
-        element: <ErrorPage/>
+        path: "/specific-question/:id",
+        element: <SpecificQuestion/>
     }
 ]);
 

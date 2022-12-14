@@ -49,4 +49,9 @@ public class ApiController {
         // TODO when query builder done, get page number as well
         return 0;
     }
+
+    @GetMapping("get-specific-question/{id}")
+    public Question getSpecificQuestionById(@PathVariable String id){
+        return questionService.getQuestionById(Integer.parseInt(id));
+    }
 }
