@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 export default function Index() {
     const [topFiveQuestions, setTopFiveQuestionState] = useState([]);
+    const navigate = useNavigate();
 
     const askedQuestions = async () => {
         const data = await utility.apiGet(`/api/five-latest-question`).then(response => response.json());
@@ -17,6 +18,10 @@ export default function Index() {
     useEffect(() => {
         askedQuestions().then();
     }, []);
+
+    const openSelectedQuestion = (e, id) => {
+        navigate(`/specific-question/${id}`);
+    };
 
 
     return (
@@ -45,7 +50,10 @@ export default function Index() {
                         <tbody>
                         {topFiveQuestions.map(question => {
                             return (<tr key={"question-id-" + question.id}>
-                                <td id={"question-id-" + question.id}>{question.title + " " + question.questionText}</td>
+                                <td id={"question-id-" + question.id}
+                                    onClick={event => openSelectedQuestion(event, question.id)}>
+                                    {question.title + " " + question.questionText}
+                                </td>
                             </tr>)
                         })}
                         </tbody>
