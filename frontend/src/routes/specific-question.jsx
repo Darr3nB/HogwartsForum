@@ -14,11 +14,19 @@ export default function SpecificQuestion() {
             let data = await response.json();
             setQuestionState(data);
         }
-        getSpecificQuestion();
+        getSpecificQuestion().then();
     }, [id]);
 
-    if (question === null){
-        return (<div>Loading, please wait</div>);
+    if (question === null) {
+        return (
+            <div>
+                <MenuLayout/>
+
+                <div>Loading, please wait</div>
+
+                <Footer/>
+            </div>
+        );
     }
 
     return (
