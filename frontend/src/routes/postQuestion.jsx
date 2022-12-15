@@ -1,4 +1,3 @@
-import {useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
 import {useNavigate} from "react-router-dom";
@@ -9,7 +8,7 @@ async function postAQuestion(e, navigate) {
     e.preventDefault();
     const postQuestionData = new FormData(e.currentTarget);
 
-    await utility.apiPostWithDictionaryDataType('/post-question',
+    await utility.apiPostWithDictionaryDataType('/question/post-question',
         {
             'title': postQuestionData.get("question-title"),
             'questionText': postQuestionData.get("question-description")
@@ -24,6 +23,7 @@ async function postAQuestion(e, navigate) {
 export default function PostQuestion() {
     const navigate = useNavigate();
     // TODO check if logged in, case: no, redirect error
+
     return (
         <div>
             <MenuLayout/>

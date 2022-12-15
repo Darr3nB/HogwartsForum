@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/post-question")
+@RequestMapping("/question")
 public class QuestionController {
     QuestionService questionService;
 
-    @PostMapping
+    @PostMapping("post-question")
     public HttpEntity<Void> postQuestion(@RequestBody Question question) {
         if (question.getTitle().length() < 5 || question.getQuestionText().length() < 5) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

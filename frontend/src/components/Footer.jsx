@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
-        <div>
-            <p>fake@email.com - Copyright ----</p>
+        <div className="footer">
+            fake@email.com - Copyright ----
         </div>
 
     );

@@ -1,8 +1,49 @@
-.footer-container{
-  position: relative;
+.footer {
+    position: relative;
+    bottom: 0;
 }
 
-.footer-copyright{
-  position: absolute;
-  bottom: 0;
+.body {
+    background-color: grey;
+}
+
+.header-to-middle {
+    text-align: center;
+}
+
+.card-to-middle-with-border {
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.reg-fields {
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.button-to-middle {
+    height: 20px;
+    width: 100px;
+    margin: -20px -50px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
+.wrapper {
+    width: auto;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.menu-layout-elements {
+    width: auto;
+    float: left;
+}
+
+.go-right {
+    float: right;
 }

@@ -37,19 +37,21 @@ export default function Profile() {
         <div>
             <MenuLayout/>
 
-            <img alt="Blank profile picture." height="150" width="200"/>
-            <div id="profile-id-on-profile-page">{user.id}</div>
-            <div id="username-on-profile-page">{user.username}</div>
-            <div id="house-on-profile-page">{user.houseType}</div>
-            <div id="pet-on-profile-page">{user.petType}</div>
+            <h1 className="header-to-middle">Your profile</h1>
+            <div className="card-to-middle-with-border">
+                <img alt="Blank profile picture." height="150" width="200" className="reg-fields"/>
+                <div id="profile-id-on-profile-page" className="reg-fields">Registration id: {user.id}</div>
+                <div id="username-on-profile-page" className="reg-fields">Username: {user.username}</div>
+                <div id="house-on-profile-page" className="reg-fields">House: {user.houseType}</div>
+                <div id="pet-on-profile-page" className="reg-fields">Pet type: {user.petType}</div>
 
-            <form onSubmit={event => deleteProfile(event, user, navigate)}>
-                <label htmlFor="password-for-delete-profile">Enter password to delete profile:</label>
-                <input type="text" id="password-for-delete-profile" name="password-for-delete-profile"
-                       required="required"/>
-                <button type="submit">Delete my profile</button>
-            </form>
-
+                <form onSubmit={event => deleteProfile(event, user, navigate)}>
+                    <label htmlFor="password-for-delete-profile" className="reg-fields">Enter password to delete profile:</label>
+                    <input type="text" id="password-for-delete-profile" name="password-for-delete-profile"
+                           required="required" className="reg-fields"/>
+                    <button type="submit" className="button-to-middle">Delete profile</button>
+                </form>
+            </div>
             <Footer/>
         </div>
     );
