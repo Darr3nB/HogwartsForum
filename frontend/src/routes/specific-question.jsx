@@ -33,8 +33,10 @@ export default function SpecificQuestion() {
         <div>
             <MenuLayout/>
 
-            <div>
-                <h2>{question.title}</h2>
+            <div className="specific-question-page">
+                <div className="main-page-welcome-msg">
+                    <h2 className="header-to-middle">{question.title}</h2>
+                </div>
                 <div id="question-text">{question.questionText}</div>
                 <div id="question-submission-time">{question.submissionTime}</div>
                 <div id="comments">{question.commentList && question.commentList.map(comment => {

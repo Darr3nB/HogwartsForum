@@ -12,5 +12,15 @@ export let utility = {
 
     apiGet: async function (path) {
         return await fetch(path);
+    },
+    isLoggedInRequest: async function () {
+        return await utility.apiGet(`/user/logged-in`)
+            .then(r => {
+                if (r.status === 204) {
+                    return false;
+                } else if (r.status === 200) {
+                    return r.json();
+                }
+            });
     }
 }

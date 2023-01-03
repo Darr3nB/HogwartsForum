@@ -1,8 +1,25 @@
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {utility} from "../utility.js";
 
 export default function Registration() {
+    const navigate = useNavigate();
+    const [isLoggedIn, setLoginState] = useState(false);
+
+    useEffect(() => {
+        utility.isLoggedInRequest().then(
+            d => {
+                if (d === false) {
+                    setLoginState(false);
+                } else {
+                    setLoginState(true);
+                    navigate("/");
+                }
+            }
+        );
+    }, [isLoggedIn]);
     return (
         <div>
             <MenuLayout/>

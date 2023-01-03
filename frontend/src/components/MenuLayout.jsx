@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
-async function doLogin(e, setLoginState) {
+async function doLogin(e, setLoginState, navigate) {
     e.preventDefault();
     const componentData = new FormData(e.currentTarget);
 
@@ -15,17 +15,19 @@ async function doLogin(e, setLoginState) {
         .then(response => {
             if (response.ok) {
                 setLoginState(true);
+                navigate("/");
             }
         });
 }
 
-async function doLogout(e, setLoginState) {
+async function doLogout(e, setLoginState, navigate) {
     e.preventDefault();
 
     await utility.apiGet(`/user/logout`)
         .then(response => {
             if (response.ok) {
                 setLoginState(false);
+                navigate("/");
             }
         })
 }
@@ -34,20 +36,10 @@ export default function MenuLayout() {
     // TODO switch password input field type to password
     const [isLoggedIn, setLoginState] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState({});
-
-    const isLoggedInRequest = async () => {
-        return await utility.apiGet(`/user/logged-in`)
-            .then(r => {
-                if (r.status === 204) {
-                    return false;
-                } else if (r.status === 200) {
-                    return r.json();
-                }
-            });
-    };
+    const navigate = useNavigate();
 
     useEffect(() => {
-        isLoggedInRequest().then(
+        utility.isLoggedInRequest().then(
             d => {
                 if (d === false) {
                     setLoginState(false);
@@ -61,16 +53,18 @@ export default function MenuLayout() {
 
 
     const loggedOff = <div className="wrapper">
-        <Link to={"/"} className="menu-layout-elements">
-            <button type="button" className="profile-button"></button>
-        </Link>
+        <span className="hovertext" data-hover="Home page">
+            <Link to={"/"} className="menu-layout-elements">
+                <button type="button" className="profile-button" id="home-button"></button>
+            </Link>
+        </span>
         <div>
             <Link to={"/registration"} className="menu-layout-elements">
                 <button type="button">Registration</button>
             </Link>
         </div>
         <div className="first, go-right">
-            <form onSubmit={event => doLogin(event, setLoginState)}>
+            <form onSubmit={event => doLogin(event, setLoginState, navigate)}>
                 <label htmlFor="username-field">Username: </label>
                 <input type="text" id="username-field" name="username-field" minLength="3"/>
                 <label htmlFor="password-field">Magic word: </label>
@@ -81,21 +75,36 @@ export default function MenuLayout() {
         </div>
 
     </div>;
-    const houseCrest = loggedInUser.house === "GRYFFINDOR" ? "gryffindor-house-crest" :
-                        loggedInUser.house === "SLYTHERIN" ? "slytherin-house-crest" :
-                        loggedInUser.house === "HUFFLEPUFF" ? "hufflepuff-house-crest" :
-                        loggedInUser.house === "RAVENCLAW" ? "ravenclaw-house-crest" : "profile-button";
+
+    const houseCrest = () => {
+        switch (loggedInUser.house){
+            case "GRYFFINDOR":
+                return "gryffindor-house-crest";
+            case "SLYTHERIN":
+                return "slytherin-house-crest";
+            case "HUFFLEPUFF":
+                return "hufflepuff-house-crest";
+            case "RAVENCLAW":
+                return "ravenclaw-house-crest";
+            default:
+                return "profile-button";
+        }
+    }
 
     const loggedIn = <div className="wrapper">
-        <Link to={"/"} className="menu-layout-elements">
-            <button type="button" className="profile-button"></button>
-        </Link>
+        <span className="hovertext" data-hover="Home page">
+            <Link to={"/"} className="menu-layout-elements">
+                <button type="button" className="profile-button" id="home-button"></button>
+            </Link>
+        </span>
         <p className="menu-layout-elements welcome-by-name">Welcome {loggedInUser.name}!</p>
-        <button onClick={event => doLogout(event, setLoginState)} className="menu-layout-buttons, go-right">Logout
+        <button onClick={event => doLogout(event, setLoginState, navigate)} className="menu-layout-buttons, go-right">Logout
         </button>
-        <Link to={"/profile"} className="menu-layout-buttons, go-right">
-            <button type="button" className={houseCrest} title="Profile"></button>
-        </Link>
+        <span className="hovertext" data-hover="Profile page">
+            <Link to={"/profile"} className="menu-layout-buttons, go-right">
+                <button id="profile-button" type="button" className={houseCrest()} title="Profile"></button>
+            </Link>
+        </span>
     </div>;
 
     return isLoggedIn === false ? loggedOff : loggedIn;

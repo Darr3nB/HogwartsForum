@@ -22,26 +22,13 @@ async function deleteProfile(e, currentUser, navigate) {
 }
 
 export default function Profile() {
-    // TODO if not logged in redirect to error
     // TODO switch password input type to 'password'
-    // TODO get current user's data instead of dummy data
     const navigate = useNavigate();
     const [isLoggedIn, setLoginState] = useState(false);
     const [user, setUser] = useState({});
 
-    const isLoggedInRequest = async () => {
-        return await utility.apiGet(`/user/logged-in`)
-            .then(r => {
-                if (r.status === 204) {
-                    return false;
-                } else if (r.status === 200) {
-                    return r.json();
-                }
-            });
-    };
-
     useEffect(() => {
-        isLoggedInRequest().then(
+        utility.isLoggedInRequest().then(
             d => {
                 if (d === false) {
                     setLoginState(false);
@@ -63,7 +50,9 @@ export default function Profile() {
                 <img alt="Blank profile picture." height="150" width="200" className="reg-fields"/>
                 <div id="profile-id-on-profile-page" className="reg-fields">Registration id: {user.id}</div>
                 <div id="username-on-profile-page" className="reg-fields">Username: {user.name}</div>
+                {/*<div id="house-on-profile-page" className="reg-fields">House: {user.house.charAt(0).toUpperCase() + user.house.slice(1).toLowerCase()}</div>*/}
                 <div id="house-on-profile-page" className="reg-fields">House: {user.house}</div>
+                {/*<div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet.charAt(0).toUpperCase() + user.pet.slice(1).toLowerCase()}</div>*/}
                 <div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet}</div>
 
                 <form onSubmit={event => deleteProfile(event, user, navigate)}>
