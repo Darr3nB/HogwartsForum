@@ -46,14 +46,14 @@ export default function Profile() {
             <MenuLayout/>
 
             <h1 className="header-to-middle">Your profile</h1>
+
             <div className="card-to-middle-with-border">
                 <img alt="Blank profile picture." height="150" width="200" className="reg-fields"/>
+                <button id="upload-profile-picture-button" type="button" className="reg-fields">Upload new profile picture</button>
                 <div id="profile-id-on-profile-page" className="reg-fields">Registration id: {user.id}</div>
                 <div id="username-on-profile-page" className="reg-fields">Username: {user.name}</div>
-                {/*<div id="house-on-profile-page" className="reg-fields">House: {user.house.charAt(0).toUpperCase() + user.house.slice(1).toLowerCase()}</div>*/}
-                <div id="house-on-profile-page" className="reg-fields">House: {user.house}</div>
-                {/*<div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet.charAt(0).toUpperCase() + user.pet.slice(1).toLowerCase()}</div>*/}
-                <div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet}</div>
+                <div id="house-on-profile-page" className="reg-fields">House: {user.house?.charAt(0).toUpperCase() + user.house?.slice(1).toLowerCase()}</div>
+                <div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet?.charAt(0).toUpperCase() + user.pet?.slice(1).toLowerCase()}</div>
 
                 <form onSubmit={event => deleteProfile(event, user, navigate)}>
                     <label htmlFor="password-for-delete-profile" className="reg-fields">Enter password to delete
@@ -63,6 +63,7 @@ export default function Profile() {
                     <button type="submit" className="button-to-middle">Delete profile</button>
                 </form>
             </div>
+
             <Footer/>
         </div>
     );
