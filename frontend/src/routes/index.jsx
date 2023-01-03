@@ -28,21 +28,26 @@ export default function Index() {
         <div className="App">
             <MenuLayout/>
 
-            <h1 className="header-to-middle">Welcome to Hogwarts forum!</h1>
-            <p className="header-to-middle">Find friends, chat, connect with other students, ask questions or help in studies.</p>
+            <div className="main-page-welcome-msg">
+                <h1 className="header-to-middle">Welcome to Hogwarts forum!</h1>
+                <p className="header-to-middle">Find friends, chat, connect with other students, ask questions or help
+                    in studies.</p>
+            </div>
 
-            <Link to={"/post-question"}>
-                <button type="button">Ask a question</button>
-            </Link>
-            <Link to={`all-questions`}>
-                <button>All Questions</button>
-            </Link>
+            <div className="question-buttons">
+                <Link to={"/post-question"}>
+                    <button type="button">Ask a question</button>
+                </Link>
+                <Link to={`all-questions`}>
+                    <button>All Questions</button>
+                </Link>
+            </div>
 
 
             <div id="main-page-questions">
                 {topFiveQuestions.length <= 0
-                    ? (<p>There are no asked questions yet.</p>)
-                    : (<table>
+                    ? (<p className="no-questions">There are no asked questions yet.</p>)
+                    : (<table className="main-page-table">
                         <thead>
                         <tr>
                             <th>Latest question(s)</th>

@@ -62,7 +62,7 @@ export default function MenuLayout() {
 
     const loggedOff = <div className="wrapper">
         <Link to={"/"} className="menu-layout-elements">
-            <button type="button">Home</button>
+            <button type="button" className="profile-button"></button>
         </Link>
         <div>
             <Link to={"/registration"} className="menu-layout-elements">
@@ -81,15 +81,20 @@ export default function MenuLayout() {
         </div>
 
     </div>;
+    const houseCrest = loggedInUser.house === "GRYFFINDOR" ? "gryffindor-house-crest" :
+                        loggedInUser.house === "SLYTHERIN" ? "slytherin-house-crest" :
+                        loggedInUser.house === "HUFFLEPUFF" ? "hufflepuff-house-crest" :
+                        loggedInUser.house === "RAVENCLAW" ? "ravenclaw-house-crest" : "profile-button";
 
     const loggedIn = <div className="wrapper">
         <Link to={"/"} className="menu-layout-elements">
-            <button type="button">Home</button>
+            <button type="button" className="profile-button"></button>
         </Link>
-        <p className="menu-layout-elements">Welcome {loggedInUser.name}!</p>
-        <button onClick={event => doLogout(event, setLoginState)} className="menu-layout-buttons, go-right">Logout</button>
+        <p className="menu-layout-elements welcome-by-name">Welcome {loggedInUser.name}!</p>
+        <button onClick={event => doLogout(event, setLoginState)} className="menu-layout-buttons, go-right">Logout
+        </button>
         <Link to={"/profile"} className="menu-layout-buttons, go-right">
-            <button type="button" className="profile-button">Profile</button>
+            <button type="button" className={houseCrest} title="Profile"></button>
         </Link>
     </div>;
 

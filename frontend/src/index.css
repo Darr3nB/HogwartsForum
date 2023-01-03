@@ -1,10 +1,18 @@
 .footer {
-    position: relative;
+    text-align: center;
+    flex: fit-content;
+    position: fixed;
     bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .body {
-    background-color: grey;
+    background: url("./assets/hogwarts-school.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .header-to-middle {
@@ -16,6 +24,7 @@
     width: 50%;
     border: 3px solid black;
     padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .reg-fields {
@@ -46,4 +55,75 @@
 
 .go-right {
     float: right;
+}
+
+#main-page-questions {
+    width: 500px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-page-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+th {
+    border: 1px solid black;
+}
+
+
+.question-buttons {
+    text-align: center;
+}
+
+.profile-button {
+    background-image: url("./assets/hogwarts_logo.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.gryffindor-house-crest {
+    background-image: url("./assets/gryffindor_logo.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.slytherin-house-crest {
+    background-image: url("./assets/slytherin_logo.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.hufflepuff-house-crest {
+    background-image: url("./assets/hufflepuff_logo.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.ravenclaw-house-crest {
+    background-image: url("./assets/ravenclaw_logo.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.main-page-welcome-msg {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.welcome-by-name {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.no-questions {
+    background-color: rgba(255, 255, 255, 0.5);
 }
