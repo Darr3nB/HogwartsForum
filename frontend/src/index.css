@@ -123,7 +123,7 @@ th {
     background-size: cover;
 }
 
-.slight-white-background{
+.slight-white-background {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -162,4 +162,30 @@ th {
 .ask-question-div {
     border: 1px solid black;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.time-stamp-on-specific-question {
+    text-align: right;
+    font-size: 13px;
+}
+
+.question-text-on-specific-question {
+    text-align: center;
+    font-size: 30px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.laBorder {
+    border: 1px solid black;
+}
+
+.loading-field {
+    background-image: url("../src/assets/magic-pusheen.gif");
 }

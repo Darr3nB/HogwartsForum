@@ -4,6 +4,9 @@ import com.HogwartsForum.model.Question;
 import com.HogwartsForum.services.QuestionService;
 import com.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,5 +56,14 @@ public class ApiController {
     @GetMapping("get-specific-question/{id}")
     public Question getSpecificQuestionById(@PathVariable String id){
         return questionService.getQuestionById(Integer.parseInt(id));
+    }
+
+    @GetMapping("post-comment-on-specific-question/{questionId}/{commentText}")
+    public HttpEntity<Void> commentOnSpecificQuestion(@PathVariable String questionId,
+                                                      @PathVariable String commentText){
+        // TODO get missing data from frontend to save comment in database
+        System.out.println("I AM HERE BITCHES! " + questionId + " " + commentText);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
