@@ -43,7 +43,7 @@ export default function PostQuestion() {
         <div>
             <MenuLayout/>
 
-            <div className="main-page-welcome-msg">
+            <div className="slight-white-background">
                 <h1 className="header-to-middle">Ask your question</h1>
             </div>
 

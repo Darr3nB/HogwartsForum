@@ -34,7 +34,7 @@ export default function SpecificQuestion() {
             <MenuLayout/>
 
             <div className="specific-question-page">
-                <div className="main-page-welcome-msg">
+                <div className="slight-white-background">
                     <h2 className="header-to-middle">{question.title}</h2>
                 </div>
                 <div id="question-text">{question.questionText}</div>

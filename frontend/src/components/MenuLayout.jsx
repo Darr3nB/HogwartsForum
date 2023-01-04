@@ -97,7 +97,7 @@ export default function MenuLayout() {
                 <button type="button" className="profile-button" id="home-button"></button>
             </Link>
         </span>
-        <p className="menu-layout-elements welcome-by-name">Welcome {loggedInUser.name}!</p>
+        <p className="menu-layout-elements slight-white-background">Welcome {loggedInUser.name}!</p>
         <button onClick={event => doLogout(event, setLoginState, navigate)} className="menu-layout-buttons, go-right">Logout
         </button>
         <span className="hovertext" data-hover="Profile page">

@@ -28,7 +28,7 @@ export default function Index() {
         <div className="App">
             <MenuLayout/>
 
-            <div className="main-page-welcome-msg">
+            <div className="slight-white-background">
                 <h1 className="header-to-middle">Welcome to Hogwarts forum!</h1>
                 <p className="header-to-middle">Find friends, chat, connect with other students, ask questions or help
                     in studies.</p>
@@ -46,7 +46,7 @@ export default function Index() {
 
             <div id="main-page-questions">
                 {topFiveQuestions.length <= 0
-                    ? (<p className="no-questions">There are no asked questions yet.</p>)
+                    ? (<p className="slight-white-background">There are no asked questions yet.</p>)
                     : (<table className="main-page-table">
                         <thead>
                         <tr>

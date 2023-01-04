@@ -27,13 +27,13 @@ export default function AllQuestions() {
         <div>
             <MenuLayout/>
 
-            <div className="main-page-welcome-msg">
+            <div className="slight-white-background">
                 <h1 className="header-to-middle">All questions</h1>
             </div>
 
             <div id="all-questions-page-questions">
                 {allQuestions.length <= 0
-                    ? (<p className="no-questions">There are no asked questions yet.</p>)
+                    ? (<p className="slight-white-background">There are no asked questions yet.</p>)
                     : (<table className="main-page-table">
                         <thead>
                         <tr>

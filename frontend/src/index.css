@@ -123,15 +123,7 @@ th {
     background-size: cover;
 }
 
-.main-page-welcome-msg {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.welcome-by-name {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.no-questions {
+.slight-white-background{
     background-color: rgba(255, 255, 255, 0.5);
 }
 

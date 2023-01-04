@@ -1,6 +1,6 @@
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {utility} from "../utility.js";
 
@@ -20,6 +20,24 @@ export default function Registration() {
             }
         );
     }, [isLoggedIn]);
+
+    const doRegistration = async (event) => {
+        event.preventDefault();
+        const componentData = new FormData(event.currentTarget);
+
+        await utility.apiPostWithDictionaryDataType("/user/registration", {
+            "username": componentData.get("username-field"),
+            "password": componentData.get("password-field"),
+            "passwordAgain": componentData.get("password-again-field"),
+            "house": componentData.get("house-field"), "petType": componentData.get("pet-field")
+        })
+            .then(response => {
+                if (response.ok) {
+                    navigate("/");
+                }
+            });
+    }
+
     return (
         <div>
             <MenuLayout/>
@@ -27,19 +45,20 @@ export default function Registration() {
             <h1 className="header-to-middle">Registration</h1>
 
             <div className="card-to-middle-with-border">
-                <form action="/registration" method="post">
+                <form onSubmit={event => doRegistration(event)}>
                     <label htmlFor="username-field" className="reg-fields">Username: </label>
-                    <input type="text" id="username-field" minLength="5" className="reg-fields"/>
+                    <input type="text" id="username-field" name="username-field" minLength="5" className="reg-fields"/>
                     <p id="valid-field"></p>
 
                     <label htmlFor="password-field" className="reg-fields">Magic word: </label>
-                    <input type="text" id="password-field" minLength="3" className="reg-fields"/>
+                    <input type="text" id="password-field" name="password-field" minLength="3" className="reg-fields"/>
 
                     <label htmlFor="password-again-field" className="reg-fields">Magic word again: </label>
-                    <input type="text" id="password-again-field" minLength="3" className="reg-fields"/>
+                    <input type="text" id="password-again-field" name="password-again-field" minLength="3"
+                           className="reg-fields"/>
 
                     <label htmlFor="house-field" className="reg-fields">Your house: </label>
-                    <select id="house-field" className="reg-fields">
+                    <select id="house-field" name="house-field" className="reg-fields">
                         <option value="noneSelected"></option>
                         <option value="Gryffindor">Gryffindor</option>
                         <option value="Slytherin">Slytherin</option>
@@ -48,7 +67,7 @@ export default function Registration() {
                     </select>
 
                     <label htmlFor="pet-field" className="reg-fields">Your pet: </label>
-                    <select id="pet-field" className="reg-fields">
+                    <select id="pet-field" name="pet-field" className="reg-fields">
                         <option value="noneSelected"></option>
                         <option value="Owl">Owl</option>
                         <option value="Car">Cat</option>
@@ -57,9 +76,7 @@ export default function Registration() {
                         <option value="Ferret">Ferret</option>
                     </select>
 
-                    <Link to={"/registration"} className="button-to-middle">
-                        <button type="button" id="registration-button">Registration</button>
-                    </Link>
+                    <button type="submit" id="registration-button" className="reg-fields">Registration</button>
                 </form>
             </div>
 
