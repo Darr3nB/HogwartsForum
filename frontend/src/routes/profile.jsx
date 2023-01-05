@@ -5,22 +5,6 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
-async function deleteProfile(e, currentUser, navigate) {
-    e.preventDefault();
-    const profileData = new FormData(e.currentTarget);
-
-    await utility.apiPostWithDictionaryDataType(`delete-profile`, {
-        'id': currentUser.id,
-        'username': currentUser.username,
-        'password': profileData.get('password-for-delete-profile')
-    })
-        .then(response => {
-            if (response.ok) {
-                navigate("/");
-            }
-        });
-}
-
 export default function Profile() {
     // TODO switch password input type to 'password'
     const navigate = useNavigate();
@@ -41,6 +25,22 @@ export default function Profile() {
         );
     }, [isLoggedIn]);
 
+    const deleteProfile = async (e, user) => {
+        e.preventDefault();
+        const profileData = new FormData(e.currentTarget);
+
+        await utility.apiPostWithDictionaryDataType(`delete-profile`, {
+            'id': user.id,
+            'username': user.username,
+            'password': profileData.get('password-for-delete-profile')
+        })
+            .then(response => {
+                if (response.ok) {
+                    navigate("/");
+                }
+            });
+    }
+
     return (
         <div>
             <MenuLayout/>
@@ -49,13 +49,17 @@ export default function Profile() {
 
             <div className="card-to-middle-with-border">
                 <img alt="Blank profile picture." height="150" width="200" className="reg-fields"/>
-                <button id="upload-profile-picture-button" type="button" className="reg-fields">Upload new profile picture</button>
+                <button id="upload-profile-picture-button" type="button" className="reg-fields">Upload new profile
+                    picture
+                </button>
                 <div id="profile-id-on-profile-page" className="reg-fields">Registration id: {user.id}</div>
                 <div id="username-on-profile-page" className="reg-fields">Username: {user.name}</div>
-                <div id="house-on-profile-page" className="reg-fields">House: {user.house?.charAt(0).toUpperCase() + user.house?.slice(1).toLowerCase()}</div>
-                <div id="pet-on-profile-page" className="reg-fields">Pet type: {user.pet?.charAt(0).toUpperCase() + user.pet?.slice(1).toLowerCase()}</div>
+                <div id="house-on-profile-page"
+                     className="reg-fields">House: {user.house?.charAt(0).toUpperCase() + user.house?.slice(1).toLowerCase()}</div>
+                <div id="pet-on-profile-page" className="reg-fields">Pet
+                    type: {user.pet?.charAt(0).toUpperCase() + user.pet?.slice(1).toLowerCase()}</div>
 
-                <form onSubmit={event => deleteProfile(event, user, navigate)}>
+                <form onSubmit={event => deleteProfile(event)}>
                     <label htmlFor="password-for-delete-profile" className="reg-fields">Enter password to delete
                         profile:</label>
                     <input type="text" id="password-for-delete-profile" name="password-for-delete-profile"

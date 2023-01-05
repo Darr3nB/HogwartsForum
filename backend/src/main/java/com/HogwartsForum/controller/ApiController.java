@@ -1,6 +1,8 @@
 package com.HogwartsForum.controller;
 
+import com.HogwartsForum.model.Comment;
 import com.HogwartsForum.model.Question;
+import com.HogwartsForum.services.CommentService;
 import com.HogwartsForum.services.QuestionService;
 import com.HogwartsForum.services.UserService;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class ApiController {
     UserService userService;
     QuestionService questionService;
+    CommentService commentService;
 
     @GetMapping(value = "check-username-in-database/{name}")
     public Boolean checkUsernameInDatabase(@PathVariable String name) {
@@ -54,15 +57,21 @@ public class ApiController {
     }
 
     @GetMapping("get-specific-question/{id}")
-    public Question getSpecificQuestionById(@PathVariable String id){
+    public Question getSpecificQuestionById(@PathVariable String id) {
         return questionService.getQuestionById(Integer.parseInt(id));
     }
 
-    @GetMapping("post-comment-on-specific-question/{questionId}/{commentText}")
+    @GetMapping("post-comment-on-specific-question/{questionId}/{userId}/{commentText}")
     public HttpEntity<Void> commentOnSpecificQuestion(@PathVariable String questionId,
-                                                      @PathVariable String commentText){
-        // TODO get missing data from frontend to save comment in database
-        System.out.println("I AM HERE BITCHES! " + questionId + " " + commentText);
+                                                      @PathVariable String userId,
+                                                      @PathVariable String commentText) {
+        // TODO picture from frontend
+        // TODO backend validation of fields
+        String uploadedPicture = null;
+        Comment comment = new Comment(commentText, uploadedPicture);
+        commentService.saveNewComment(comment);
+        questionService.addCommentToQuestion(Integer.parseInt(questionId), comment);
+        userService.addCommentToUser(Integer.parseInt(userId), comment);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

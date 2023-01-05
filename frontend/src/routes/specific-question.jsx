@@ -1,13 +1,31 @@
 import {useEffect, useState} from "react";
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {utility} from "../utility.js";
 
 export default function SpecificQuestion() {
     const {id} = useParams();
     const [question, setQuestionState] = useState(null);
     const [commentDiv, setCommentDivState] = useState(false);
+    const [isLoggedIn, setLoginState] = useState(false);
+    const [loggedInUSer, setUser] = useState({});
+    const navigate = useNavigate();
+    // TODO check if logged in, case: no, redirect error
+
+    useEffect(() => {
+        utility.isLoggedInRequest().then(
+            d => {
+                if (d === false) {
+                    setLoginState(false);
+                    navigate("/");
+                } else {
+                    setUser(d);
+                    setLoginState(true);
+                }
+            }
+        );
+    }, [isLoggedIn]);
 
     useEffect(() => {
         const getSpecificQuestion = async () => {
@@ -41,10 +59,14 @@ export default function SpecificQuestion() {
         event.preventDefault();
         const componentData = new FormData(event.currentTarget);
 
-        utility.apiGet(`/api/post-comment-on-specific-question/${question.id}/BLABLA`)
-
-        console.log("I AM IN WITH: ", componentData.get("comment-text-area"));
-
+        await utility.apiGet(
+            `/api/post-comment-on-specific-question/${question.id}/${loggedInUSer.id}/${componentData.get("comment-text-area")}`
+        )
+            .then(response => {
+                if (response.ok) {
+                    navigate(0);
+                }
+            })
     }
 
     return (
@@ -58,7 +80,8 @@ export default function SpecificQuestion() {
                 </div>
 
                 <div className="slight-white-background">
-                    <div id="question-text" className="question-text-on-specific-question">{question?.questionText}</div>
+                    <div id="question-text"
+                         className="question-text-on-specific-question">{question?.questionText}</div>
                     <div id="question-submission-time"
                          className="time-stamp-on-specific-question">{question?.submissionTime}</div>
                     <button type="button" onClick={event => {
@@ -70,16 +93,20 @@ export default function SpecificQuestion() {
             </div>
 
             <div id="post-comment-area" className={commentDiv ? "visible" : "hidden"}>
-                <form onSubmit={event => {postComment(event)}}>
-                    <textarea id="comment-text-area" name="comment-text-area" className="reg-fields" rows="3" cols="50" minLength="5"/>
+                <form onSubmit={event => {
+                    postComment(event)
+                }}>
+                    <textarea id="comment-text-area" name="comment-text-area" className="reg-fields" rows="3" cols="50"
+                              minLength="5"/>
                     <button type="submit" className="reg-fields">Post comment</button>
                 </form>
             </div>
 
-            <div id="comments" className="slight-white-background">{question?.commentList && question?.commentList?.map(comment => {
+            <div id="comments"
+                 className="slight-white-background">{question?.commentList && question?.commentList?.map(comment => {
                 return (
                     <div key={"comment-id-" + comment?.id} className="laBorder">
-                        <div>{comment?.comment}</div>
+                        <div>{comment?.commentText}</div>
                         <span>{comment?.submissionTime}</span>
                     </div>
                 );

@@ -5,8 +5,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 export default function Index() {
-    const [topFiveQuestions, setTopFiveQuestionState] = useState([]);
     const navigate = useNavigate();
+    const [topFiveQuestions, setTopFiveQuestionState] = useState([]);
 
     const askedQuestions = async () => {
         const data = await utility.apiGet(`/api/five-latest-question`).then(response => response.json());

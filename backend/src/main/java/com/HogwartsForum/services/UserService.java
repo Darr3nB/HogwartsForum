@@ -1,6 +1,7 @@
 package com.HogwartsForum.services;
 
 import com.HogwartsForum.dao.HogwartsUserDao;
+import com.HogwartsForum.model.Comment;
 import com.HogwartsForum.model.HogwartsUser;
 import com.HogwartsForum.model.Question;
 import com.HogwartsForum.model.Roles;
@@ -59,6 +60,9 @@ public class UserService {
         foundUser.setPassword("----");
         foundUser.setPet(null);
         foundUser.setHouse(null);
+        foundUser.setRole(null);
+        foundUser.setReputation(0);
+        foundUser.setProfilePicture("../src/assets/default-profile-picture.jpg");
         hogwartsUserDatabaseDao.save(foundUser);
     }
 
@@ -83,5 +87,11 @@ public class UserService {
         HogwartsUser userToAddQuestion = getUserById(userId);
         userToAddQuestion.getQuestionsList().add(question);
         hogwartsUserDatabaseDao.save(userToAddQuestion);
+    }
+
+    public void addCommentToUser(Integer userId, Comment comment) {
+        HogwartsUser userToAddComment = getUserById(userId);
+        userToAddComment.getCommentList().add(comment);
+        hogwartsUserDatabaseDao.save(userToAddComment);
     }
 }

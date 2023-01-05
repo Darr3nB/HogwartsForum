@@ -19,11 +19,15 @@ public class Comment {
     @Id
     @GeneratedValue
     private Integer id;
-    private String comment;
+    private String commentText;
     private LocalDateTime submissionTime;
-    @Column(columnDefinition = "int default 0")
     private Integer upVoteCount;
-    @Column(columnDefinition = "int default 0")
     private Integer downVoteCount;
     private String image;
+
+    public Comment(String commentText, String image){
+        this.commentText = commentText;
+        this.image = image;
+        this.submissionTime = LocalDateTime.now();
+    }
 }

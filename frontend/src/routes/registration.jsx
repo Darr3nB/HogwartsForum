@@ -1,8 +1,8 @@
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {utility} from "../utility.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Registration() {
     const navigate = useNavigate();

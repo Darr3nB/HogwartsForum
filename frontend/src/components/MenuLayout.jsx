@@ -3,40 +3,40 @@ import {Link, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
-async function doLogin(e, setLoginState, navigate) {
-    e.preventDefault();
-    const componentData = new FormData(e.currentTarget);
-
-
-    await utility.apiPostWithDictionaryDataType(`/user/login`, {
-        'username': componentData.get('username-field'),
-        'password': componentData.get('password-field')
-    })
-        .then(response => {
-            if (response.ok) {
-                setLoginState(true);
-                navigate("/");
-            }
-        });
-}
-
-async function doLogout(e, setLoginState, navigate) {
-    e.preventDefault();
-
-    await utility.apiGet(`/user/logout`)
-        .then(response => {
-            if (response.ok) {
-                setLoginState(false);
-                navigate("/");
-            }
-        })
-}
-
 export default function MenuLayout() {
     // TODO switch password input field type to password
+    const navigate = useNavigate();
     const [isLoggedIn, setLoginState] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState({});
-    const navigate = useNavigate();
+
+    const doLogin = async (e) => {
+        e.preventDefault();
+        const componentData = new FormData(e.currentTarget);
+
+
+        await utility.apiPostWithDictionaryDataType(`/user/login`, {
+            'username': componentData.get('username-field'),
+            'password': componentData.get('password-field')
+        })
+            .then(response => {
+                if (response.ok) {
+                    setLoginState(true);
+                    navigate("/");
+                }
+            });
+    }
+
+    const doLogout = async (e) => {
+        e.preventDefault();
+
+        await utility.apiGet(`/user/logout`)
+            .then(response => {
+                if (response.ok) {
+                    setLoginState(false);
+                    navigate("/");
+                }
+            })
+    }
 
     useEffect(() => {
         utility.isLoggedInRequest().then(
@@ -64,7 +64,7 @@ export default function MenuLayout() {
             </Link>
         </div>
         <div className="first, go-right">
-            <form onSubmit={event => doLogin(event, setLoginState, navigate)}>
+            <form onSubmit={event => doLogin(event)}>
                 <label htmlFor="username-field">Username: </label>
                 <input type="text" id="username-field" name="username-field" minLength="3"/>
                 <label htmlFor="password-field">Magic word: </label>
@@ -77,7 +77,7 @@ export default function MenuLayout() {
     </div>;
 
     const houseCrest = () => {
-        switch (loggedInUser.house){
+        switch (loggedInUser.house) {
             case "GRYFFINDOR":
                 return "gryffindor-house-crest";
             case "SLYTHERIN":
@@ -98,7 +98,7 @@ export default function MenuLayout() {
             </Link>
         </span>
         <p className="menu-layout-elements slight-white-background">Welcome {loggedInUser.name}!</p>
-        <button onClick={event => doLogout(event, setLoginState, navigate)} className="menu-layout-buttons, go-right">Logout
+        <button onClick={event => doLogout(event)} className="menu-layout-buttons, go-right">Logout
         </button>
         <span className="hovertext" data-hover="Profile page">
             <Link to={"/profile"} className="menu-layout-buttons, go-right">

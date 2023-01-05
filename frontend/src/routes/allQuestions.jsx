@@ -6,8 +6,8 @@ import {useNavigate} from "react-router-dom";
 
 
 export default function AllQuestions() {
-    const [allQuestions, setAllQuestionState] = useState([]);
     const navigate = useNavigate();
+    const [allQuestions, setAllQuestionState] = useState([]);
 
     const askedQuestions = async () => {
         const data = await utility.apiGet(`/api/get-all-questions`).then(response => response.json());
@@ -15,7 +15,7 @@ export default function AllQuestions() {
         setAllQuestionState(data);
     };
 
-    const openSelectedQuestion = (e, id) =>{
+    const openSelectedQuestion = (e, id) => {
         navigate(`/specific-question/${id}`);
     };
 
@@ -44,7 +44,8 @@ export default function AllQuestions() {
 
                         {allQuestions.map(question => {
                             return (<tr key={"question-id-" + question.id}>
-                                <td id={"question-id-" + question.id} onClick={event => openSelectedQuestion(event, question.id)}>
+                                <td id={"question-id-" + question.id}
+                                    onClick={event => openSelectedQuestion(event, question.id)}>
                                     {question.title + " " + question.questionText}
                                 </td>
                             </tr>)

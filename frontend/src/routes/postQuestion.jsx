@@ -1,25 +1,9 @@
 import MenuLayout from "../components/MenuLayout.jsx";
 import Footer from "../components/Footer.jsx";
-import {useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-
-// async function postAQuestion(e, navigate) {
-//     e.preventDefault();
-//     const postQuestionData = new FormData(e.currentTarget);
-//
-//     await utility.apiPostWithDictionaryDataType('/question/post-question',
-//         {
-//             'title': postQuestionData.get("question-title"),
-//             'questionText': postQuestionData.get("question-description")
-//         })
-//         .then(response => {
-//             if (response.ok) {
-//                 navigate('/');
-//             }
-//         });
-// }
 
 export default function PostQuestion() {
     const navigate = useNavigate();
@@ -71,9 +55,11 @@ export default function PostQuestion() {
                     <input type="text" id="question-title" name="question-title" minLength="5" className="reg-fields"/>
 
                     <label htmlFor="question-description" className="reg-fields">Description: </label>
-                    <textarea id="question-description" name="question-description" rows="4" cols="50" minLength="5" className="reg-fields"/>
+                    <textarea id="question-description" name="question-description" rows="4" cols="50" minLength="5"
+                              className="reg-fields"/>
 
-                    <button type="submit" id="post-question-submit-button" className="button-to-middle">Post question</button>
+                    <button type="submit" id="post-question-submit-button" className="button-to-middle">Post question
+                    </button>
                 </form>
             </div>
 

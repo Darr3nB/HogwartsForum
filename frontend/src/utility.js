@@ -1,3 +1,5 @@
+import {useNavigate} from "react-router-dom";
+
 export let utility = {
     apiPostWithDictionaryDataType: async function (path, dataAsDict) {
         return await fetch(path, {

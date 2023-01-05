@@ -1,6 +1,7 @@
 package com.HogwartsForum.services;
 
 import com.HogwartsForum.dao.QuestionsDao;
+import com.HogwartsForum.model.Comment;
 import com.HogwartsForum.model.Question;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,5 +29,11 @@ public class QuestionService {
 
     public Question getQuestionById(Integer id) {
         return questionsDao.findQuestionById(id);
+    }
+
+    public void addCommentToQuestion(Integer questionId, Comment comment) {
+        Question foundQuestionByGivenId = questionsDao.findQuestionById(questionId);
+        foundQuestionByGivenId.getCommentList().add(comment);
+        questionsDao.save(foundQuestionByGivenId);
     }
 }
