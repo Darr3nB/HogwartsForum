@@ -2,6 +2,8 @@ package com.HogwartsForum.services;
 
 import com.HogwartsForum.dao.HogwartsUserDao;
 import com.HogwartsForum.model.HogwartsUser;
+import com.HogwartsForum.model.Question;
+import com.HogwartsForum.model.Roles;
 import com.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,20 @@ public class UserService {
     }
 
     public void addUser(HogwartsUser hogwartsUser) {
+        if (hogwartsUser.getReputation() == null) {
+            hogwartsUser.setReputation(0);
+        }
+        if (hogwartsUser.getRole() == null) {
+            hogwartsUser.setRole(Roles.USER);
+        }
+        if (hogwartsUser.getProfilePicture() == null) {
+            hogwartsUser.setProfilePicture("../src/assets/default-profile-picture.jpg");
+        }
         hogwartsUserDatabaseDao.save(hogwartsUser);
     }
 
     public HogwartsUser getUserById(Integer id) {
-        return hogwartsUserDatabaseDao.getById(id);
+        return hogwartsUserDatabaseDao.findHogwartsUserById(id);
     }
 
     public HogwartsUser getUserByUsername(String username) {
@@ -52,7 +63,7 @@ public class UserService {
     }
 
     public Boolean validateProfile(String username, String plainPassword) {
-        if (username.equals("DELETED_USER")){
+        if (username.equals("DELETED_USER")) {
             return false;
         }
 
@@ -66,5 +77,11 @@ public class UserService {
             System.out.println("An error has occurred: " + e);
             return false;
         }
+    }
+
+    public void saveQuestionToUserSet(Integer userId, Question question) {
+        HogwartsUser userToAddQuestion = getUserById(userId);
+        userToAddQuestion.getQuestionsList().add(question);
+        hogwartsUserDatabaseDao.save(userToAddQuestion);
     }
 }

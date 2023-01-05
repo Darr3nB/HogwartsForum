@@ -7,4 +7,6 @@ public interface HogwartsUserDao extends JpaRepository<HogwartsUser, Integer> {
     boolean existsByName(String name);
 
     HogwartsUser getHogwartsUserByName(String name);
+
+    HogwartsUser findHogwartsUserById(Integer id);
 }

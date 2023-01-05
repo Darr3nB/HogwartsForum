@@ -5,26 +5,28 @@ import {utility} from "../utility.js";
 import {useEffect, useState} from "react";
 
 
-async function postAQuestion(e, navigate) {
-    e.preventDefault();
-    const postQuestionData = new FormData(e.currentTarget);
-
-    await utility.apiPostWithDictionaryDataType('/question/post-question',
-        {
-            'title': postQuestionData.get("question-title"),
-            'questionText': postQuestionData.get("question-description")
-        })
-        .then(response => {
-            if (response.ok) {
-                navigate('/');
-            }
-        });
-}
+// async function postAQuestion(e, navigate) {
+//     e.preventDefault();
+//     const postQuestionData = new FormData(e.currentTarget);
+//
+//     await utility.apiPostWithDictionaryDataType('/question/post-question',
+//         {
+//             'title': postQuestionData.get("question-title"),
+//             'questionText': postQuestionData.get("question-description")
+//         })
+//         .then(response => {
+//             if (response.ok) {
+//                 navigate('/');
+//             }
+//         });
+// }
 
 export default function PostQuestion() {
     const navigate = useNavigate();
     const [isLoggedIn, setLoginState] = useState(false);
+    const [loggedInUSer, setUser] = useState({});
     // TODO check if logged in, case: no, redirect error
+
     useEffect(() => {
         utility.isLoggedInRequest().then(
             d => {
@@ -39,6 +41,22 @@ export default function PostQuestion() {
         );
     }, [isLoggedIn]);
 
+    const postAQuestion = async (e) => {
+        e.preventDefault();
+        const postQuestionData = new FormData(e.currentTarget);
+
+        await utility.apiPostWithDictionaryDataType(`/question/post-question/${loggedInUSer.id}`,
+            {
+                'title': postQuestionData.get("question-title"),
+                'questionText': postQuestionData.get("question-description")
+            })
+            .then(response => {
+                if (response.ok) {
+                    navigate('/');
+                }
+            });
+    }
+
     return (
         <div>
             <MenuLayout/>
@@ -48,7 +66,7 @@ export default function PostQuestion() {
             </div>
 
             <div className="ask-question-div">
-                <form onSubmit={event => postAQuestion(event, navigate)}>
+                <form onSubmit={event => postAQuestion(event)}>
                     <label htmlFor="question-title" className="reg-fields">Question title: </label>
                     <input type="text" id="question-title" name="question-title" minLength="5" className="reg-fields"/>
 

@@ -21,11 +21,17 @@ public class HogwartsUser {
     @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
+    private Roles role;
+    @Enumerated(EnumType.STRING)
     private HogwartsHouses house;
     @Enumerated(EnumType.STRING)
     private PetTypes pet;
+    private Integer reputation;
     @OneToMany
     private Set<Question> questionsList;
+    @OneToMany
+    private Set<Comment> commentList;
+    private String profilePicture;
 
     public HogwartsUser(String name, String password, String house, String pet) {
         this.name = name;

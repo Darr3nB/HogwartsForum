@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,4 +21,9 @@ public class Comment {
     private Integer id;
     private String comment;
     private LocalDateTime submissionTime;
+    @Column(columnDefinition = "int default 0")
+    private Integer upVoteCount;
+    @Column(columnDefinition = "int default 0")
+    private Integer downVoteCount;
+    private String image;
 }

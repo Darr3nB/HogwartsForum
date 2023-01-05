@@ -23,6 +23,7 @@ public class Question {
     private LocalDateTime submissionTime;
     @OneToMany
     private Set<Comment> commentList;
+    private String image;
 
 
     public Question(String title, String questionText) {
