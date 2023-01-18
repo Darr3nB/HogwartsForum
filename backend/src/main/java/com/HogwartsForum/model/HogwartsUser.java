@@ -26,7 +26,8 @@ public class HogwartsUser {
     private HogwartsHouses house;
     @Enumerated(EnumType.STRING)
     private PetTypes pet;
-    private Integer reputation;
+    @Column(nullable = false)
+    private int reputation;
     @OneToMany
     private Set<Question> questionsList;
     @OneToMany

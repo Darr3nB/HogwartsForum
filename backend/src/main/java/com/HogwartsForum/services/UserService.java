@@ -22,9 +22,6 @@ public class UserService {
     }
 
     public void addUser(HogwartsUser hogwartsUser) {
-        if (hogwartsUser.getReputation() == null) {
-            hogwartsUser.setReputation(0);
-        }
         if (hogwartsUser.getRole() == null) {
             hogwartsUser.setRole(Roles.USER);
         }

@@ -69,6 +69,39 @@ export default function SpecificQuestion() {
             })
     }
 
+    const doUpvote = async (event, commentId) => {
+        event.preventDefault();
+
+        await utility.apiGet(`/api/upvote-comment/${commentId}`)
+            .then(response => {
+                if (response.ok) {
+                    navigate(0);
+                }
+            });
+    }
+
+    const doDownvote = async (event, commentId) => {
+        event.preventDefault();
+
+        await utility.apiGet(`/api/downvote-comment/${commentId}`)
+            .then(response => {
+                if (response.ok) {
+                    navigate(0);
+                }
+            });
+    }
+
+    const deleteComment = async (event, commentId) => {
+        event.preventDefault();
+
+        await utility.apiDeleteWithPathData(`/api/delete-comment/${commentId}`)
+            .then(response => {
+                if (response.ok){
+                    navigate(0);
+                }
+            });
+    }
+
     return (
         <div>
             <MenuLayout/>
@@ -107,7 +140,13 @@ export default function SpecificQuestion() {
                 return (
                     <div key={"comment-id-" + comment?.id} className="laBorder">
                         <div>{comment?.commentText}</div>
+                        <button onClick={event => doUpvote(event, comment?.id)} className="up-vote"
+                                title="Upvote comment"></button>
+                        <span>{comment?.upVoteCount} </span>
+                        <button onClick={event => doDownvote(event, comment?.id)} className="down-vote"></button>
+                        <span>{comment?.downVoteCount} </span>
                         <span>{comment?.submissionTime}</span>
+                        <button onClick={event => deleteComment(event, comment.id)} className="delete-comment-button"></button>
                     </div>
                 );
             })}</div>

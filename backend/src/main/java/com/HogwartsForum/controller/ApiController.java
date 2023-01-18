@@ -75,4 +75,23 @@ public class ApiController {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @GetMapping("upvote-comment/{commentId}")
+    public HttpEntity<Void> upvoteComment(@PathVariable String commentId){
+        commentService.upvoteComment(Integer.parseInt(commentId));
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @GetMapping("downvote-comment/{commentId}")
+    public HttpEntity<Void> downvoteComment(@PathVariable String commentId){
+        commentService.downvoteComment(Integer.parseInt(commentId));
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("delete-comment/{commentId}")
+    public HttpEntity<Void> deleteComment(@PathVariable String commentId){
+        commentService.removeCommentById(Integer.parseInt(commentId));
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

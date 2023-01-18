@@ -21,8 +21,10 @@ public class Comment {
     private Integer id;
     private String commentText;
     private LocalDateTime submissionTime;
-    private Integer upVoteCount;
-    private Integer downVoteCount;
+    @Column(nullable = false)
+    private int upVoteCount;
+    @Column(nullable = false)
+    private int downVoteCount;
     private String image;
 
     public Comment(String commentText, String image){

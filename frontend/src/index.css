@@ -189,3 +189,24 @@ th {
 .loading-field {
     background-image: url("../src/assets/magic-pusheen.gif");
 }
+
+.up-vote {
+    background-image: url("./assets/upVoteImg.png");
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.down-vote {
+    background-image: url("./assets/downVoteImg.png");
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.delete-comment-button {
+    background-image: url("./assets/x-mark.png");
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}

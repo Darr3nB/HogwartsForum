@@ -9,7 +9,8 @@ export default function Index() {
     const [topFiveQuestions, setTopFiveQuestionState] = useState([]);
 
     const askedQuestions = async () => {
-        const data = await utility.apiGet(`/api/five-latest-question`).then(response => response.json());
+        const data = await utility.apiGet(`/api/five-latest-question`)
+            .then(response => response.json());
         // TODO In case of bad response, use state
         setTopFiveQuestionState(data);
     };
@@ -54,11 +55,11 @@ export default function Index() {
                         </tr>
                         </thead>
                         <tbody>
-                        {topFiveQuestions.map(question => {
-                            return (<tr key={"question-id-" + question.id}>
-                                <td id={"question-id-" + question.id}
+                        {topFiveQuestions?.map(question => {
+                            return (<tr key={"question-id-" + question?.id}>
+                                <td id={"question-id-" + question?.id}
                                     onClick={event => openSelectedQuestion(event, question.id)}>
-                                    {question.title + " " + question.questionText}
+                                    {question?.title + " " + question?.questionText}
                                 </td>
                             </tr>)
                         })}

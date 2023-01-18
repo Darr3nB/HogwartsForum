@@ -24,5 +24,10 @@ export let utility = {
                     return r.json();
                 }
             });
+    },
+    apiDeleteWithPathData: async function (path){
+        return await fetch(path, {
+            method: "DELETE"
+        }).catch(reason => console.log(`An error happened: ${reason}`));
     }
 }

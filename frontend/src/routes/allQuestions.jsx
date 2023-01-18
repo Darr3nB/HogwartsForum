@@ -32,7 +32,7 @@ export default function AllQuestions() {
             </div>
 
             <div id="all-questions-page-questions">
-                {allQuestions.length <= 0
+                {allQuestions?.length <= 0
                     ? (<p className="slight-white-background">There are no asked questions yet.</p>)
                     : (<table className="main-page-table">
                         <thead>
@@ -42,11 +42,11 @@ export default function AllQuestions() {
                         </thead>
                         <tbody>
 
-                        {allQuestions.map(question => {
-                            return (<tr key={"question-id-" + question.id}>
-                                <td id={"question-id-" + question.id}
+                        {allQuestions?.map(question => {
+                            return (<tr key={"question-id-" + question?.id}>
+                                <td id={"question-id-" + question?.id}
                                     onClick={event => openSelectedQuestion(event, question.id)}>
-                                    {question.title + " " + question.questionText}
+                                    {question?.title + " " + question?.questionText}
                                 </td>
                             </tr>)
                         })}

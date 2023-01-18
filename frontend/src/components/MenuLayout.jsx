@@ -5,6 +5,7 @@ import {utility} from "../utility.js";
 
 export default function MenuLayout() {
     // TODO switch password input field type to password
+    // TODO if credentials empty don't proceed
     const navigate = useNavigate();
     const [isLoggedIn, setLoginState] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState({});
@@ -92,7 +93,7 @@ export default function MenuLayout() {
     }
 
     const loggedIn = <div className="wrapper">
-        <span className="hovertext" data-hover="Home page">
+        <span className="hovertext" data-hover="Home page" title="Home page">
             <Link to={"/"} className="menu-layout-elements">
                 <button type="button" className="profile-button" id="home-button"></button>
             </Link>
