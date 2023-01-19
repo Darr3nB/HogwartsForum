@@ -5,6 +5,7 @@ import com.HogwartsForum.model.*;
 import com.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -131,5 +132,25 @@ public class UserService implements CommandLineRunner {
             }
         }
         return false;
+    }
+
+    public boolean isUserAdmin(int userId) {
+        HogwartsUser foundUser = getUserById(userId);
+
+        return foundUser.getRole() == Roles.ADMIN;
+    }
+
+    public HogwartsUser getUserOwnsThisComment(int commentId){
+        List<HogwartsUser> allUsers = getAllUsers();
+
+        for (HogwartsUser user : allUsers){
+            for (Comment comment : user.getCommentList()){
+                if (comment.getId() == commentId){
+                    return user;
+                }
+            }
+        }
+
+        throw new UsernameNotFoundException("I did not found the requested user.");
     }
 }

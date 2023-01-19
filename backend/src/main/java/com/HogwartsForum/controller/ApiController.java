@@ -1,6 +1,7 @@
 package com.HogwartsForum.controller;
 
 import com.HogwartsForum.model.Comment;
+import com.HogwartsForum.model.HogwartsUser;
 import com.HogwartsForum.model.Question;
 import com.HogwartsForum.services.CommentService;
 import com.HogwartsForum.services.QuestionService;
@@ -90,19 +91,32 @@ public class ApiController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("delete-comment/{userId}/{questionId}/{commentId}")
-    public HttpEntity<Void> deleteComment(@PathVariable String userId,
+    @DeleteMapping("delete-comment/{loggedInUserId}/{questionId}/{commentId}")
+    public HttpEntity<Void> deleteComment(@PathVariable String loggedInUserId,
                                           @PathVariable String questionId,
                                           @PathVariable String commentId) {
-        if (!userService.thisUserPostedCommentWithThisId(Integer.parseInt(userId), Integer.parseInt(commentId))
+
+        if(userService.isUserAdmin(Integer.parseInt(loggedInUserId))){
+            HogwartsUser userOwnsComment = userService.getUserOwnsThisComment(Integer.parseInt(commentId));
+
+            doDeleteComment(userOwnsComment.getId(), Integer.parseInt(questionId),
+                    Integer.parseInt(commentId));
+
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        if (!userService.thisUserPostedCommentWithThisId(Integer.parseInt(loggedInUserId), Integer.parseInt(commentId))
                 || !questionService.thisQuestionHasCommentWithThisId(Integer.parseInt(questionId) ,Integer.parseInt(commentId))){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        userService.removeCommentById(Integer.parseInt(userId), Integer.parseInt(commentId));
-        questionService.removeCommentById(Integer.parseInt(questionId) ,Integer.parseInt(commentId));
-        commentService.removeCommentById(Integer.parseInt(commentId));
+        doDeleteComment(Integer.parseInt(loggedInUserId), Integer.parseInt(questionId), Integer.parseInt(commentId));
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    private void doDeleteComment(int userId, int questionId, int commentId){
+        userService.removeCommentById(userId, commentId);
+        questionService.removeCommentById(questionId ,commentId);
+        commentService.removeCommentById(commentId);
     }
 }
