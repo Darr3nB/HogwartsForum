@@ -58,6 +58,7 @@ export default function Profile() {
                      className="reg-fields">House: {user.house?.charAt(0).toUpperCase() + user.house?.slice(1).toLowerCase()}</div>
                 <div id="pet-on-profile-page" className="reg-fields">Pet
                     type: {user.pet?.charAt(0).toUpperCase() + user.pet?.slice(1).toLowerCase()}</div>
+                <div className="reg-fields">Reputation: {user.reputation}</div>
 
                 <form onSubmit={event => deleteProfile(event)}>
                     <label htmlFor="password-for-delete-profile" className="reg-fields">Enter password to delete

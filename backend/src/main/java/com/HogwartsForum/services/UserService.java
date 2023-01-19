@@ -159,4 +159,33 @@ public class UserService implements CommandLineRunner {
 
         throw new UsernameNotFoundException("I did not found the requested user.");
     }
+
+    public boolean addReputationToUserById(int userId, int reputation) {
+        try {
+            HogwartsUser foundUser = getUserById(userId);
+
+            foundUser.setReputation(foundUser.getReputation() + reputation);
+            hogwartsUserDatabaseDao.save(foundUser);
+
+            return true;
+        }catch (UsernameNotFoundException e){
+            System.out.println("I did not found the user: " + e);
+            return false;
+        }
+
+    }
+
+    public boolean substractReputationToUserById(Integer userId, int reputation) {
+        try {
+            HogwartsUser foundUser = getUserById(userId);
+
+            foundUser.setReputation(foundUser.getReputation() - reputation);
+            hogwartsUserDatabaseDao.save(foundUser);
+
+            return true;
+        }catch (UsernameNotFoundException e){
+            System.out.println("I did not found the user: " + e);
+            return false;
+        }
+    }
 }

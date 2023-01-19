@@ -3,9 +3,11 @@ package com.HogwartsForum.controller;
 import com.HogwartsForum.model.Comment;
 import com.HogwartsForum.model.HogwartsUser;
 import com.HogwartsForum.model.Question;
+import com.HogwartsForum.model.Roles;
 import com.HogwartsForum.services.CommentService;
 import com.HogwartsForum.services.QuestionService;
 import com.HogwartsForum.services.UserService;
+import com.HogwartsForum.util.Utility;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -84,16 +86,36 @@ public class ApiController {
 
     @GetMapping("upvote-comment/{commentId}")
     public HttpEntity<Void> upvoteComment(@PathVariable String commentId) {
-        commentService.upvoteComment(Integer.parseInt(commentId));
+        HogwartsUser foundUser = findUserOwnsCommentByCommentId(Integer.parseInt(commentId));
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        if (foundUser == null || foundUser.getRole() == Roles.ADMIN){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (commentService.upvoteComment(Integer.parseInt(commentId))){
+            if (userService.addReputationToUserById(foundUser.getId(), Utility.commentReputationValue)){
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("downvote-comment/{commentId}")
     public HttpEntity<Void> downvoteComment(@PathVariable String commentId) {
-        commentService.downvoteComment(Integer.parseInt(commentId));
+        HogwartsUser foundUser = findUserOwnsCommentByCommentId(Integer.parseInt(commentId));
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        if (foundUser == null || foundUser.getRole() == Roles.ADMIN){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (commentService.downvoteComment(Integer.parseInt(commentId))){
+            if (userService.substractReputationToUserById(foundUser.getId(), Utility.commentReputationValue)){
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @DeleteMapping("delete-comment/{loggedInUserId}/{questionId}/{commentId}")
@@ -103,7 +125,7 @@ public class ApiController {
 
         if (userService.isUserAdmin(Integer.parseInt(loggedInUserId))) {
             try {
-                HogwartsUser userOwnsComment = userService.getUserOwnsThisComment(Integer.parseInt(commentId));
+                HogwartsUser userOwnsComment = findUserOwnsCommentByCommentId(Integer.parseInt(commentId));
 
                 doDeleteComment(userOwnsComment.getId(), Integer.parseInt(questionId),
                         Integer.parseInt(commentId));
@@ -129,6 +151,14 @@ public class ApiController {
             if (questionService.removeCommentById(questionId, commentId)){
                 commentService.removeCommentById(commentId);
             }
+        }
+    }
+
+    private HogwartsUser findUserOwnsCommentByCommentId(int commentId){
+        try {
+            return userService.getUserOwnsThisComment(commentId);
+        }catch (UsernameNotFoundException e){
+            return null;
         }
     }
 }
