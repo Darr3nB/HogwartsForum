@@ -96,9 +96,10 @@ public class UserService implements CommandLineRunner {
         if (hogwartsUserDatabaseDao.count() == 0) {
             HogwartsUser admin = new HogwartsUser("admin",
                     "$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK",
-                    HogwartsHouses.GRYFFINDOR.name(), PetTypes.OWL.name());
+                    "Gryffindor", PetTypes.OWL.name());
 
             admin.setRole(Roles.ADMIN);
+            admin.setProfilePicture("../src/assets/default-profile-picture.jpg");
 
             hogwartsUserDatabaseDao.save(admin);
         }
