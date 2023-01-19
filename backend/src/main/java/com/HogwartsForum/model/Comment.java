@@ -32,4 +32,8 @@ public class Comment {
         this.image = image;
         this.submissionTime = LocalDateTime.now();
     }
+
+    public boolean validText(String commentText) {
+        return commentText.length() >= 5;
+    }
 }

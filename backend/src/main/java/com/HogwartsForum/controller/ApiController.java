@@ -68,9 +68,13 @@ public class ApiController {
                                                       @PathVariable String userId,
                                                       @PathVariable String commentText) {
         // TODO picture from frontend
-        // TODO backend validation of fields
         String uploadedPicture = null;
+
         Comment comment = new Comment(commentText, uploadedPicture);
+
+        if (!comment.validText(commentText)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         commentService.saveNewComment(comment);
         questionService.addCommentToQuestion(Integer.parseInt(questionId), comment);
         userService.addCommentToUser(Integer.parseInt(userId), comment);
