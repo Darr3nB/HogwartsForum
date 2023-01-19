@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -30,7 +31,7 @@ public class HogwartsUser {
     private int reputation;
     @OneToMany
     private Set<Question> questionsList;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> commentList;
     private String profilePicture;
 

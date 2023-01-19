@@ -77,21 +77,32 @@ public class ApiController {
     }
 
     @GetMapping("upvote-comment/{commentId}")
-    public HttpEntity<Void> upvoteComment(@PathVariable String commentId){
+    public HttpEntity<Void> upvoteComment(@PathVariable String commentId) {
         commentService.upvoteComment(Integer.parseInt(commentId));
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
     @GetMapping("downvote-comment/{commentId}")
-    public HttpEntity<Void> downvoteComment(@PathVariable String commentId){
+    public HttpEntity<Void> downvoteComment(@PathVariable String commentId) {
         commentService.downvoteComment(Integer.parseInt(commentId));
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("delete-comment/{commentId}")
-    public HttpEntity<Void> deleteComment(@PathVariable String commentId){
+    @DeleteMapping("delete-comment/{userId}/{questionId}/{commentId}")
+    public HttpEntity<Void> deleteComment(@PathVariable String userId,
+                                          @PathVariable String questionId,
+                                          @PathVariable String commentId) {
+        if (!userService.thisUserPostedCommentWithThisId(Integer.parseInt(userId), Integer.parseInt(commentId))
+                || !questionService.thisQuestionHasCommentWithThisId(Integer.parseInt(questionId) ,Integer.parseInt(commentId))){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        userService.removeCommentById(Integer.parseInt(userId), Integer.parseInt(commentId));
+        questionService.removeCommentById(Integer.parseInt(questionId) ,Integer.parseInt(commentId));
         commentService.removeCommentById(Integer.parseInt(commentId));
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

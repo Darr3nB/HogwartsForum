@@ -3,10 +3,7 @@ package com.HogwartsForum.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -21,7 +18,7 @@ public class Question {
     private String title;
     private String questionText;
     private LocalDateTime submissionTime;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> commentList;
     private String image;
 

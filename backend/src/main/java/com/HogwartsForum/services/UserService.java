@@ -90,8 +90,8 @@ public class UserService implements CommandLineRunner {
         hogwartsUserDatabaseDao.save(userToAddComment);
     }
 
-    public void loadUserData(){
-        if (hogwartsUserDatabaseDao.count() == 0){
+    public void loadUserData() {
+        if (hogwartsUserDatabaseDao.count() == 0) {
             HogwartsUser admin = new HogwartsUser("admin",
                     "$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK",
                     HogwartsHouses.GRYFFINDOR.name(), PetTypes.OWL.name());
@@ -105,5 +105,31 @@ public class UserService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         loadUserData();
+    }
+
+    public void removeCommentById(int userId, int commentId) {
+        HogwartsUser foundUser = getUserById(userId);
+
+        for (Comment comment : foundUser.getCommentList()) {
+            if (comment.getId() == commentId) {
+                foundUser.getCommentList().remove(comment);
+                hogwartsUserDatabaseDao.save(foundUser);
+            }
+        }
+    }
+
+    public boolean thisUserPostedCommentWithThisId(int userId, int commentId) {
+        HogwartsUser foundUser = getUserById(userId);
+
+        if (foundUser.getCommentList().size() <= 0) {
+            return false;
+        }
+
+        for (Comment comment : foundUser.getCommentList()) {
+            if (comment.getId() == commentId) {
+                return true;
+            }
+        }
+        return false;
     }
 }

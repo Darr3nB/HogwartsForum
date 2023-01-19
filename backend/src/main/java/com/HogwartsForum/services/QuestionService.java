@@ -36,4 +36,31 @@ public class QuestionService {
         foundQuestionByGivenId.getCommentList().add(comment);
         questionsDao.save(foundQuestionByGivenId);
     }
+
+    public void removeCommentById(int questionId, int commentId) {
+        Question foundQuestion = questionsDao.findQuestionById(questionId);
+
+        for (Comment comment : foundQuestion.getCommentList()) {
+            if (comment.getId() == commentId) {
+                foundQuestion.getCommentList().remove(comment);
+
+                questionsDao.save(foundQuestion);
+            }
+        }
+    }
+
+    public boolean thisQuestionHasCommentWithThisId(int questionId, int commentId) {
+        Question foundQuestion = questionsDao.findQuestionById(questionId);
+
+        if (foundQuestion.getCommentList().size() <= 0) {
+            return false;
+        }
+
+        for (Comment comment : foundQuestion.getCommentList()) {
+            if (comment.getId() == commentId) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

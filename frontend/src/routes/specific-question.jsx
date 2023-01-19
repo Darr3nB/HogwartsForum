@@ -94,7 +94,7 @@ export default function SpecificQuestion() {
     const deleteComment = async (event, commentId) => {
         event.preventDefault();
 
-        await utility.apiDeleteWithPathData(`/api/delete-comment/${commentId}`)
+        await utility.apiDeleteWithPathData(`/api/delete-comment/${loggedInUSer.id}/${id}/${commentId}`)
             .then(response => {
                 if (response.ok){
                     navigate(0);
