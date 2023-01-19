@@ -1,19 +1,17 @@
 package com.HogwartsForum.services;
 
 import com.HogwartsForum.dao.HogwartsUserDao;
-import com.HogwartsForum.model.Comment;
-import com.HogwartsForum.model.HogwartsUser;
-import com.HogwartsForum.model.Question;
-import com.HogwartsForum.model.Roles;
+import com.HogwartsForum.model.*;
 import com.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements CommandLineRunner {
     HogwartsUserDao hogwartsUserDatabaseDao;
     PasswordAgent passwordAgent;
 
@@ -90,5 +88,22 @@ public class UserService {
         HogwartsUser userToAddComment = getUserById(userId);
         userToAddComment.getCommentList().add(comment);
         hogwartsUserDatabaseDao.save(userToAddComment);
+    }
+
+    public void loadUserData(){
+        if (hogwartsUserDatabaseDao.count() == 0){
+            HogwartsUser admin = new HogwartsUser("admin",
+                    "$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK",
+                    HogwartsHouses.GRYFFINDOR.name(), PetTypes.OWL.name());
+
+            admin.setRole(Roles.ADMIN);
+
+            hogwartsUserDatabaseDao.save(admin);
+        }
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        loadUserData();
     }
 }
