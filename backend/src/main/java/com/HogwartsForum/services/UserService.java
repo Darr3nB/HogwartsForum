@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -108,15 +109,19 @@ public class UserService implements CommandLineRunner {
         loadUserData();
     }
 
-    public void removeCommentById(int userId, int commentId) {
+    public boolean removeCommentById(int userId, int commentId) {
         HogwartsUser foundUser = getUserById(userId);
 
         for (Comment comment : foundUser.getCommentList()) {
             if (comment.getId() == commentId) {
                 foundUser.getCommentList().remove(comment);
                 hogwartsUserDatabaseDao.save(foundUser);
+
+                return true;
             }
         }
+
+        return false;
     }
 
     public boolean thisUserPostedCommentWithThisId(int userId, int commentId) {
@@ -140,12 +145,12 @@ public class UserService implements CommandLineRunner {
         return foundUser.getRole() == Roles.ADMIN;
     }
 
-    public HogwartsUser getUserOwnsThisComment(int commentId){
+    public HogwartsUser getUserOwnsThisComment(Integer commentId){
         List<HogwartsUser> allUsers = getAllUsers();
 
         for (HogwartsUser user : allUsers){
             for (Comment comment : user.getCommentList()){
-                if (comment.getId() == commentId){
+                if (Objects.equals(comment.getId(), commentId)){
                     return user;
                 }
             }

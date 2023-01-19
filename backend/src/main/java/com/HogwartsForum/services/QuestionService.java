@@ -37,7 +37,7 @@ public class QuestionService {
         questionsDao.save(foundQuestionByGivenId);
     }
 
-    public void removeCommentById(int questionId, int commentId) {
+    public boolean removeCommentById(int questionId, int commentId) {
         Question foundQuestion = questionsDao.findQuestionById(questionId);
 
         for (Comment comment : foundQuestion.getCommentList()) {
@@ -45,8 +45,10 @@ public class QuestionService {
                 foundQuestion.getCommentList().remove(comment);
 
                 questionsDao.save(foundQuestion);
+                return true;
             }
         }
+        return false;
     }
 
     public boolean thisQuestionHasCommentWithThisId(int questionId, int commentId) {

@@ -121,8 +121,10 @@ public class ApiController {
     }
 
     private void doDeleteComment(int userId, int questionId, int commentId) {
-        userService.removeCommentById(userId, commentId);
-        questionService.removeCommentById(questionId, commentId);
-        commentService.removeCommentById(commentId);
+        if (userService.removeCommentById(userId, commentId)){
+            if (questionService.removeCommentById(questionId, commentId)){
+                commentService.removeCommentById(commentId);
+            }
+        }
     }
 }
