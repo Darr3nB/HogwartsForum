@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -96,16 +97,21 @@ public class ApiController {
                                           @PathVariable String questionId,
                                           @PathVariable String commentId) {
 
-        if(userService.isUserAdmin(Integer.parseInt(loggedInUserId))){
-            HogwartsUser userOwnsComment = userService.getUserOwnsThisComment(Integer.parseInt(commentId));
+        if (userService.isUserAdmin(Integer.parseInt(loggedInUserId))) {
+            try {
+                HogwartsUser userOwnsComment = userService.getUserOwnsThisComment(Integer.parseInt(commentId));
 
-            doDeleteComment(userOwnsComment.getId(), Integer.parseInt(questionId),
-                    Integer.parseInt(commentId));
+                doDeleteComment(userOwnsComment.getId(), Integer.parseInt(questionId),
+                        Integer.parseInt(commentId));
 
-            return ResponseEntity.status(HttpStatus.OK).build();
+                return ResponseEntity.status(HttpStatus.OK).build();
+            } catch (UsernameNotFoundException e) {
+                System.out.println("An error has happened: " + e);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
         }
         if (!userService.thisUserPostedCommentWithThisId(Integer.parseInt(loggedInUserId), Integer.parseInt(commentId))
-                || !questionService.thisQuestionHasCommentWithThisId(Integer.parseInt(questionId) ,Integer.parseInt(commentId))){
+                || !questionService.thisQuestionHasCommentWithThisId(Integer.parseInt(questionId), Integer.parseInt(commentId))) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
@@ -114,9 +120,9 @@ public class ApiController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    private void doDeleteComment(int userId, int questionId, int commentId){
+    private void doDeleteComment(int userId, int questionId, int commentId) {
         userService.removeCommentById(userId, commentId);
-        questionService.removeCommentById(questionId ,commentId);
+        questionService.removeCommentById(questionId, commentId);
         commentService.removeCommentById(commentId);
     }
 }
