@@ -1,29 +1,24 @@
-import MenuLayout from "../components/MenuLayout.jsx";
-import Footer from "../components/Footer.jsx";
 import {utility} from "../utility.js";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
 export default function Profile() {
-    // TODO switch password input type to 'password'
+    // TODO switch password input type to 'password' type
     const navigate = useNavigate();
-    const [isLoggedIn, setLoginState] = useState(false);
     const [user, setUser] = useState({});
 
     useEffect(() => {
         utility.loggedInUser().then(
             d => {
                 if (d === false) {
-                    setLoginState(false);
                     navigate("/");
                 } else {
                     setUser(d);
-                    setLoginState(true);
                 }
             }
         );
-    }, [isLoggedIn]);
+    }, []);
 
     const deleteProfile = async (e, user) => {
         e.preventDefault();
@@ -46,7 +41,8 @@ export default function Profile() {
             <h1 className="header-to-middle">Your profile</h1>
 
             <div className="card-to-middle-with-border">
-                <img src={utility.questionMarkPicture} alt="Blank profile picture." height="150" width="200" className="reg-fields"/>
+                <img src={user.profilePicture} alt="Blank profile picture." height="150" width="200"
+                     className="reg-fields"/>
                 <button id="upload-profile-picture-button" type="button" className="reg-fields">Upload new profile
                     picture
                 </button>

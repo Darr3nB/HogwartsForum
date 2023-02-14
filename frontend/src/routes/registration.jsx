@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 export default function Registration() {
     const navigate = useNavigate();
     const [isLoggedIn, setLoginState] = useState(false);
+    const [uploadedImage, setImage] = useState(null);
 
     useEffect(() => {
         utility.loggedInUser().then(
@@ -24,18 +25,27 @@ export default function Registration() {
     const doRegistration = async (event) => {
         event.preventDefault();
         const componentData = new FormData(event.currentTarget);
+        const profilePicture = uploadedImage === null ? utility.questionMarkPicture : uploadedImage;
 
         await utility.apiPostWithDictionaryDataType("/user/registration", {
             "username": componentData.get("username-field"),
             "password": componentData.get("password-field"),
             "passwordAgain": componentData.get("password-again-field"),
-            "house": componentData.get("house-field"), "petType": componentData.get("pet-field")
+            "house": componentData.get("house-field"), "petType": componentData.get("pet-field"),
+            "profilePicture": profilePicture
         })
             .then(response => {
                 if (response.ok) {
                     navigate("/");
                 }
             });
+    }
+
+    const uploadImage = async (event) => {
+        const file = event.target.files[0];
+        const base64 = await utility.convertBase64(file).then();
+
+        setImage(base64);
     }
 
     return (
@@ -73,6 +83,10 @@ export default function Registration() {
                         <option value="Rat">Rat</option>
                         <option value="Ferret">Ferret</option>
                     </select>
+                    <div className="header-to-middle"><input type="file" id="input-for-file-on-post-question" name="input-for-file-on-post-question"
+                                                             accept=".jpg, .jpeg, .png" onChange={(event) => {
+                        uploadImage(event);
+                    }}/></div>
 
                     <button type="submit" id="registration-button" className="reg-fields">Registration</button>
                 </form>

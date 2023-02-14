@@ -9,6 +9,7 @@ public class RegistrationModel {
     private String passwordAgain;
     private String house;
     private String petType;
+    private String profilePicture;
 
     public Boolean validateRegistrationData() {
         return username.length() >= 3 && password.length() >= 3 && passwordAgain.length() >= 3 && password.equals(passwordAgain)

@@ -90,7 +90,7 @@ public class UserController {
         }
 
         HogwartsUser newUser = new HogwartsUser(newRegistration.getUsername(), passwordAgent.hashPassword(newRegistration.getPassword()),
-                newRegistration.getHouse(), newRegistration.getPetType());
+                newRegistration.getHouse(), newRegistration.getPetType(), newRegistration.getProfilePicture());
         userService.addUser(newUser);
 
         return ResponseEntity.status(HttpStatus.OK).build();
