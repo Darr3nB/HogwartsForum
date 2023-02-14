@@ -9,12 +9,19 @@ import Registration from "./routes/registration.jsx";
 import PostQuestion from "./routes/postQuestion.jsx";
 import Profile from "./routes/profile.jsx";
 import SpecificQuestion from "./routes/specific-question.jsx";
+import LatestFiveQuestion from "./components/LatestFiveQuestion.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Index/>,
         errorElement: <ErrorPage/>,
+        children: [
+            {
+                index: true,
+                element: <LatestFiveQuestion/>
+            }
+        ]
     },
     {
         path: "/all-questions",
