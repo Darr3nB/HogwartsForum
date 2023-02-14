@@ -1,29 +1,26 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {utility} from "../utility.js";
+import Comment from "../components/Comment";
 
 export default function SpecificQuestion() {
     const {id} = useParams();
     const [question, setQuestionState] = useState(null);
     const [commentDiv, setCommentDivState] = useState(false);
-    const [isLoggedIn, setLoginState] = useState(false);
-    const [loggedInUSer, setUser] = useState({});
+    const [loggedInUSer, setUser] = useState(false);
     const navigate = useNavigate();
-    // TODO check if logged in, case: no, redirect error
 
     useEffect(() => {
         utility.loggedInUser().then(
             d => {
                 if (d === false) {
-                    setLoginState(false);
                     navigate("/");
                 } else {
                     setUser(d);
-                    setLoginState(true);
                 }
             }
         );
-    }, [isLoggedIn]);
+    }, []);
 
     useEffect(() => {
         const getSpecificQuestion = async () => {
@@ -44,8 +41,10 @@ export default function SpecificQuestion() {
     }
 
     const showAndHideCommentField = (event) => {
-        // TODO prevent this if logged out
         event.preventDefault();
+        if (commentDiv === false) {
+            return;
+        }
         setCommentDivState(!commentDiv);
     }
 
@@ -63,39 +62,6 @@ export default function SpecificQuestion() {
             })
     }
 
-    const doUpvote = async (event, commentId) => {
-        event.preventDefault();
-
-        await utility.apiGet(`/api/upvote-comment/${commentId}`)
-            .then(response => {
-                if (response.ok) {
-                    navigate(0);
-                }
-            });
-    }
-
-    const doDownvote = async (event, commentId) => {
-        event.preventDefault();
-
-        await utility.apiGet(`/api/downvote-comment/${commentId}`)
-            .then(response => {
-                if (response.ok) {
-                    navigate(0);
-                }
-            });
-    }
-
-    const deleteComment = async (event, commentId) => {
-        event.preventDefault();
-
-        await utility.apiDeleteWithPathData(`/api/delete-comment/${loggedInUSer.id}/${id}/${commentId}`)
-            .then(response => {
-                if (response.ok) {
-                    navigate(0);
-                }
-            });
-    }
-
     return (
         <div>
             <div className="specific-question-page">
@@ -105,7 +71,8 @@ export default function SpecificQuestion() {
                 </div>
 
                 <div className="slight-white-background">
-                    <div className="header-to-middle"><img src={question.image} alt="Uploaded picture by user" className="uploaded-picture"/></div>
+                    <div className="header-to-middle"><img src={question.image} alt="Uploaded picture by user"
+                                                           className="uploaded-picture"/></div>
                     <div id="question-text"
                          className="question-text-on-specific-question">{question?.questionText}</div>
                     <div id="question-submission-time"
@@ -132,15 +99,7 @@ export default function SpecificQuestion() {
                  className="slight-white-background">{question?.commentList && question?.commentList?.map(comment => {
                 return (
                     <div key={"comment-id-" + comment?.id} className="laBorder">
-                        <div>{comment?.commentText}</div>
-                        <button onClick={event => doUpvote(event, comment?.id)} className="up-vote"
-                                title="Upvote comment"></button>
-                        <span>{comment?.upVoteCount} </span>
-                        <button onClick={event => doDownvote(event, comment?.id)} className="down-vote"></button>
-                        <span>{comment?.downVoteCount} </span>
-                        <span>{comment?.submissionTime}</span>
-                        <button onClick={event => deleteComment(event, comment.id)}
-                                className="delete-comment-button"></button>
+                        <Comment comment={comment} loggedInUserId={loggedInUSer.id} questionId={id}/>
                     </div>
                 );
             })}</div>

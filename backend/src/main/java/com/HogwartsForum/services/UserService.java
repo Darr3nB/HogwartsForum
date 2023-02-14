@@ -25,9 +25,6 @@ public class UserService implements CommandLineRunner {
         if (hogwartsUser.getRole() == null) {
             hogwartsUser.setRole(Roles.USER);
         }
-        if (hogwartsUser.getProfilePicture() == null) {
-            hogwartsUser.setProfilePicture("../src/assets/default-profile-picture.jpg");
-        }
         hogwartsUserDatabaseDao.save(hogwartsUser);
     }
 
