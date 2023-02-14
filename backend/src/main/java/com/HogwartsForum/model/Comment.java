@@ -25,6 +25,7 @@ public class Comment {
     private int upVoteCount;
     @Column(nullable = false)
     private int downVoteCount;
+    @Column(columnDefinition = "VARCHAR")
     private String image;
 
     public Comment(String commentText, String image){

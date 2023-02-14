@@ -1,5 +1,3 @@
-import MenuLayout from "../components/MenuLayout.jsx";
-import Footer from "../components/Footer.jsx";
 import {utility} from "../utility.js";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -7,23 +5,19 @@ import {useNavigate} from "react-router-dom";
 
 export default function PostQuestion() {
     const navigate = useNavigate();
-    const [isLoggedIn, setLoginState] = useState(false);
-    const [loggedInUSer, setUser] = useState({});
-    // TODO check if logged in, case: no, redirect error
+    const [loggedInUSer, setUser] = useState(false);
 
     useEffect(() => {
         utility.loggedInUser().then(
             d => {
                 if (d === false) {
-                    setLoginState(false);
                     navigate("/");
                 } else {
                     setUser(d);
-                    setLoginState(true);
                 }
             }
         );
-    }, [isLoggedIn]);
+    }, []);
 
     const postAQuestion = async (e) => {
         e.preventDefault();
@@ -32,7 +26,8 @@ export default function PostQuestion() {
         await utility.apiPostWithDictionaryDataType(`/question/post-question/${loggedInUSer.id}`,
             {
                 'title': postQuestionData.get("question-title"),
-                'questionText': postQuestionData.get("question-description")
+                'questionText': postQuestionData.get("question-description"),
+                'image': utility.questionMarkPicture // TODO replace with uploaded img
             })
             .then(response => {
                 if (response.ok) {

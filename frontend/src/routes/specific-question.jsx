@@ -105,6 +105,7 @@ export default function SpecificQuestion() {
                 </div>
 
                 <div className="slight-white-background">
+                    <div className="header-to-middle"><img src={question.image} alt="Uploaded picture by user" className="uploaded-picture"/></div>
                     <div id="question-text"
                          className="question-text-on-specific-question">{question?.questionText}</div>
                     <div id="question-submission-time"

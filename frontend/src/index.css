@@ -182,6 +182,10 @@ th {
     visibility: visible;
 }
 
+.uploaded-picture {
+    width: 200px;
+}
+
 .laBorder {
     border: 1px solid black;
 }

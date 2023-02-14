@@ -33,6 +33,7 @@ public class HogwartsUser {
     private Set<Question> questionsList;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> commentList;
+    @Column(columnDefinition = "VARCHAR")
     private String profilePicture;
 
     public HogwartsUser(String name, String password, String house, String pet) {

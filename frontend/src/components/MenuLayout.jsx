@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
 
 export default function MenuLayout() {
     const navigate = useNavigate();
-    const [loggedInUser, setLoggedInUser] = useState({});
+    const [loggedInUser, setLoggedInUser] = useState(false);
+    const path = useLocation().pathname;
 
     const doLogin = async (e) => {
         e.preventDefault();
@@ -22,7 +23,6 @@ export default function MenuLayout() {
         })
             .then(response => {
                 if (response.ok) {
-                    // TODO get logged in user data and set it
                     utility.loggedInUser().then(
                         async d => {
                             await setLoggedInUser(d);
@@ -39,7 +39,7 @@ export default function MenuLayout() {
         await utility.apiGet(`/user/logout`)
             .then(response => {
                 if (response.ok) {
-                    setLoggedInUser({});
+                    setLoggedInUser(false);
                     navigate("/");
                 }
             })
@@ -74,7 +74,7 @@ export default function MenuLayout() {
                 <label htmlFor="username-field">Username: </label>
                 <input type="text" id="username-field" name="username-field" minLength="3"/>
                 <label htmlFor="password-field">Magic word: </label>
-                <input type="password" id="password-field" name="password-field" minLength="3"/>
+                <input type="text" id="password-field" name="password-field" minLength="3"/>
 
                 <button type="submit" id="login-button" className="nav-bar-button">Login</button>
             </form>
@@ -113,5 +113,5 @@ export default function MenuLayout() {
         </span>
     </div>;
 
-    return loggedInUser === {} || loggedInUser === false ? loggedOff : loggedIn;
+    return loggedInUser === false ? loggedOff : loggedIn;
 };

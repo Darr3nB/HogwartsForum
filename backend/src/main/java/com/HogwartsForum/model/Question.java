@@ -2,6 +2,7 @@ package com.HogwartsForum.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,12 +21,14 @@ public class Question {
     private LocalDateTime submissionTime;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> commentList;
+    @Column(columnDefinition = "VARCHAR")
     private String image;
 
 
-    public Question(String title, String questionText) {
+    public Question(String title, String questionText, String image) {
         this.title = title;
         this.questionText = questionText;
         this.submissionTime = LocalDateTime.now();
+        this.image = image;
     }
 }
