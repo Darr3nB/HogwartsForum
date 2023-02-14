@@ -1,7 +1,9 @@
 package com.HogwartsForum.controller;
 
 import com.HogwartsForum.dto.Login;
+import com.HogwartsForum.model.HogwartsHouses;
 import com.HogwartsForum.model.HogwartsUser;
+import com.HogwartsForum.model.PetTypes;
 import com.HogwartsForum.model.RegistrationModel;
 import com.HogwartsForum.security.PasswordAgent;
 import com.HogwartsForum.services.UserService;
@@ -89,8 +91,13 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        HogwartsUser newUser = new HogwartsUser(newRegistration.getUsername(), passwordAgent.hashPassword(newRegistration.getPassword()),
-                newRegistration.getHouse(), newRegistration.getPetType(), newRegistration.getProfilePicture());
+        HogwartsUser newUser = new HogwartsUser();
+        newUser.setName(newRegistration.getUsername());
+        newUser.setPassword(passwordAgent.hashPassword(newRegistration.getPassword()));
+        newUser.setHouse(HogwartsHouses.getHouseByStringEquivalent(newRegistration.getHouse()));
+        newUser.setPet(PetTypes.getPetByStringEquivalent(newRegistration.getPetType()));
+        newUser.setProfilePicture(newRegistration.getProfilePicture());
+
         userService.addUser(newUser);
 
         return ResponseEntity.status(HttpStatus.OK).build();

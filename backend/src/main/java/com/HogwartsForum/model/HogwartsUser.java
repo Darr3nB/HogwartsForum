@@ -35,12 +35,4 @@ public class HogwartsUser {
     private Set<Comment> commentList;
     @Column(columnDefinition = "VARCHAR")
     private String profilePicture;
-
-    public HogwartsUser(String name, String password, String house, String pet, String profilePicture) {
-        this.name = name;
-        this.password = password;
-        this.house = HogwartsHouses.getHouseByStringEquivalent(house);
-        this.pet = PetTypes.getPetByStringEquivalent(pet);
-        this.profilePicture = profilePicture;
-    }
 }

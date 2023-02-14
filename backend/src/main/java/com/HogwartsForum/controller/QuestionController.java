@@ -27,7 +27,10 @@ public class QuestionController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        Question newQuestion = new Question(question.getTitle(), question.getQuestionText(), question.getImage());
+        Question newQuestion = new Question();
+        newQuestion.setTitle(question.getTitle());
+        newQuestion.setQuestionText(question.getQuestionText());
+        newQuestion.setImage(question.getImage());
 
         questionService.addQuestion(newQuestion);
         userService.saveQuestionToUserSet(Integer.parseInt(id), newQuestion);
