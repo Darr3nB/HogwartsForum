@@ -9,7 +9,7 @@ export default function Registration() {
     const [isLoggedIn, setLoginState] = useState(false);
 
     useEffect(() => {
-        utility.isLoggedInRequest().then(
+        utility.loggedInUser().then(
             d => {
                 if (d === false) {
                     setLoginState(false);

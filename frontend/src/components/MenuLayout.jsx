@@ -4,16 +4,17 @@ import {utility} from "../utility.js";
 
 
 export default function MenuLayout() {
-    // TODO switch password input field type to password
-    // TODO if credentials empty don't proceed
     const navigate = useNavigate();
-    const [isLoggedIn, setLoginState] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState({});
 
     const doLogin = async (e) => {
         e.preventDefault();
         const componentData = new FormData(e.currentTarget);
 
+        if (componentData.get('username-field').length <= 0 || componentData.get('password-field').length <= 0) {
+            alert("Fields cannot be empty!");
+            return;
+        }
 
         await utility.apiPostWithDictionaryDataType(`/user/login`, {
             'username': componentData.get('username-field'),
@@ -21,8 +22,13 @@ export default function MenuLayout() {
         })
             .then(response => {
                 if (response.ok) {
-                    setLoginState(true);
-                    navigate("/");
+                    // TODO get logged in user data and set it
+                    utility.loggedInUser().then(
+                        async d => {
+                            await setLoggedInUser(d);
+                            navigate("/");
+                        }
+                    )
                 }
             });
     }
@@ -33,24 +39,23 @@ export default function MenuLayout() {
         await utility.apiGet(`/user/logout`)
             .then(response => {
                 if (response.ok) {
-                    setLoginState(false);
+                    setLoggedInUser({});
                     navigate("/");
                 }
             })
     }
 
     useEffect(() => {
-        utility.isLoggedInRequest().then(
+        utility.loggedInUser().then(
             d => {
                 if (d === false) {
-                    setLoginState(false);
+                    setLoggedInUser(false)
                 } else {
                     setLoggedInUser(d);
-                    setLoginState(true);
                 }
             }
         );
-    }, [isLoggedIn]);
+    }, []);
 
 
     const loggedOff = <div className="wrapper">
@@ -69,7 +74,7 @@ export default function MenuLayout() {
                 <label htmlFor="username-field">Username: </label>
                 <input type="text" id="username-field" name="username-field" minLength="3"/>
                 <label htmlFor="password-field">Magic word: </label>
-                <input type="text" id="password-field" name="password-field" minLength="3"/>
+                <input type="password" id="password-field" name="password-field" minLength="3"/>
 
                 <button type="submit" id="login-button" className="nav-bar-button">Login</button>
             </form>
@@ -108,5 +113,5 @@ export default function MenuLayout() {
         </span>
     </div>;
 
-    return isLoggedIn === false ? loggedOff : loggedIn;
+    return loggedInUser === {} || loggedInUser === false ? loggedOff : loggedIn;
 };

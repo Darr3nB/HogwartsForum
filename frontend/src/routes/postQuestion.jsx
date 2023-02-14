@@ -12,7 +12,7 @@ export default function PostQuestion() {
     // TODO check if logged in, case: no, redirect error
 
     useEffect(() => {
-        utility.isLoggedInRequest().then(
+        utility.loggedInUser().then(
             d => {
                 if (d === false) {
                     setLoginState(false);

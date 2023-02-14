@@ -12,7 +12,7 @@ export default function Profile() {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        utility.isLoggedInRequest().then(
+        utility.loggedInUser().then(
             d => {
                 if (d === false) {
                     setLoginState(false);
