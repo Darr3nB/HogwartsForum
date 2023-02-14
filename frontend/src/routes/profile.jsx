@@ -43,8 +43,6 @@ export default function Profile() {
 
     return (
         <div>
-            <MenuLayout/>
-
             <h1 className="header-to-middle">Your profile</h1>
 
             <div className="card-to-middle-with-border">
@@ -68,8 +66,6 @@ export default function Profile() {
                     <button type="submit" className="button-to-middle">Delete profile</button>
                 </form>
             </div>
-
-            <Footer/>
         </div>
     );
 }

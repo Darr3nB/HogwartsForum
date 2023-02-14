@@ -43,8 +43,6 @@ export default function PostQuestion() {
 
     return (
         <div>
-            <MenuLayout/>
-
             <div className="slight-white-background">
                 <h1 className="header-to-middle">Ask your question</h1>
             </div>
@@ -62,8 +60,6 @@ export default function PostQuestion() {
                     </button>
                 </form>
             </div>
-
-            <Footer/>
         </div>
     );
 }

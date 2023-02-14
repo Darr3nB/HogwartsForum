@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react";
-import MenuLayout from "../components/MenuLayout.jsx";
-import Footer from "../components/Footer.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {utility} from "../utility.js";
 
@@ -39,12 +37,8 @@ export default function SpecificQuestion() {
     if (question === null) {
         return (
             <div>
-                <MenuLayout/>
-
                 <div className="loading-field"></div>
                 <div className="slight-white-background">Loading, please wait, the magic is happening.</div>
-
-                <Footer/>
             </div>
         );
     }
@@ -96,7 +90,7 @@ export default function SpecificQuestion() {
 
         await utility.apiDeleteWithPathData(`/api/delete-comment/${loggedInUSer.id}/${id}/${commentId}`)
             .then(response => {
-                if (response.ok){
+                if (response.ok) {
                     navigate(0);
                 }
             });
@@ -104,8 +98,6 @@ export default function SpecificQuestion() {
 
     return (
         <div>
-            <MenuLayout/>
-
             <div className="specific-question-page">
 
                 <div className="slight-white-background">
@@ -146,12 +138,11 @@ export default function SpecificQuestion() {
                         <button onClick={event => doDownvote(event, comment?.id)} className="down-vote"></button>
                         <span>{comment?.downVoteCount} </span>
                         <span>{comment?.submissionTime}</span>
-                        <button onClick={event => deleteComment(event, comment.id)} className="delete-comment-button"></button>
+                        <button onClick={event => deleteComment(event, comment.id)}
+                                className="delete-comment-button"></button>
                     </div>
                 );
             })}</div>
-
-            <Footer/>
         </div>
     );
 }

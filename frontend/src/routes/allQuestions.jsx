@@ -24,10 +24,7 @@ export default function AllQuestions() {
     }, []);
 
     return (
-        <div>
-            <MenuLayout/>
-
-            <div className="slight-white-background">
+        <div><div className="slight-white-background">
                 <h1 className="header-to-middle">All questions</h1>
             </div>
 
@@ -53,7 +50,5 @@ export default function AllQuestions() {
                         </tbody>
                     </table>)}
             </div>
-
-            <Footer/>
         </div>);
 }

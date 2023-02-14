@@ -20,28 +20,28 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <LatestFiveQuestion/>
+            },
+            {
+                path: "/all-questions",
+                element: <AllQuestions/>,
+            },
+            {
+                path: "/registration",
+                element: <Registration/>,
+            },
+            {
+                path: "/post-question",
+                element: <PostQuestion/>,
+            },
+            {
+                path: "/profile",
+                element: <Profile/>
+            },
+            {
+                path: "/specific-question/:id",
+                element: <SpecificQuestion/>
             }
         ]
-    },
-    {
-        path: "/all-questions",
-        element: <AllQuestions/>,
-    },
-    {
-        path: "/registration",
-        element: <Registration/>,
-    },
-    {
-        path: "/post-question",
-        element: <PostQuestion/>,
-    },
-    {
-        path: "/profile",
-        element: <Profile/>
-    },
-    {
-        path: "/specific-question/:id",
-        element: <SpecificQuestion/>
     }
 ]);
 

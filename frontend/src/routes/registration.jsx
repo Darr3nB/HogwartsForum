@@ -40,8 +40,6 @@ export default function Registration() {
 
     return (
         <div>
-            <MenuLayout/>
-
             <h1 className="header-to-middle">Registration</h1>
 
             <div className="card-to-middle-with-border">
@@ -79,8 +77,6 @@ export default function Registration() {
                     <button type="submit" id="registration-button" className="reg-fields">Registration</button>
                 </form>
             </div>
-
-            <Footer/>
         </div>
     );
 }
