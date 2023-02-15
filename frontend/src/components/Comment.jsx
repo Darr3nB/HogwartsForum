@@ -39,16 +39,18 @@ export default function Comment({comment, loggedInUserId, questionId}) {
 
     return (
         <div>
-            <div><img src={comment.image} alt="Uploaded picture for comment" className="uploaded-picture"/></div>
-            <div>{comment?.commentText}</div>
+            <div className="header-to-middle"><img src={comment.image} alt="Uploaded picture for comment"
+                                                   className="uploaded-picture"/></div>
+            <div className="header-to-middle">{comment?.commentText}</div>
             <button onClick={event => upVoteComment(event, comment?.id)} className="up-vote"
                     title="Upvote comment"></button>
             <span>{comment?.upVoteCount} </span>
             <button onClick={event => downVoteComment(event, comment?.id)} className="down-vote"></button>
-            <span>{comment?.downVoteCount} </span>
-            <span>{comment?.submissionTime}</span>
-            <button onClick={event => deleteComment(event, comment.id)}
-                    className="delete-comment-button"></button>
+            <span>{comment?.downVoteCount}</span>
+            <div className="to-the-right">{comment?.submissionTime}
+                <button onClick={event => deleteComment(event, comment.id)}
+                        className="delete-comment-button"></button>
+            </div>
         </div>
     );
 }

@@ -214,3 +214,12 @@ th {
     height: 20px;
     background-size: cover;
 }
+
+.to-the-right {
+    text-align: right;
+}
+
+#comments {
+    width: 1000px;
+    margin: auto;
+}

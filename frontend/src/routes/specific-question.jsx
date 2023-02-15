@@ -52,7 +52,10 @@ export default function SpecificQuestion() {
         const questionPicture = uploadedImage === null ? utility.questionMarkPicture : uploadedImage;
 
         await utility.apiPostWithDictionaryDataType(
-            `/api/post-comment-on-specific-question/${question.id}/${loggedInUSer.id}`, {'commentText': componentData.get("comment-text-area"), 'image': questionPicture}
+            `/api/post-comment-on-specific-question/${question.id}/${loggedInUSer.id}`, {
+                'commentText': componentData.get("comment-text-area"),
+                'image': questionPicture
+            }
         )
             .then(response => {
                 if (response.ok) {
@@ -97,19 +100,20 @@ export default function SpecificQuestion() {
                 }}>
                     <textarea id="comment-text-area" name="comment-text-area" className="reg-fields" rows="3" cols="50"
                               minLength="5"/>
-                    <div className="header-to-middle"><input type="file" id="input-for-file-on-post-comment" name="input-for-file-on-post-question"
+                    <div className="header-to-middle"><input type="file" id="input-for-file-on-post-comment"
+                                                             name="input-for-file-on-post-question"
                                                              accept=".jpg, .jpeg, .png" onChange={(event) => {
                         uploadImage(event);
                     }}/></div>
                     <button type="submit" className="reg-fields">Post comment</button>
                 </form>
             </div>
-
             <div id="comments"
                  className="slight-white-background">{question?.commentList && question?.commentList?.map(comment => {
                 return (
                     <div key={"comment-id-" + comment?.id} className="laBorder">
-                        <Comment comment={comment} loggedInUserId={loggedInUSer.id} questionId={id} upLoadedPicture={uploadedImage}/>
+                        <Comment comment={comment} loggedInUserId={loggedInUSer.id} questionId={id}
+                                 upLoadedPicture={uploadedImage}/>
                     </div>
                 );
             })}</div>
