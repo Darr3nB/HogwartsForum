@@ -1,6 +1,7 @@
 package com.HogwartsForum.controller;
 
 import com.HogwartsForum.dto.Login;
+import com.HogwartsForum.dto.UpdateProfilePicture;
 import com.HogwartsForum.model.HogwartsHouses;
 import com.HogwartsForum.model.HogwartsUser;
 import com.HogwartsForum.model.PetTypes;
@@ -9,6 +10,7 @@ import com.HogwartsForum.security.PasswordAgent;
 import com.HogwartsForum.services.UserService;
 import com.HogwartsForum.util.Utility;
 import lombok.AllArgsConstructor;
+import org.openqa.selenium.NotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,5 +103,16 @@ public class UserController {
         userService.addUser(newUser);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("update-profile-picture")
+    public HttpEntity<Void> updateProfilePicture(@RequestBody UpdateProfilePicture data) {
+        try {
+            userService.updateProfilePicture(data);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+        }
+
     }
 }

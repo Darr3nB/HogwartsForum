@@ -1,9 +1,11 @@
 package com.HogwartsForum.services;
 
 import com.HogwartsForum.dao.HogwartsUserDao;
+import com.HogwartsForum.dto.UpdateProfilePicture;
 import com.HogwartsForum.model.*;
 import com.HogwartsForum.security.PasswordAgent;
 import lombok.AllArgsConstructor;
+import org.openqa.selenium.NotFoundException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -146,12 +148,12 @@ public class UserService implements CommandLineRunner {
         return foundUser.getRole() == Roles.ADMIN;
     }
 
-    public HogwartsUser getUserOwnsThisComment(Integer commentId){
+    public HogwartsUser getUserOwnsThisComment(Integer commentId) {
         List<HogwartsUser> allUsers = getAllUsers();
 
-        for (HogwartsUser user : allUsers){
-            for (Comment comment : user.getCommentList()){
-                if (Objects.equals(comment.getId(), commentId)){
+        for (HogwartsUser user : allUsers) {
+            for (Comment comment : user.getCommentList()) {
+                if (Objects.equals(comment.getId(), commentId)) {
                     return user;
                 }
             }
@@ -168,7 +170,7 @@ public class UserService implements CommandLineRunner {
             hogwartsUserDatabaseDao.save(foundUser);
 
             return true;
-        }catch (UsernameNotFoundException e){
+        } catch (UsernameNotFoundException e) {
             System.out.println("I did not found the user: " + e);
             return false;
         }
@@ -183,7 +185,20 @@ public class UserService implements CommandLineRunner {
             hogwartsUserDatabaseDao.save(foundUser);
 
             return true;
-        }catch (UsernameNotFoundException e){
+        } catch (UsernameNotFoundException e) {
+            System.out.println("I did not found the user: " + e);
+            return false;
+        }
+    }
+
+    public boolean updateProfilePicture(UpdateProfilePicture data) {
+        try {
+            HogwartsUser foundUser = getUserById(data.getUserId());
+            foundUser.setProfilePicture(data.getNewPicture());
+            hogwartsUserDatabaseDao.save(foundUser);
+
+            return true;
+        } catch (NotFoundException e) {
             System.out.println("I did not found the user: " + e);
             return false;
         }
