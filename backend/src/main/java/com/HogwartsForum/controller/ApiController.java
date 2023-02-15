@@ -65,18 +65,15 @@ public class ApiController {
         return questionService.getQuestionById(Integer.parseInt(id));
     }
 
-    @GetMapping("post-comment-on-specific-question/{questionId}/{userId}/{commentText}")
+    @PostMapping("post-comment-on-specific-question/{questionId}/{userId}")
     public HttpEntity<Void> commentOnSpecificQuestion(@PathVariable String questionId,
                                                       @PathVariable String userId,
-                                                      @PathVariable String commentText) {
-        // TODO picture from frontend
-        String uploadedPicture = null;
-
+                                                      @RequestBody Comment commentFromFrontend) {
         Comment comment = new Comment();
-        comment.setCommentText(commentText);
-        comment.setImage(uploadedPicture);
+        comment.setCommentText(commentFromFrontend.getCommentText());
+        comment.setImage(commentFromFrontend.getImage());
 
-        if (!comment.validText(commentText)){
+        if (!comment.validText()){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         commentService.saveNewComment(comment);

@@ -9,6 +9,7 @@ export default function SpecificQuestion() {
     const [commentDiv, setCommentDivState] = useState(false);
     const [loggedInUSer, setUser] = useState(false);
     const navigate = useNavigate();
+    const [uploadedImage, setImage] = useState(null);
 
     useEffect(() => {
         utility.loggedInUser().then(
@@ -42,24 +43,29 @@ export default function SpecificQuestion() {
 
     const showAndHideCommentField = (event) => {
         event.preventDefault();
-        if (commentDiv === false) {
-            return;
-        }
         setCommentDivState(!commentDiv);
     }
 
     const postComment = async (event) => {
         event.preventDefault();
         const componentData = new FormData(event.currentTarget);
+        const questionPicture = uploadedImage === null ? utility.questionMarkPicture : uploadedImage;
 
-        await utility.apiGet(
-            `/api/post-comment-on-specific-question/${question.id}/${loggedInUSer.id}/${componentData.get("comment-text-area")}`
+        await utility.apiPostWithDictionaryDataType(
+            `/api/post-comment-on-specific-question/${question.id}/${loggedInUSer.id}`, {'commentText': componentData.get("comment-text-area"), 'image': questionPicture}
         )
             .then(response => {
                 if (response.ok) {
                     navigate(0);
                 }
             })
+    }
+
+    const uploadImage = async (event) => {
+        const file = event.target.files[0];
+        const base64 = await utility.convertBase64(file).then();
+
+        setImage(base64);
     }
 
     return (
@@ -91,6 +97,10 @@ export default function SpecificQuestion() {
                 }}>
                     <textarea id="comment-text-area" name="comment-text-area" className="reg-fields" rows="3" cols="50"
                               minLength="5"/>
+                    <div className="header-to-middle"><input type="file" id="input-for-file-on-post-comment" name="input-for-file-on-post-question"
+                                                             accept=".jpg, .jpeg, .png" onChange={(event) => {
+                        uploadImage(event);
+                    }}/></div>
                     <button type="submit" className="reg-fields">Post comment</button>
                 </form>
             </div>
@@ -99,7 +109,7 @@ export default function SpecificQuestion() {
                  className="slight-white-background">{question?.commentList && question?.commentList?.map(comment => {
                 return (
                     <div key={"comment-id-" + comment?.id} className="laBorder">
-                        <Comment comment={comment} loggedInUserId={loggedInUSer.id} questionId={id}/>
+                        <Comment comment={comment} loggedInUserId={loggedInUSer.id} questionId={id} upLoadedPicture={uploadedImage}/>
                     </div>
                 );
             })}</div>

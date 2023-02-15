@@ -28,7 +28,7 @@ public class Comment {
     @Column(columnDefinition = "VARCHAR")
     private String image;
 
-    public boolean validText(String commentText) {
-        return commentText.length() >= 5;
+    public boolean validText() {
+        return this.commentText.length() >= 5;
     }
 }

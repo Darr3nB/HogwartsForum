@@ -39,6 +39,7 @@ export default function Comment({comment, loggedInUserId, questionId}) {
 
     return (
         <div>
+            <div><img src={comment.image} alt="Uploaded picture for comment" className="uploaded-picture"/></div>
             <div>{comment?.commentText}</div>
             <button onClick={event => upVoteComment(event, comment?.id)} className="up-vote"
                     title="Upvote comment"></button>
