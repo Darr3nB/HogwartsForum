@@ -1,11 +1,13 @@
 package com.HogwartsForum.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -18,17 +20,12 @@ public class Question {
     private Integer id;
     private String title;
     private String questionText;
+    @Column(columnDefinition = "timestamp default current_timestamp")
+    @CreationTimestamp
+    @JsonFormat(pattern = "YYYY.MM.dd HH:mm")
     private LocalDateTime submissionTime;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> commentList;
     @Column(columnDefinition = "VARCHAR")
     private String image;
-
-
-    public Question(String title, String questionText, String image) {
-        this.title = title;
-        this.questionText = questionText;
-        this.submissionTime = LocalDateTime.now();
-        this.image = image;
-    }
 }
