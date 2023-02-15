@@ -72,7 +72,9 @@ public class ApiController {
         // TODO picture from frontend
         String uploadedPicture = null;
 
-        Comment comment = new Comment(commentText, uploadedPicture);
+        Comment comment = new Comment();
+        comment.setCommentText(commentText);
+        comment.setImage(uploadedPicture);
 
         if (!comment.validText(commentText)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

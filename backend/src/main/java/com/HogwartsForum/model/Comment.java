@@ -28,12 +28,6 @@ public class Comment {
     @Column(columnDefinition = "VARCHAR")
     private String image;
 
-    public Comment(String commentText, String image){
-        this.commentText = commentText;
-        this.image = image;
-        this.submissionTime = LocalDateTime.now();
-    }
-
     public boolean validText(String commentText) {
         return commentText.length() >= 5;
     }
