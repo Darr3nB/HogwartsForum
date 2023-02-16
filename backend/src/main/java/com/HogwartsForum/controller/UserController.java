@@ -82,9 +82,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        userService.deleteUserById(profileParams.getId());
-
-        return ResponseEntity.status(HttpStatus.OK).build();
+        if (!userService.deleteUserById(profileParams.getId(), profileParams.getPassword())){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
     }
 
     @PostMapping(value = "registration")

@@ -22,13 +22,13 @@ export default function Profile() {
         );
     }, []);
 
-    const deleteProfile = async (e, user) => {
+    const deleteProfile = async (e) => {
         e.preventDefault();
         const profileData = new FormData(e.currentTarget);
 
-        await utility.apiPostWithDictionaryDataType(`delete-profile`, {
+        await utility.apiPostWithDictionaryDataType(`/user/delete-profile`, {
             'id': user.id,
-            'username': user.username,
+            'username': user.name,
             'password': profileData.get('password-for-delete-profile')
         })
             .then(response => {
