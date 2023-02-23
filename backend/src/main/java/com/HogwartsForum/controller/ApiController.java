@@ -9,6 +9,7 @@ import com.HogwartsForum.services.QuestionService;
 import com.HogwartsForum.services.UserService;
 import com.HogwartsForum.util.Utility;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@Slf4j
 @RequestMapping("/api")
 public class ApiController {
     UserService userService;
@@ -131,7 +133,7 @@ public class ApiController {
 
                 return ResponseEntity.status(HttpStatus.OK).build();
             } catch (UsernameNotFoundException e) {
-                System.out.println("An error has happened: " + e);
+                log.error("An error has happened in deleteComment method: " + e);
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
         }

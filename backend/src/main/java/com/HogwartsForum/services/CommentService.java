@@ -3,10 +3,12 @@ package com.HogwartsForum.services;
 import com.HogwartsForum.dao.CommentDao;
 import com.HogwartsForum.model.Comment;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class CommentService {
     CommentDao commentDao;
@@ -25,7 +27,7 @@ public class CommentService {
             commentDao.save(commentToUpvote);
             return true;
         }catch (NotFoundException e){
-            System.out.println("Comment not found: " + e);
+            log.error("Comment not found in upvoteComment method, CommentService: " + e);
             return false;
         }
     }
@@ -39,7 +41,7 @@ public class CommentService {
             commentDao.save(commentToUpvote);
             return true;
         }catch (NotFoundException e){
-            System.out.println("Comment not found: " + e);
+            log.error("Comment not found in downvoteComment method CommentService: " + e);
             return false;
         }
     }

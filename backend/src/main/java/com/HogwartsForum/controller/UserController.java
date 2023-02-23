@@ -82,7 +82,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        if (!userService.deleteUserById(profileParams.getId(), profileParams.getPassword())){
+        if (!userService.deleteUserById(profileParams.getId(), profileParams.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } else {
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -110,11 +110,13 @@ public class UserController {
     @PostMapping("update-profile-picture")
     public HttpEntity<Void> updateProfilePicture(@RequestBody UpdateProfilePicture data) {
         try {
-            userService.updateProfilePicture(data);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            if (userService.updateProfilePicture(data)) {
+                return ResponseEntity.status(HttpStatus.OK).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
         }
-
     }
 }
